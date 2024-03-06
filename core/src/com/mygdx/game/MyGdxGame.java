@@ -34,8 +34,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		// Draw a small red block at position (x, y) with width and height of 10 pixels
 		float x = 100;
 		float y = 100;
-		float width = 50;
-		float height = 50;
+		float width = 100;
+		float height = 100;
 		shapeRenderer.rect(x, y, width, height);
 
 		// End rendering shapes
