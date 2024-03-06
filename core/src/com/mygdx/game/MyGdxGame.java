@@ -7,17 +7,21 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	private ShapeRenderer shapeRenderer;
+	private OrthographicCamera camera;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		shapeRenderer = new ShapeRenderer();
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 800, 480);
 	}
 
 	@Override
@@ -40,6 +44,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		// End rendering shapes
 		shapeRenderer.end();
+		camera.update();
 	}
 	
 	@Override
