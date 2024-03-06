@@ -14,17 +14,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 
-	//add textures here
-	//i.e. private Texture dropImage;
-	
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 
-		// load the images, 64x64 pixels each
-		//i.e. dropImage = new Texture(Gdx.files.internal("droplet.png"));
 	}
 
 	@Override
