@@ -2,12 +2,17 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+<<<<<<< Updated upstream
+=======
+import com.badlogic.gdx.Input;
+>>>>>>> Stashed changes
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input.Keys;
 
@@ -57,6 +62,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		// Draw a small red block at position (x, y) with width and height of 10 pixels
 		shapeRenderer.rect(x, y, width, height);
+
 
 		// End rendering shapes
 		shapeRenderer.end();
