@@ -2,10 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-<<<<<<< Updated upstream
-=======
 import com.badlogic.gdx.Input;
->>>>>>> Stashed changes
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -74,16 +71,16 @@ public class MyGdxGame extends ApplicationAdapter {
 		// Move the block with arrow keys
 		// Perhaps need a check to reduce speed when two keys are pressed at once?
 		// Moves quite fast diagonally.
-		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+		if (Gdx.input.isKeyPressed(Keys.LEFT) && x > 0) {
 			x -= 200 * Gdx.graphics.getDeltaTime();
 		}
-		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT) && x < 720) {
 			x += 200 * Gdx.graphics.getDeltaTime();
 		}
-		if (Gdx.input.isKeyPressed(Keys.UP)) {
+		if (Gdx.input.isKeyPressed(Keys.UP) && y < 480) {
 			y += 200 * Gdx.graphics.getDeltaTime();
 		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+		if (Gdx.input.isKeyPressed(Keys.DOWN) && y > 0) {
 			y -= 200 * Gdx.graphics.getDeltaTime();
 		}
 	}
