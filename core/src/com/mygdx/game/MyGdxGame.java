@@ -26,17 +26,30 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		shapeRenderer = new ShapeRenderer();
+		// Create OrthographicCamera
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override
 	public void render() {
+		// Clear the screen with a white color
 		ScreenUtils.clear(1, 1, 1, 1);
+
+		// Update camera to follow the asset
+		camera.position.set(x + width / 2, y + height / 2, 0);
+		camera.update();
+
+		// Set the batch projection matrix to the camera's combined matrix
+		batch.setProjectionMatrix(camera.combined);
+		shapeRenderer.setProjectionMatrix(camera.combined);
+
+		// Start sprite batch rendering
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.end();
-		shapeRenderer.setProjectionMatrix(camera.combined);
+
+		// Start rendering shapes
 		shapeRenderer.begin(ShapeType.Filled);
 
 		// Set the color to red
@@ -47,7 +60,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		// End rendering shapes
 		shapeRenderer.end();
-		camera.update();
+
 		handleInput();
 	}
 
