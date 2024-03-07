@@ -66,6 +66,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private void handleInput() {
 		// Move the block with arrow keys
+		// Perhaps need a check to reduce speed when two keys are pressed at once?
+		// Moves quite fast diagonally.
 		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
 			x -= 200 * Gdx.graphics.getDeltaTime();
 		}
