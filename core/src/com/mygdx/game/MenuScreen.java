@@ -21,7 +21,7 @@ public class MenuScreen implements Screen {
     //Screen interface does not provide any sort of create() method, so a constructor is used
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(1, 1, 1, 1);
+        ScreenUtils.clear(0, 0, 0, 1);
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
