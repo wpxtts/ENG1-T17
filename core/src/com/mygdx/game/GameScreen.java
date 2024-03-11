@@ -28,10 +28,14 @@ public class GameScreen implements Screen {
     private float width = 100;
     private float height = 100;
 
-    public GameScreen(final MyGdxGame game){
+    public GameScreen(final MyGdxGame game) {
+        this.game = game;
+
+        //creates a shape to represent Player
         batch = new SpriteBatch();
         img = new Texture("badlogic.jpg");
         shapeRenderer = new ShapeRenderer();
+
         //adds a font and screen
         font = new BitmapFont(); // use libGDX's default Arial font
         //this.setScreen(new GameScreen(this)); commented out to check screens
@@ -40,11 +44,9 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
-    }
-
     @Override
     public void render(float delta) {
-        super.render(); // important! Renders Screen set in create() method if you override the render method in your Game class
+        //super.render(); //[Note used as create() does not apply to Screen] important! Renders Screen set in create() method if you override the render method in your Game class
 
         // Clear the screen with a white color
         ScreenUtils.clear(1, 1, 1, 1);
@@ -60,6 +62,8 @@ public class GameScreen implements Screen {
         // Start sprite batch rendering
         batch.begin();
         batch.draw(img, 0, 0);
+        //test text on screen once collision is implemented
+        //game.font.draw(game.batch, "Test text" + 1, 0, 480);
         batch.end();
 
         // Start rendering shapes
@@ -96,8 +100,23 @@ public class GameScreen implements Screen {
         }
     }
 
-    public void show(){
+    @Override
+    public void resize(int width, int height) {
+    }
+    @Override
+    public void show() {
+    }
 
+    @Override
+    public void hide() {
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
     }
 
     @Override
