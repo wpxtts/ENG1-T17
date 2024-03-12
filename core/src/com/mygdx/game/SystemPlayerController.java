@@ -23,16 +23,16 @@ public class SystemPlayerController {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.x > 0) {
-            player.x -= 200 * Gdx.graphics.getDeltaTime();
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.x < 720) {
             player.x += 200 * Gdx.graphics.getDeltaTime();
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.x < 720) {
+            player.x -= 200 * Gdx.graphics.getDeltaTime();
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.y < 480) {
-            player.y += 200 * Gdx.graphics.getDeltaTime();
+            player.y -= 200 * Gdx.graphics.getDeltaTime();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.y > 0) {
-            player.y -= 200 * Gdx.graphics.getDeltaTime();
+            player.y += 200 * Gdx.graphics.getDeltaTime();
         }
 
     }
