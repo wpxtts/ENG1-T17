@@ -39,7 +39,7 @@ public class SystemRender {
         }
 
         // Updates the camera's position to be over the centre of the player
-        camera.position.set(player.x + player.width / 2, player.y player.height / 2, 0);
+        camera.position.set(player.x + player.width / 2, player.y + player.height / 2, 0);
         camera.update();
 
         // Defines the shape renderer to draw shapes.
