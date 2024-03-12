@@ -1,16 +1,16 @@
 package com.mygdx.game;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class SystemCollision {
 
-    ArrayList<ComponentCollision> collisionObjects;
 
     SystemCollision() {}
 
     public void Update(Entity[] entities) {
 
-        collisionObjects = new ArrayList<ComponentCollision>();
+        ArrayList<ComponentCollision> collisionObjects = new ArrayList<ComponentCollision>();
         ComponentPlayerController player = null;
 
         for (int i = 0; i < entities.length; i++) {
