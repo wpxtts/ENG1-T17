@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -15,12 +16,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class GameScreen implements Screen {
     final MyGdxGame game;
     SpriteBatch batch;
     BitmapFont font;
     Texture img;
+    Stage stage;
     private ShapeRenderer shapeRenderer;
     private OrthographicCamera camera;
     private float x = 100;
@@ -43,6 +47,10 @@ public class GameScreen implements Screen {
         // Create OrthographicCamera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        //initialises a cover for the entire screen to enable event capture
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
     }
     @Override
     public void render(float delta) {

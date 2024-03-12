@@ -15,9 +15,6 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont(); // use libGDX's default Arial font
 		this.setScreen(new MenuScreen(this));
-		//initialises a cover for the entire screen to enable event capture
-		stage = new Stage(new ScreenViewport());
-		Gdx.input.setInputProcessor(stage);
 	}
 
 	public void render() {
