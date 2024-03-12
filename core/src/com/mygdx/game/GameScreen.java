@@ -84,6 +84,7 @@ public class GameScreen implements Screen {
         shapeRenderer.rect(x, y, width, height);
 
 
+
         // End rendering shapes
         shapeRenderer.end();
 
