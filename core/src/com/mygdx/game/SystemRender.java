@@ -13,12 +13,16 @@ public class SystemRender {
 
     public void Update(Entity[] entities) {
 
+        // Initialises a camera for this frame.
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+        // Note the player controller is initialised as null, meaning the code will break if there
+        // is no player entity.
         ArrayList<ComponentCollision> collisionObjects = new ArrayList<ComponentCollision>();
         ComponentPlayerController player = null;
 
+        // Finds all collidable objects and player.
         for (int i = 0; i < entities.length; i++) {
 
             ComponentCollision collision = entities[i].GetCollisionComponent();
@@ -34,16 +38,19 @@ public class SystemRender {
 
         }
 
-        camera.position.set(player.x, player.y, 0);
+        // Updates the camera's position to be over the centre of the player
+        camera.position.set(player.x + player.width / 2, player.y player.height / 2, 0);
         camera.update();
 
+        // Defines the shape renderer to draw shapes.
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
-
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
+        // Function that draws the player.
         DrawPlayer(player, shapeRenderer);
 
+        // Draws all collidable objects
         for (int i = 0; i < collisionObjects.size(); i++) {
 
             ComponentCollision collision = collisionObjects.get(0);
@@ -51,6 +58,7 @@ public class SystemRender {
 
         }
 
+        // Ends the shape renderer
         shapeRenderer.end();
 
     }

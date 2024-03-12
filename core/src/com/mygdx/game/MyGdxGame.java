@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class MyGdxGame extends ApplicationAdapter {
-	private ShapeRenderer shapeRenderer;
 	Entity[] entities;
 	ComponentPlayerController player;
 
@@ -20,9 +19,6 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-		shapeRenderer = new ShapeRenderer();
-		// Create OrthographicCamera
-
 
 		entities = new Entity[2];
 		entities[0] = new Entity();
@@ -46,22 +42,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		// updates all the systems every frame
 		UpdateFrame();
 
-
-
-		// Update camera to follow the asset
-
-		// Set the batch projection matrix to the camera's combined matrix
-
-		// Start rendering shapes
-
-
 	}
-
-	@Override
-	public void dispose() {
-		shapeRenderer.dispose();
-	}
-
 	void UpdateFrame() {
 
 		playerControllerSystem.Update(entities);

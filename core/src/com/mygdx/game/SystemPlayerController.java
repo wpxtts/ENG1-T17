@@ -9,8 +9,11 @@ public class SystemPlayerController {
 
     public void Update(Entity[] entities) {
 
+        // Note the player controller is initialised as null, meaning the code will break if there
+        // is no player entity.
         ComponentPlayerController player = null;
 
+        // Finds the player.
         for (int i = 0; i < entities.length; i++) {
 
             ComponentPlayerController playerController = entities[i].GetPlayerControllerComponent();
@@ -22,6 +25,7 @@ public class SystemPlayerController {
 
         }
 
+        // Moves the player according to the user's input.
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.x > 0) {
             player.x -= 200 * Gdx.graphics.getDeltaTime();
         }

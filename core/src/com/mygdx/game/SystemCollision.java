@@ -10,9 +10,12 @@ public class SystemCollision {
 
     public void Update(Entity[] entities) {
 
+        // Note the player controller is initialised as null, meaning the code will break if there
+        // is no player entity.
         ArrayList<ComponentCollision> collisionObjects = new ArrayList<ComponentCollision>();
         ComponentPlayerController player = null;
 
+        // Finds all the collidable objects and the player.
         for (int i = 0; i < entities.length; i++) {
 
             ComponentCollision collision = entities[i].GetCollisionComponent();
@@ -28,6 +31,7 @@ public class SystemCollision {
 
         }
 
+        // Determines what needs to be done for each collision.
         for (int i = 0; i < collisionObjects.size(); i++) {
             ComponentCollision collision = collisionObjects.get(0);
             CollisionCorrection(collision, player);
@@ -61,7 +65,6 @@ public class SystemCollision {
         if (leftGap > 0 && rightGap > 0 && topGap > 0 && bottomGap > 0) {
 
             // Finds the direction with the shortest value
-
             float leftRightMin = Math.min(leftGap, rightGap);
             float topBottomMin = Math.min(topGap, bottomGap);
             float directionValue = Math.min(leftRightMin, topBottomMin);
