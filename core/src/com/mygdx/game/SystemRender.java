@@ -1,7 +1,11 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+import java.util.ArrayList;
 
 public class SystemRender {
 
@@ -9,8 +13,11 @@ public class SystemRender {
 
     public void Update(Entity[] entities) {
 
-        ShapeRenderer shapeRenderer = new ShapeRenderer();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        OrthographicCamera camera = new OrthographicCamera();
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        ArrayList<ComponentCollision> collisionObjects = new ArrayList<ComponentCollision>();
+        ComponentPlayerController player = null;
 
         for (int i = 0; i < entities.length; i++) {
 
@@ -18,12 +25,29 @@ public class SystemRender {
             ComponentPlayerController playerController = entities[i].GetPlayerControllerComponent();
 
             if (collision != null) {
-                DrawCollisionObject(collision, shapeRenderer);
+                collisionObjects.add(collision);
             }
 
             else if (playerController != null) {
-                DrawPlayer(playerController, shapeRenderer);
+                player = playerController;
             }
+
+        }
+
+        camera.position.set(player.x, player.y, 0);
+        camera.update();
+
+        ShapeRenderer shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setProjectionMatrix(camera.combined);
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        DrawPlayer(player, shapeRenderer);
+
+        for (int i = 0; i < collisionObjects.size(); i++) {
+
+            ComponentCollision collision = collisionObjects.get(0);
+            DrawCollisionObject(collision, shapeRenderer);
 
         }
 
