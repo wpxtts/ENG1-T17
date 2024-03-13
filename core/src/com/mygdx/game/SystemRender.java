@@ -64,9 +64,11 @@ public class SystemRender {
     }
 
     void DrawPlayer(ComponentPlayerController player, ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.setColor(player.color); // Set the color to the player's color
         shapeRenderer.rect(player.x, player.y, player.width, player.height);
     }
+
+
 
     void DrawCollisionObject(ComponentCollision collision, ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.BLUE);
