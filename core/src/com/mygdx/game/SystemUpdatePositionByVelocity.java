@@ -3,10 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
+import java.util.ArrayList;
+
 public class SystemUpdatePositionByVelocity {
     SystemUpdatePositionByVelocity(){}
 
-    public void Update(Entity[] entities){
+    public void Update(ArrayList<Entity> entities){
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentPosition.class) && entity.hasComponent(ComponentVelocity.class)){
                 ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);

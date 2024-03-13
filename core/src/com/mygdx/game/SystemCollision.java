@@ -6,7 +6,7 @@ public class SystemCollision {
 
     SystemCollision() {}
 
-    public void Update(Entity[] entities) {
+    public void Update(ArrayList<Entity> entities) {
 
         ArrayList<Entity> collisionObjects = new ArrayList<Entity>();
         Entity player = null;
