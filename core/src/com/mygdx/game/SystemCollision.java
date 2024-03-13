@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class SystemCollision {
 
     // Predefined radius for color change
-    private static final float COLOR_CHANGE_RADIUS = 150; // Adjust this radius as needed
+    private static final float IN_RANGE = 150; // Adjust this radius as needed
 
     SystemCollision() {}
 
@@ -47,9 +47,8 @@ public class SystemCollision {
         float distance = (float) playerCenter.distance(collisionCenter);
 
         // Check if player is within the predefined radius of the collision object
-        if (distance <= COLOR_CHANGE_RADIUS) {
+        if (distance <= IN_RANGE) {
             // Change the color of the player's block (for demonstration purpose, changing to green)
-            // Assuming you have an instance of ComponentPlayerController named 'player' in scope
             player.color = Color.GREEN;
 
         } else {
