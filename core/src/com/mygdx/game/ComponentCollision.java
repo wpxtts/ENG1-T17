@@ -11,4 +11,10 @@ public class ComponentCollision extends Component {
         this.interactable = interactable;
     }
 
+    public boolean getInteractable(){
+        return interactable;
+    }
+    public void setInteractable(boolean interactable){
+        this.interactable=interactable;
+    }
 }

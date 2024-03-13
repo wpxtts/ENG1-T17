@@ -8,4 +8,11 @@ public class ComponentInput extends Component{
     ComponentInput(){
         this.keysPressed = new ArrayList<>();
     }
+
+    public ArrayList<String> getKeysPressed(){
+      return keysPressed;
+    };
+    public void setKeysPressed(ArrayList<String> keysPressed){
+        this.keysPressed = keysPressed;
+    }
 }
