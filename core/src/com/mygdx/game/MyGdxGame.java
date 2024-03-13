@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class MyGdxGame extends ApplicationAdapter {
 	Entity[] entities;
-	ComponentPlayerController player;
 
 	SystemPlayerController playerControllerSystem;
 	SystemCollision collisionSystem;
@@ -20,13 +19,21 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 
-		entities = new Entity[2];
+		entities = new Entity[3];
 		entities[0] = new Entity();
-		entities[0].SetPlayerControllerComponent(new ComponentPlayerController(100, 100, 100, 100));
-		entities[1] = new Entity();
-		entities[1].SetCollisionComponent(new ComponentCollision(300, 300, 100, 100));
+		entities[0].SetPositionComponent(new ComponentPosition(100, 100, 100, 100));
+		entities[0].SetPlayerControllerComponent(new ComponentPlayerController());
+		entities[0].SetSpriteComponent(new ComponentSprite());
 
-		player = entities[0].GetPlayerControllerComponent();
+		entities[1] = new Entity();
+		entities[1].SetPositionComponent(new ComponentPosition(300, 300, 100, 100));
+		entities[1].SetCollisionComponent(new ComponentCollision(false));
+		entities[1].SetSpriteComponent(new ComponentSprite());
+
+		entities[2] = new Entity();
+		entities[2].SetPositionComponent(new ComponentPosition(50, 500, 100, 100));
+		entities[2].SetCollisionComponent(new ComponentCollision(true));
+		entities[2].SetSpriteComponent(new ComponentSprite());
 
 		playerControllerSystem = new SystemPlayerController();
 		collisionSystem = new SystemCollision();
@@ -39,15 +46,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		// Turn the screen black.
 		ScreenUtils.clear(0, 0, 0, 1);
 
-		// updates all the systems every frame
-		UpdateFrame();
-
-	}
-	void UpdateFrame() {
-
+		// updates all the systems this frame.
 		playerControllerSystem.Update(entities);
 		collisionSystem.Update(entities);
 		renderSystem.Update(entities);
 
 	}
+
 }

@@ -11,15 +11,16 @@ public class SystemPlayerController {
 
         // Note the player controller is initialised as null, meaning the code will break if there
         // is no player entity.
-        ComponentPlayerController player = null;
+        ComponentPosition player = null;
 
         // Finds the player.
         for (int i = 0; i < entities.length; i++) {
 
-            ComponentPlayerController playerController = entities[i].GetPlayerControllerComponent();
+            Entity entity = entities[i];
+            ComponentPlayerController playerController = entity.GetPlayerControllerComponent();
 
             if (playerController != null) {
-                player = playerController;
+                player = entity.GetPositionComponent();
                 break;
             }
 

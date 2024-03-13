@@ -9,59 +9,43 @@ import java.util.ArrayList;
 
 public class SystemCollision {
 
-    // Predefined radius for color change
-    private static final float IN_RANGE = 150; // Adjust this radius as needed
-
     SystemCollision() {}
 
     public void Update(Entity[] entities) {
 
-        // Note the player controller is initialised as null, meaning the code will break if there
-        // is no player entity.
-        ArrayList<ComponentCollision> collisionObjects = new ArrayList<ComponentCollision>();
-        ComponentPlayerController player = null;
+        ArrayList<Entity> collisionObjects = new ArrayList<Entity>();
+        Entity player = null;
 
-        // Finds all the collidable objects and the player.
+        // Finds collision object entities and player entity.
         for (int i = 0; i < entities.length; i++) {
 
-            ComponentCollision collision = entities[i].GetCollisionComponent();
-            ComponentPlayerController playerController = entities[i].GetPlayerControllerComponent();
+            Entity entity = entities[i];
+            ComponentCollision collision = entity.GetCollisionComponent();
+            ComponentPlayerController playerController = entity.GetPlayerControllerComponent();
 
             if (collision != null) {
-                collisionObjects.add(collision);
-            } else if (playerController != null) {
-                player = playerController;
+                collisionObjects.add(entity);
+            }
+
+            else if (playerController != null) {
+                player = entity;
             }
         }
 
-        // Determines what needs to be done for each collision.
+        // If the entity is the player, check its collision with all objects.
         for (int i = 0; i < collisionObjects.size(); i++) {
-            ComponentCollision collision = collisionObjects.get(i);
-            CollisionCorrection(collision, player);
+            Entity collisionObject = collisionObjects.get(i);
+            AABBCollision(collisionObject, player);
         }
+
     }
 
-    void CollisionCorrection(ComponentCollision collision, ComponentPlayerController player) {
+    boolean AABBCollision(Entity collisionObject, Entity playerEntity) {
 
-        // Calculate distance between player and collision object
-        Point2D.Float playerCenter = new Point2D.Float(player.x + player.width / 2, player.y + player.height / 2);
-        Point2D.Float collisionCenter = new Point2D.Float(collision.x + collision.width / 2, collision.y + collision.height / 2);
-        float distance = (float) playerCenter.distance(collisionCenter);
+        ComponentPosition collision = collisionObject.GetPositionComponent();
+        ComponentPosition player = playerEntity.GetPositionComponent();
 
-        // Check if player is within the predefined radius of the collision object
-        if (distance <= IN_RANGE) {
-            player.color = Color.GREEN;
-            // Change the color of the player's block (for demonstration purpose, changing to green)
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                player.color = Color.PINK;
-            }
 
-        } else {
-            // Reset the color to default (for demonstration purpose, changing back to red)
-            player.color = Color.RED;
-        }
-
-        // Rest of collision correction code remains unchanged
         // These are the four edges of the collision object.
         float collisionLeft = collision.x - collision.width / 2;
         float collisionRight = collision.x + collision.width / 2;
@@ -85,22 +69,38 @@ public class SystemCollision {
         // Checks if all values are positive, which indicates a collision.
         if (leftGap > 0 && rightGap > 0 && topGap > 0 && bottomGap > 0) {
 
-            // Finds the direction with the shortest value
-            float leftRightMin = Math.min(leftGap, rightGap);
-            float topBottomMin = Math.min(topGap, bottomGap);
-            float directionValue = Math.min(leftRightMin, topBottomMin);
-
-            // Moves the player so it's no longer colliding with the
-            // object in the shortest direction.
-            if (directionValue == leftGap) {
-                player.x = collisionLeft - player.width / 2;
-            } else if (directionValue == rightGap) {
-                player.x = collisionRight + player.width / 2;
-            } else if (directionValue == topGap) {
-                player.y = collisionTop + player.height / 2;
-            } else if (directionValue == bottomGap) {
-                player.y = collisionBottom - player.height / 2;
+            if (collisionObject.GetCollisionComponent().interactable) {
+                InteractionCheck();
             }
+
+            else {
+                // Finds the direction with the shortest value
+                float leftRightMin = Math.min(leftGap, rightGap);
+                float topBottomMin = Math.min(topGap, bottomGap);
+                float directionValue = Math.min(leftRightMin, topBottomMin);
+
+                // Moves the player so it's no longer colliding with the
+                // object in the shortest direction.
+                if (directionValue == leftGap) {
+                    player.x = collisionLeft - player.width / 2;
+                } else if (directionValue == rightGap) {
+                    player.x = collisionRight + player.width / 2;
+                } else if (directionValue == topGap) {
+                    player.y = collisionTop + player.height / 2;
+                } else if (directionValue == bottomGap) {
+                    player.y = collisionBottom - player.height / 2;
+                }
+            }
+
         }
+
+        return false;
+    }
+
+    void InteractionCheck() {
+
+        // Add in here whatever happens, will need to change collision component and
+        // probably have a switch case
+
     }
 }

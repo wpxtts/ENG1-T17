@@ -2,19 +2,12 @@ package com.mygdx.game;
 
 public class ComponentCollision {
 
-    // Contains all the variables which determine the size and position of an object
-    // that the player can collide with.
+    // Can be added to make an object collidable with the player
 
-    float x;
-    float y;
-    float height;
-    float width;
+    boolean interactable;
 
-    ComponentCollision(float x, float y, float height, float width) {
-        this.x = x;
-        this.y = y;
-        this.height = height;
-        this.width = width;
+    ComponentCollision(boolean interactable) {
+        this.interactable = interactable;
     }
 
 }
