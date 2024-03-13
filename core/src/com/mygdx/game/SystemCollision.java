@@ -11,6 +11,7 @@ public class SystemCollision {
 
     // Predefined radius for color change
     private static final float IN_RANGE = 150; // Adjust this radius as needed
+    private int study = 0;
 
     SystemCollision() {}
 
@@ -54,6 +55,7 @@ public class SystemCollision {
             // Change the color of the player's block (for demonstration purpose, changing to green)
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 player.color = Color.PINK;
+                study++;
             }
 
         } else {
