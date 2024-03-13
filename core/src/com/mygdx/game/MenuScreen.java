@@ -38,8 +38,8 @@ public class MenuScreen implements Screen {
 
         //Draws in Menu buttons
         game.batch.setProjectionMatrix(camera.combined);
-        game.batch.draw(CreditsImg, 0, 0, 100, 100);
-        game.batch.draw(SettingsImg, 0, 0, 100, 100);
+        game.batch.draw(CreditsImg, 160, 100, 100, 55);
+        game.batch.draw(SettingsImg, 560, 100, 100, 55);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {
