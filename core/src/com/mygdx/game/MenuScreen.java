@@ -29,7 +29,7 @@ public class MenuScreen implements Screen {
         game.batch.begin();
 
         //Writes text to screen using game.font.draw(SpriteBatch, String, float, float)
-        game.font.draw(game.batch, "Welcome to Heslington Hustle!!! ", 100, 150);
+        game.font.draw(game.batch, "Welcome to Heslington Hustle! ", 100, 150);
         game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
         game.batch.end();
 
