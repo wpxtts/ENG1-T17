@@ -4,10 +4,12 @@ import com.mygdx.game.components.ComponentInput;
 import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.Entity;
 
+import java.util.ArrayList;
+
 public class SystemUpdateVelocityByInput {
     public SystemUpdateVelocityByInput(){}
 
-    public void Update(Entity[] entities) {
+    public void Update(ArrayList<Entity> entities) {
     for(Entity entity : entities){
         if(entity.hasComponent(ComponentInput.class) && entity.hasComponent(ComponentVelocity.class)){
             ComponentInput input = (ComponentInput) entity.getComponent(ComponentInput.class);

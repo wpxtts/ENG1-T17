@@ -4,8 +4,10 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.systems.*;
 
+import java.util.ArrayList;
+
 public class MyGdxGame extends ApplicationAdapter {
-	Entity[] entities;
+	ArrayList<Entity> entities;
 
 	SystemUpdateInput inputUpdateSystem;
 	SystemUpdateVelocityByInput updateVelocityByInputSystem;
@@ -16,27 +18,16 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 		// List of entities
-		entities = new Entity[3];
+		entities = new ArrayList<>();
 
 		// Player entity
-		entities[0] = new Entity();
-		entities[0].addComponent(new ComponentPosition(100, 100, 100, 100));
-		entities[0].addComponent(new ComponentPlayerFlag());
-		entities[0].addComponent(new ComponentSprite());
-		entities[0].addComponent(new ComponentInput());
-		entities[0].addComponent(new ComponentVelocity());
+		entities.add(new Player());
 
 		// Block Entity
-		entities[1] = new Entity();
-		entities[1].addComponent(new ComponentPosition(300, 300, 100, 100));
-		entities[1].addComponent(new ComponentCollision(false));
-		entities[1].addComponent(new ComponentSprite());
+		entities.add(new Block(300,300,100, 100, false));
 
 		// Block entity
-		entities[2] = new Entity();
-		entities[2].addComponent(new ComponentPosition(50, 500, 100, 100));
-		entities[2].addComponent(new ComponentCollision(true));
-		entities[2].addComponent(new ComponentSprite());
+		entities.add(new Block(50, 500, 100, 100, true));
 
 		inputUpdateSystem = new SystemUpdateInput();
 		updateVelocityByInputSystem = new SystemUpdateVelocityByInput();

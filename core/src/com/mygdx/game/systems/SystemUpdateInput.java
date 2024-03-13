@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SystemUpdateInput {
     public SystemUpdateInput() {}
 
-    public void Update(Entity[] entities) {
+    public void Update(ArrayList<Entity> entities) {
 
         ArrayList<String> keysPressed = new ArrayList<>();
 
