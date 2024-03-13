@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 public class MyGdxGame extends ApplicationAdapter {
 	Entity[] entities;
 
+	SystemUpdateInput inputUpdateSystem;
 	SystemPlayerController playerControllerSystem;
 	SystemCollision collisionSystem;
 	SystemRender renderSystem;
@@ -39,6 +40,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		entities[2].addComponent(new ComponentCollision(true));
 		entities[2].addComponent(new ComponentSprite());
 
+		inputUpdateSystem = new SystemUpdateInput();
 		playerControllerSystem = new SystemPlayerController();
 		collisionSystem = new SystemCollision();
 		renderSystem = new SystemRender();
@@ -51,6 +53,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 
 		// updates all the systems this frame.
+		inputUpdateSystem.Update(entities);
 		playerControllerSystem.Update(entities);
 		collisionSystem.Update(entities);
 		renderSystem.Update(entities);
