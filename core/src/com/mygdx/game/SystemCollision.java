@@ -22,14 +22,6 @@ public class SystemCollision {
                 player = entity;
             }
 
-//            ComponentCollision collision = entity.GetCollisionComponent();
-//            ComponentPlayerController playerController = entity.GetPlayerControllerComponent();
-//
-//            if (collision != null) {
-//                collisionObjects.add(entity);
-//            } else if (playerController != null) {
-//                player = entity;
-//            }
         }
 
         // If the entity is the player, check its collision with all objects.
