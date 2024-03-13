@@ -50,9 +50,10 @@ public class SystemCollision {
 
         // Check if player is within the predefined radius of the collision object
         if (distance <= IN_RANGE) {
+            player.color = Color.GREEN;
             // Change the color of the player's block (for demonstration purpose, changing to green)
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                player.color = Color.GREEN;
+                player.color = Color.PINK;
             }
 
         } else {
