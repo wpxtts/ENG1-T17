@@ -22,23 +22,31 @@ public class SystemRender {
         ArrayList<Entity> visibleObjects = new ArrayList<Entity>();
 
         // Finds all objects to be rendered.
-        for (int i = 0; i < entities.length; i++) {
-
-            Entity entity = entities[i];
-            ComponentSprite sprite = entity.GetSpriteComponent();
-
-            if (sprite != null) {
+        for (Entity entity : entities) {
+            if(entity.hasComponent(ComponentSprite.class.getName())){
                 visibleObjects.add(entity);
-
-                if (entity.GetPlayerControllerComponent() != null) {
-
+                if(entity.hasComponent(ComponentPlayerController.class.getName())){
                     // Updates the camera's position to be over the centre of the player
-                    ComponentPosition player = entity.GetPositionComponent();
+                    ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class.getName());
                     camera.position.set(player.x + player.width / 2, player.y + player.height / 2, 0);
                     camera.update();
-
                 }
             }
+
+//            ComponentSprite sprite = entity.GetSpriteComponent();
+//
+//            if (sprite != null) {
+//                visibleObjects.add(entity);
+//
+//                if (entity.GetPlayerControllerComponent() != null) {
+//
+//                    // Updates the camera's position to be over the centre of the player
+//                    ComponentPosition player = entity.GetPositionComponent();
+//                    camera.position.set(player.x + player.width / 2, player.y + player.height / 2, 0);
+//                    camera.update();
+//
+//                }
+//            }
 
         }
         
@@ -47,9 +55,8 @@ public class SystemRender {
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        for (int i = 0; i < visibleObjects.size(); i++) {
-            Entity entity = visibleObjects.get(i);
-            DrawCuboid(entity.GetPositionComponent(), shapeRenderer);
+        for (Entity entity : visibleObjects) {
+            DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class.getName()), shapeRenderer);
         }
 
         // Ends the shape renderer

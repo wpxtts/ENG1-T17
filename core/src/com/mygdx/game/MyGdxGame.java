@@ -18,22 +18,26 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-
+		// List of entities
 		entities = new Entity[3];
+
+		// Player entity
 		entities[0] = new Entity();
-		entities[0].SetPositionComponent(new ComponentPosition(100, 100, 100, 100));
-		entities[0].SetPlayerControllerComponent(new ComponentPlayerController());
-		entities[0].SetSpriteComponent(new ComponentSprite());
+		entities[0].addComponent(new ComponentPosition(100, 100, 100, 100));
+		entities[0].addComponent(new ComponentPlayerController());
+		entities[0].addComponent(new ComponentSprite());
 
+		// Block Entity
 		entities[1] = new Entity();
-		entities[1].SetPositionComponent(new ComponentPosition(300, 300, 100, 100));
-		entities[1].SetCollisionComponent(new ComponentCollision(false));
-		entities[1].SetSpriteComponent(new ComponentSprite());
+		entities[1].addComponent(new ComponentPosition(300, 300, 100, 100));
+		entities[1].addComponent(new ComponentCollision(false));
+		entities[1].addComponent(new ComponentSprite());
 
+		// Block entity
 		entities[2] = new Entity();
-		entities[2].SetPositionComponent(new ComponentPosition(50, 500, 100, 100));
-		entities[2].SetCollisionComponent(new ComponentCollision(true));
-		entities[2].SetSpriteComponent(new ComponentSprite());
+		entities[2].addComponent(new ComponentPosition(50, 500, 100, 100));
+		entities[2].addComponent(new ComponentCollision(true));
+		entities[2].addComponent(new ComponentSprite());
 
 		playerControllerSystem = new SystemPlayerController();
 		collisionSystem = new SystemCollision();

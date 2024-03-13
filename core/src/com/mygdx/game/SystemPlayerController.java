@@ -11,33 +11,30 @@ public class SystemPlayerController {
 
         // Note the player controller is initialised as null, meaning the code will break if there
         // is no player entity.
-        ComponentPosition player = null;
+        ComponentPosition playerPosition = null;
 
         // Finds the player.
-        for (int i = 0; i < entities.length; i++) {
+        for (Entity entity : entities) {
 
-            Entity entity = entities[i];
-            ComponentPlayerController playerController = entity.GetPlayerControllerComponent();
-
-            if (playerController != null) {
-                player = entity.GetPositionComponent();
+            if(entity.hasComponent(ComponentPlayerController.class.getName())){
+                playerPosition = (ComponentPosition) entity.getComponent(ComponentPosition.class.getName());
                 break;
             }
 
         }
 
         // Moves the player according to the user's input.
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.x > 0) {
-            player.x -= 200 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && playerPosition.x > 0) {
+            playerPosition.x -= 200 * Gdx.graphics.getDeltaTime();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.x < 720) {
-            player.x += 200 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && playerPosition.x < 720) {
+            playerPosition.x += 200 * Gdx.graphics.getDeltaTime();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.y < 480) {
-            player.y += 200 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerPosition.y < 480) {
+            playerPosition.y += 200 * Gdx.graphics.getDeltaTime();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.y > 0) {
-            player.y -= 200 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && playerPosition.y > 0) {
+            playerPosition.y -= 200 * Gdx.graphics.getDeltaTime();
         }
 
     }

@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-public class ComponentPosition {
+public class ComponentPosition extends Component{
 
     // Contains all the variables which determine the size
     // and position of an object..
