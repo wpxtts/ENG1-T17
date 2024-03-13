@@ -25,7 +25,7 @@ public class SystemRender {
         for (Entity entity : entities) {
             if(entity.hasComponent(ComponentSprite.class)){
                 visibleObjects.add(entity);
-                if(entity.hasComponent(ComponentPlayerController.class)){
+                if(entity.hasComponent(ComponentPlayerFlag.class)){
                     // Updates the camera's position to be over the centre of the player
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                     camera.position.set(player.x + player.width / 2, player.y + player.height / 2, 0);

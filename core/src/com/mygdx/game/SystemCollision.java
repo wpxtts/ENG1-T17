@@ -18,7 +18,7 @@ public class SystemCollision {
                 collisionObjects.add(entity);
 
             }
-            if(entity.hasComponent(ComponentPlayerController.class)){
+            if(entity.hasComponent(ComponentPlayerFlag.class)){
                 player = entity;
             }
 

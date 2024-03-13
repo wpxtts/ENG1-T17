@@ -15,7 +15,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	SystemUpdateInput inputUpdateSystem;
 	SystemUpdateVelocityByInput updateVelocityByInputSystem;
 	SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
-	SystemPlayerController playerControllerSystem;
 	SystemCollision collisionSystem;
 	SystemRender renderSystem;
 
@@ -27,7 +26,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		// Player entity
 		entities[0] = new Entity();
 		entities[0].addComponent(new ComponentPosition(100, 100, 100, 100));
-		entities[0].addComponent(new ComponentPlayerController());
+		entities[0].addComponent(new ComponentPlayerFlag());
 		entities[0].addComponent(new ComponentSprite());
 		entities[0].addComponent(new ComponentInput());
 		entities[0].addComponent(new ComponentVelocity());
@@ -47,7 +46,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		inputUpdateSystem = new SystemUpdateInput();
 		updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
 		updatePositionByVelocitySystem = new SystemUpdatePositionByVelocity();
-//		playerControllerSystem = new SystemPlayerController();
 		collisionSystem = new SystemCollision();
 		renderSystem = new SystemRender();
 	}
