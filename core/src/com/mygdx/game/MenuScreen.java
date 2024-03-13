@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -45,10 +46,18 @@ public class MenuScreen implements Screen {
         int mouseX = Gdx.input.getX();
         int mouseY = Gdx.input.getY();
 
-        if (mouseX >= 160 && mouseX <= 160 + CreditsImg.getWidth()) {
-            if (mouseY >= 100 && mouseY <= 100 + CreditsImg.getHeight()) {
-                if (Gdx.input.isTouched()) {
-                    game.font.draw(game.batch, "CREDITS", 100, 150);
+        // System.out.println("Mouse X: " + mouseX + ", Mouse Y: " + mouseY);
+        if (mouseX >= 140 && mouseX < 232) {
+            if (mouseY >= 325 && mouseY < 380) {
+                if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                    System.out.println("Button pressed on the left");
+                }
+            }
+        }
+        if (mouseX >= 505 && mouseX < 595) {
+            if (mouseY >= 325 && mouseY < 380) {
+                if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                    System.out.println("Button pressed on the right");
                 }
             }
         }
