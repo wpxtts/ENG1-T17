@@ -28,7 +28,7 @@ public class SystemRender {
                 if(entity.hasComponent(ComponentPlayerFlag.class)){
                     // Updates the camera's position to be over the centre of the player
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    camera.position.set(player.x + player.width / 2, player.y + player.height / 2, 0);
+                    camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
                     camera.update();
                 }
             }
@@ -51,7 +51,7 @@ public class SystemRender {
 
     void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.BLUE); // Set the color to the player's color
-        shapeRenderer.rect(object.x, object.y, object.width, object.height);
+        shapeRenderer.rect(object.getX(), object.getY(), object.getWidth(), object.getHeight());
     }
 
 }

@@ -31,7 +31,7 @@ public class SystemUpdateInput {
 
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentInput.class)){
-                ((ComponentInput)entity.getComponent(ComponentInput.class)).keysPressed = keysPressed;
+                ((ComponentInput)entity.getComponent(ComponentInput.class)).setKeysPressed(keysPressed);
             }
         }
     }

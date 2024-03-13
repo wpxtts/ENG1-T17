@@ -38,16 +38,16 @@ public class SystemCollision {
         ComponentPosition playerPosition = (ComponentPosition) playerEntity.getComponent(ComponentPosition.class);
 
         // These are the four edges of the collision object.
-        float collisionLeft = collisionPosition.x - collisionPosition.width / 2;
-        float collisionRight = collisionPosition.x + collisionPosition.width / 2;
-        float collisionTop = collisionPosition.y + collisionPosition.height / 2;
-        float collisionBottom = collisionPosition.y - collisionPosition.height / 2;
+        float collisionLeft = collisionPosition.getX() - collisionPosition.getWidth() / 2;
+        float collisionRight = collisionPosition.getX() + collisionPosition.getWidth() / 2;
+        float collisionTop = collisionPosition.getY() + collisionPosition.getHeight() / 2;
+        float collisionBottom = collisionPosition.getY() - collisionPosition.getHeight() / 2;
 
         // These are the four edges of the player.
-        float playerLeft = playerPosition.x - playerPosition.width / 2;
-        float playerRight = playerPosition.x + playerPosition.width / 2;
-        float playerTop = playerPosition.y + playerPosition.height / 2;
-        float playerBottom = playerPosition.y - playerPosition.height / 2;
+        float playerLeft = playerPosition.getX() - playerPosition.getWidth() / 2;
+        float playerRight = playerPosition.getX() + playerPosition.getWidth() / 2;
+        float playerTop = playerPosition.getY() + playerPosition.getHeight() / 2;
+        float playerBottom = playerPosition.getY() - playerPosition.getHeight() / 2;
 
         // These gap values are positive if they overlap, meaning if all of them
         // are positive there is a collision, and the smallest value indicates the
@@ -60,7 +60,7 @@ public class SystemCollision {
         // Checks if all values are positive, which indicates a collision.
         if (leftGap > 0 && rightGap > 0 && topGap > 0 && bottomGap > 0) {
 
-            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class)).interactable) {
+            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class)).getInteractable()) {
                 InteractionCheck();
             }
 
@@ -73,13 +73,13 @@ public class SystemCollision {
                 // Moves the player, so it's no longer colliding with the
                 // object in the shortest direction.
                 if (directionValue == leftGap) {
-                    playerPosition.x = collisionLeft - playerPosition.width / 2;
+                    playerPosition.setX(collisionLeft - playerPosition.getWidth()/2);
                 } else if (directionValue == rightGap) {
-                    playerPosition.x = collisionRight + playerPosition.width / 2;
+                    playerPosition.setX(collisionRight + playerPosition.getWidth()/2);
                 } else if (directionValue == topGap) {
-                    playerPosition.y = collisionTop + playerPosition.height / 2;
+                    playerPosition.setY(collisionTop + playerPosition.getHeight() / 2);
                 } else if (directionValue == bottomGap) {
-                    playerPosition.y = collisionBottom - playerPosition.height / 2;
+                    playerPosition.setY(collisionBottom - playerPosition.getHeight() / 2);
                 }
             }
 

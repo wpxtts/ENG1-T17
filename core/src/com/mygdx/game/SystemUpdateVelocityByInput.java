@@ -10,11 +10,12 @@ public class SystemUpdateVelocityByInput {
         if(entity.hasComponent(ComponentInput.class) && entity.hasComponent(ComponentVelocity.class)){
             ComponentInput input = (ComponentInput) entity.getComponent(ComponentInput.class);
             ComponentVelocity velocity = (ComponentVelocity) entity.getComponent(ComponentVelocity.class);
-            boolean left = input.keysPressed.contains("LEFT");
-            boolean right = input.keysPressed.contains("RIGHT");
-            boolean up = input.keysPressed.contains("UP");
-            boolean down = input.keysPressed.contains("DOWN");
-            int speedIncrement = 5;
+            ArrayList<String> keysPressed = input.getKeysPressed();
+            boolean left = keysPressed.contains("LEFT");
+            boolean right = keysPressed.contains("RIGHT");
+            boolean up = keysPressed.contains("UP");
+            boolean down = keysPressed.contains("DOWN");
+            int speedIncrement = 200;
             int newXSpeed = 0;
             int newYSpeed = 0;
             if(left){
@@ -34,8 +35,8 @@ public class SystemUpdateVelocityByInput {
                 newYSpeed = (int) (newYSpeed * 0.707);
             }
 
-            velocity.xSpeed = newXSpeed;
-            velocity.ySpeed = newYSpeed;
+            velocity.setXSpeed(newXSpeed);
+            velocity.setYSpeed(newYSpeed);
 
         }
     }

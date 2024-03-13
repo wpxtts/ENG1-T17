@@ -14,14 +14,13 @@ public class SystemUpdatePositionByVelocity {
                 ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                 ComponentVelocity velocity = (ComponentVelocity) entity.getComponent(ComponentVelocity.class);
 
-                position.x += velocity.xSpeed;
-                position.y += velocity.ySpeed;
-
-                if (0<position.x && position.x<720) {
-                    position.x += velocity.xSpeed * Gdx.graphics.getDeltaTime();
+                if ((0<position.getX() || velocity.getXSpeed()>0) &&
+                        (position.getX()<500||velocity.getXSpeed()<0)) {
+                    position.setX(position.getX() +velocity.getXSpeed() * Gdx.graphics.getDeltaTime());
                 }
-                if(0<position.y && position.y<480){
-                    position.y += velocity.ySpeed * Gdx.graphics.getDeltaTime();
+                if ((0<position.getY() || velocity.getYSpeed()>0) &&
+                        (position.getY()<500||velocity.getYSpeed()<0)) {
+                    position.setY(position.getY() +velocity.getYSpeed() * Gdx.graphics.getDeltaTime());
                 }
             }
         }
