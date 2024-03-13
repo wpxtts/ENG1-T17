@@ -1,19 +1,15 @@
-package com.mygdx.game.systems;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.components.ComponentPlayerFlag;
-import com.mygdx.game.components.ComponentPosition;
-import com.mygdx.game.components.ComponentSprite;
-import com.mygdx.game.Entity;
 
 import java.util.ArrayList;
 
 public class SystemRender {
 
-    public SystemRender() {}
+    SystemRender() {}
 
     public void Update(ArrayList<Entity> entities) {
 
@@ -32,7 +28,7 @@ public class SystemRender {
                 if(entity.hasComponent(ComponentPlayerFlag.class)){
                     // Updates the camera's position to be over the centre of the player
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
+                    camera.position.set(player.x + player.width / 2, player.y + player.height / 2, 0);
                     camera.update();
                 }
             }
@@ -55,7 +51,7 @@ public class SystemRender {
 
     void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.BLUE); // Set the color to the player's color
-        shapeRenderer.rect(object.getX(), object.getY(), object.getWidth(), object.getHeight());
+        shapeRenderer.rect(object.x, object.y, object.width, object.height);
     }
 
 }

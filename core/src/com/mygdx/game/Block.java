@@ -1,9 +1,5 @@
 package com.mygdx.game;
 
-import com.mygdx.game.components.ComponentCollision;
-import com.mygdx.game.components.ComponentPosition;
-import com.mygdx.game.components.ComponentSprite;
-
 import java.util.HashMap;
 
 public class Block extends Entity{

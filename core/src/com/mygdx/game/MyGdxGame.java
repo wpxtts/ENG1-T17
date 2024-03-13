@@ -1,8 +1,13 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.systems.*;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import java.util.ArrayList;
 
@@ -46,6 +51,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		inputUpdateSystem.Update(entities);
 		updateVelocityByInputSystem.Update(entities);
 		updatePositionByVelocitySystem.Update(entities);
+//		playerControllerSystem.Update(entities);
 		collisionSystem.Update(entities);
 		renderSystem.Update(entities);
 

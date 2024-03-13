@@ -1,25 +1,20 @@
-package com.mygdx.game.systems;
-
-import com.mygdx.game.components.ComponentInput;
-import com.mygdx.game.components.ComponentVelocity;
-import com.mygdx.game.Entity;
+package com.mygdx.game;
 
 import java.util.ArrayList;
 
 public class SystemUpdateVelocityByInput {
-    public SystemUpdateVelocityByInput(){}
+    SystemUpdateVelocityByInput(){}
 
     public void Update(ArrayList<Entity> entities) {
     for(Entity entity : entities){
         if(entity.hasComponent(ComponentInput.class) && entity.hasComponent(ComponentVelocity.class)){
             ComponentInput input = (ComponentInput) entity.getComponent(ComponentInput.class);
             ComponentVelocity velocity = (ComponentVelocity) entity.getComponent(ComponentVelocity.class);
-            ArrayList<String> keysPressed = input.getKeysPressed();
-            boolean left = keysPressed.contains("LEFT");
-            boolean right = keysPressed.contains("RIGHT");
-            boolean up = keysPressed.contains("UP");
-            boolean down = keysPressed.contains("DOWN");
-            int speedIncrement = 200;
+            boolean left = input.keysPressed.contains("LEFT");
+            boolean right = input.keysPressed.contains("RIGHT");
+            boolean up = input.keysPressed.contains("UP");
+            boolean down = input.keysPressed.contains("DOWN");
+            int speedIncrement = 5;
             int newXSpeed = 0;
             int newYSpeed = 0;
             if(left){
@@ -39,8 +34,9 @@ public class SystemUpdateVelocityByInput {
                 newYSpeed = (int) (newYSpeed * 0.707);
             }
 
-            velocity.setXSpeed(newXSpeed);
-            velocity.setYSpeed(newYSpeed);
+            velocity.xSpeed = newXSpeed;
+            velocity.ySpeed = newYSpeed;
+
         }
     }
     }

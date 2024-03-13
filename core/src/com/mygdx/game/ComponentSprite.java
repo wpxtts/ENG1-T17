@@ -1,4 +1,4 @@
-package com.mygdx.game.components;
+package com.mygdx.game;
 
 public class ComponentSprite extends Component{
 
