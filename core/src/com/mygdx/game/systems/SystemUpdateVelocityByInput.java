@@ -1,9 +1,13 @@
-package com.mygdx.game;
+package com.mygdx.game.systems;
+
+import com.mygdx.game.ComponentInput;
+import com.mygdx.game.ComponentVelocity;
+import com.mygdx.game.Entity;
 
 import java.util.ArrayList;
 
 public class SystemUpdateVelocityByInput {
-    SystemUpdateVelocityByInput(){}
+    public SystemUpdateVelocityByInput(){}
 
     public void Update(ArrayList<Entity> entities) {
     for(Entity entity : entities){

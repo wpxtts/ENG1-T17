@@ -1,10 +1,15 @@
-package com.mygdx.game;
+package com.mygdx.game.systems;
+
+import com.mygdx.game.ComponentCollision;
+import com.mygdx.game.ComponentPlayerFlag;
+import com.mygdx.game.ComponentPosition;
+import com.mygdx.game.Entity;
 
 import java.util.ArrayList;
 
 public class SystemCollision {
 
-    SystemCollision() {}
+    public SystemCollision() {}
 
     public void Update(ArrayList<Entity> entities) {
 

@@ -1,15 +1,19 @@
-package com.mygdx.game;
+package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.ComponentPlayerFlag;
+import com.mygdx.game.ComponentPosition;
+import com.mygdx.game.ComponentSprite;
+import com.mygdx.game.Entity;
 
 import java.util.ArrayList;
 
 public class SystemRender {
 
-    SystemRender() {}
+    public SystemRender() {}
 
     public void Update(ArrayList<Entity> entities) {
 
