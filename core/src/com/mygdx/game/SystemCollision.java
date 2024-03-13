@@ -45,7 +45,6 @@ public class SystemCollision {
         ComponentPosition collision = collisionObject.GetPositionComponent();
         ComponentPosition player = playerEntity.GetPositionComponent();
 
-
         // These are the four edges of the collision object.
         float collisionLeft = collision.x - collision.width / 2;
         float collisionRight = collision.x + collision.width / 2;
