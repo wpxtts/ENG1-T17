@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
+import com.mygdx.game.components.Component;
+
 import java.util.HashMap;
 
 public class Entity {

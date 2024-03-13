@@ -1,11 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import java.util.ArrayList;
 
 public class ComponentInput extends Component{
     ArrayList<String> keysPressed;
 
-    ComponentInput(){
+    public ComponentInput(){
         this.keysPressed = new ArrayList<>();
     }
 

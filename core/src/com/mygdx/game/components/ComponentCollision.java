@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 public class ComponentCollision extends Component {
 
@@ -6,7 +6,7 @@ public class ComponentCollision extends Component {
 
     boolean interactable;
 
-    ComponentCollision(boolean interactable) {
+    public ComponentCollision(boolean interactable) {
 
         this.interactable = interactable;
     }

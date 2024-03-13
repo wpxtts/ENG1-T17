@@ -1,6 +1,4 @@
-package com.mygdx.game;
-
-import com.badlogic.gdx.graphics.Color;
+package com.mygdx.game.components;
 
 public class ComponentPlayerFlag extends Component{
 

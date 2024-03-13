@@ -1,8 +1,8 @@
 package com.mygdx.game.systems;
 
-import com.mygdx.game.ComponentCollision;
-import com.mygdx.game.ComponentPlayerFlag;
-import com.mygdx.game.ComponentPosition;
+import com.mygdx.game.components.ComponentCollision;
+import com.mygdx.game.components.ComponentPlayerFlag;
+import com.mygdx.game.components.ComponentPosition;
 import com.mygdx.game.Entity;
 
 import java.util.ArrayList;

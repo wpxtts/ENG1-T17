@@ -1,9 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 public class ComponentVelocity extends Component{
     float xSpeed;
     float ySpeed;
-    ComponentVelocity(){
+    public ComponentVelocity(){
         this.xSpeed = 0;
         this.ySpeed = 0;
     }

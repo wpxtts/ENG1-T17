@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.ComponentPlayerFlag;
-import com.mygdx.game.ComponentPosition;
-import com.mygdx.game.ComponentSprite;
+import com.mygdx.game.components.ComponentPlayerFlag;
+import com.mygdx.game.components.ComponentPosition;
+import com.mygdx.game.components.ComponentSprite;
 import com.mygdx.game.Entity;
 
 import java.util.ArrayList;

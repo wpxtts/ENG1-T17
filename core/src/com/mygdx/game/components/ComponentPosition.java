@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 public class ComponentPosition extends Component{
 
@@ -10,7 +10,7 @@ public class ComponentPosition extends Component{
     float height;
     float width;
 
-    ComponentPosition(float x, float y, float height, float width) {
+    public ComponentPosition(float x, float y, float height, float width) {
         this.x = x;
         this.y = y;
         this.height = height;

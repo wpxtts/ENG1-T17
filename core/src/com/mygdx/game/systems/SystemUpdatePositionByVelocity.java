@@ -1,9 +1,8 @@
 package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.mygdx.game.ComponentPosition;
-import com.mygdx.game.ComponentVelocity;
+import com.mygdx.game.components.ComponentPosition;
+import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.Entity;
 
 import java.util.ArrayList;
