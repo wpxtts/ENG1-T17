@@ -11,11 +11,13 @@ public class MenuScreen implements Screen {
     final MyGdxGame game;
 
     OrthographicCamera camera;
+    Texture CreditsImg;
+    Texture SettingsImg;
 
     public MenuScreen(final MyGdxGame game) {
         this.game = game;
-        Texture CreditsImg = new Texture("button1.png");
-        Texture SettingsImg = new Texture("button1.png");
+        CreditsImg = new Texture("button1.png");
+        SettingsImg = new Texture("button1.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
     }
@@ -35,6 +37,7 @@ public class MenuScreen implements Screen {
         game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
 
         //Draws in Menu buttons
+        game.batch.setProjectionMatrix(camera.combined);
         game.batch.draw(CreditsImg, 0, 0);
         game.batch.draw(SettingsImg, 0, 0);
         game.batch.end();
