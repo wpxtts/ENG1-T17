@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MenuScreen implements Screen {
@@ -13,7 +14,7 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(final MyGdxGame game) {
         this.game = game;
-
+        Texture img = new Texture("badlogic.jpg");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
     }
