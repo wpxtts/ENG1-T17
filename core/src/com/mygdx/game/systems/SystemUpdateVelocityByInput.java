@@ -2,7 +2,7 @@ package com.mygdx.game.systems;
 
 import com.mygdx.game.components.ComponentInput;
 import com.mygdx.game.components.ComponentVelocity;
-import com.mygdx.game.Entity;
+import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
 

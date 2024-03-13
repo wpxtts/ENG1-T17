@@ -2,6 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.entities.Block;
+import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.Player;
 import com.mygdx.game.systems.*;
 
 import java.util.ArrayList;

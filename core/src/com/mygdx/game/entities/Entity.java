@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.entities;
 
 import com.mygdx.game.components.Component;
 
@@ -19,7 +19,7 @@ public class Entity {
         return components.get(componentClass.getName());
     }
 
-    Entity() {
+    public Entity() {
         this.components = new HashMap<>();
     }
 

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.components.ComponentPlayerFlag;
 import com.mygdx.game.components.ComponentPosition;
 import com.mygdx.game.components.ComponentSprite;
-import com.mygdx.game.Entity;
+import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
 

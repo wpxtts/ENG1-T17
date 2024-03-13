@@ -3,7 +3,7 @@ package com.mygdx.game.systems;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.components.ComponentInput;
-import com.mygdx.game.Entity;
+import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
 
