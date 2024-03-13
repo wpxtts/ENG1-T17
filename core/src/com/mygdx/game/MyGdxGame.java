@@ -27,7 +27,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		entities[1].SetCollisionComponent(new ComponentCollision(300, 300, 100, 100));
 
 		entities[2] = new Entity();
-		entities[2].SetCollisionComponent(new ComponentCollision(100, 100, 100, 100));
+		entities[2].SetCollisionComponent(new ComponentCollision(500, 500, 100, 100));
 
 
 		player = entities[0].GetPlayerControllerComponent();

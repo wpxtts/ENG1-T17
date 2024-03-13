@@ -52,10 +52,8 @@ public class SystemRender {
 
         // Draws all collidable objects
         for (int i = 0; i < collisionObjects.size(); i++) {
-
-            ComponentCollision collision = collisionObjects.get(0);
+            ComponentCollision collision = collisionObjects.get(i); // Corrected to use 'i' instead of '0'
             DrawCollisionObject(collision, shapeRenderer);
-
         }
 
         // Ends the shape renderer
