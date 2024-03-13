@@ -1,12 +1,14 @@
-package com.mygdx.game;
+package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.mygdx.game.components.ComponentInput;
+import com.mygdx.game.Entity;
 
 import java.util.ArrayList;
 
 public class SystemUpdateInput {
-    SystemUpdateInput() {}
+    public SystemUpdateInput() {}
 
     public void Update(ArrayList<Entity> entities) {
 
@@ -31,7 +33,7 @@ public class SystemUpdateInput {
 
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentInput.class)){
-                ((ComponentInput)entity.getComponent(ComponentInput.class)).keysPressed = keysPressed;
+                ((ComponentInput)entity.getComponent(ComponentInput.class)).setKeysPressed(keysPressed);
             }
         }
     }

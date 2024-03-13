@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.mygdx.game.components.*;
+
 import java.util.HashMap;
 
 public class Player extends Entity{
