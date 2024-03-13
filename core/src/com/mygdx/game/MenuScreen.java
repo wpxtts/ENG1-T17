@@ -14,7 +14,8 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(final MyGdxGame game) {
         this.game = game;
-        Texture img = new Texture("badlogic.jpg");
+        Texture CreditsImg = new Texture("button1.png");
+        Texture SettingsImg = new Texture("button1.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
     }
