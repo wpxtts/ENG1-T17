@@ -20,11 +20,15 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 
-		entities = new Entity[2];
+		entities = new Entity[3];
 		entities[0] = new Entity();
 		entities[0].SetPlayerControllerComponent(new ComponentPlayerController(100, 100, 100, 100));
 		entities[1] = new Entity();
 		entities[1].SetCollisionComponent(new ComponentCollision(300, 300, 100, 100));
+
+		entities[2] = new Entity();
+		entities[2].SetCollisionComponent(new ComponentCollision(100, 100, 100, 100));
+
 
 		player = entities[0].GetPlayerControllerComponent();
 
