@@ -22,7 +22,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		entities = new Entity[2];
 		entities[0] = new Entity();
-		entities[0].SetPlayerControllerComponent(new ComponentPlayerController(100, 100, 100, 100));
+		entities[0].SetPlayerControllerComponent(new ComponentPlayerController(100, 100, 100, 100)); //player width made 65 pixels to align with sprite
 		entities[1] = new Entity();
 		entities[1].SetCollisionComponent(new ComponentCollision(300, 300, 100, 100));
 

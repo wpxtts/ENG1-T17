@@ -4,10 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
 public class SystemRender {
+    private Texture player_sprite;
+    private Rectangle hit_box;
+    private SpriteBatch batch;
 
     SystemRender() {}
 
@@ -47,8 +53,29 @@ public class SystemRender {
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        // Function that draws the player.
-        DrawPlayer(player, shapeRenderer);
+        //Defines Texture which is image used for player's sprite.
+        player_sprite = new Texture(Gdx.files.internal("player_sprite_1.png"));
+
+
+        // Function that draws the player as shape. Commented out.
+        //DrawCollisionObject(collision, shapeRenderer);
+
+        //Adds rectangle hit box around character
+        hit_box = new Rectangle();
+        hit_box.x = player.x;
+        hit_box.y = player.y;
+        hit_box.width = player_sprite.getWidth();
+        hit_box.height = player.height;
+
+        //renders player Sprite each movement
+        batch = new SpriteBatch();
+        batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
+        batch.begin();
+        batch.draw(player_sprite, hit_box.x, hit_box.y);
+        batch.end();
+
+
+
 
         // Draws all collidable objects
         for (int i = 0; i < collisionObjects.size(); i++) {
@@ -58,7 +85,7 @@ public class SystemRender {
 
         }
 
-        // Ends the shape renderer
+        // Ends the shape renderer. Commented out.
         shapeRenderer.end();
 
     }
