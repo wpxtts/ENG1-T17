@@ -101,5 +101,7 @@ public class SystemCollision {
         // Add in here whatever happens, will need to change collision component and
         // probably have a switch case
 
+        System.out.println("Check");
+
     }
 }
