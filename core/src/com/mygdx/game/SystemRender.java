@@ -48,7 +48,7 @@ public class SystemRender {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         for (int i = 0; i < visibleObjects.size(); i++) {
-            Entity entity = visibleObjects.get(0);
+            Entity entity = visibleObjects.get(i);
             DrawCuboid(entity.GetPositionComponent(), shapeRenderer);
         }
 
