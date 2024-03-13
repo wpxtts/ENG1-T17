@@ -42,9 +42,15 @@ public class MenuScreen implements Screen {
         game.batch.draw(SettingsImg, 560, 100, 100, 55);
         game.batch.end();
 
-        if (Gdx.input.isTouched()) {
-            game.setScreen(new GameScreen(game));
-            dispose();
+        int mouseX = Gdx.input.getX();
+        int mouseY = Gdx.input.getY();
+
+        if (mouseX >= 160 && mouseX <= 160 + CreditsImg.getWidth()) {
+            if (mouseY >= 100 && mouseY <= 100 + CreditsImg.getHeight()) {
+                if (Gdx.input.isTouched()) {
+                    game.font.draw(game.batch, "CREDITS", 100, 150);
+                }
+            }
         }
     }
 
