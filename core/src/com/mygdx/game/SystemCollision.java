@@ -14,11 +14,11 @@ public class SystemCollision {
         // Finds collision object entities and player entity.
         for (Entity entity : entities) {
 
-            if(entity.hasComponent(ComponentCollision.class.getName())){
+            if(entity.hasComponent(ComponentCollision.class)){
                 collisionObjects.add(entity);
 
             }
-            if(entity.hasComponent(ComponentPlayerController.class.getName())){
+            if(entity.hasComponent(ComponentPlayerController.class)){
                 player = entity;
             }
 
@@ -41,9 +41,9 @@ public class SystemCollision {
 
     void AABBCollision(Entity collisionObject, Entity playerEntity) {
 
-        ComponentPosition collisionPosition = (ComponentPosition) collisionObject.getComponent(ComponentPosition.class.getName());
+        ComponentPosition collisionPosition = (ComponentPosition) collisionObject.getComponent(ComponentPosition.class);
 
-        ComponentPosition playerPosition = (ComponentPosition) playerEntity.getComponent(ComponentPosition.class.getName());
+        ComponentPosition playerPosition = (ComponentPosition) playerEntity.getComponent(ComponentPosition.class);
 
         // These are the four edges of the collision object.
         float collisionLeft = collisionPosition.x - collisionPosition.width / 2;
@@ -68,7 +68,7 @@ public class SystemCollision {
         // Checks if all values are positive, which indicates a collision.
         if (leftGap > 0 && rightGap > 0 && topGap > 0 && bottomGap > 0) {
 
-            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class.getName())).interactable) {
+            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class)).interactable) {
                 InteractionCheck();
             }
 

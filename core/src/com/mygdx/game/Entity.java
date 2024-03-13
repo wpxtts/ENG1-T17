@@ -10,12 +10,12 @@ public class Entity {
         components.put(component.getClass().getName(), component);
     }
 
-    public boolean hasComponent(String componentName){
-        return components.containsKey(componentName);
+    public boolean hasComponent(Class<?> componentClass){
+        return components.containsKey(componentClass.getName());
     }
 
-    public Component getComponent(String componentName){
-        return components.get(componentName);
+    public Component getComponent(Class<?> componentClass){
+        return components.get(componentClass.getName());
     }
 
     //    ComponentPosition position;

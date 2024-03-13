@@ -16,8 +16,8 @@ public class SystemPlayerController {
         // Finds the player.
         for (Entity entity : entities) {
 
-            if(entity.hasComponent(ComponentPlayerController.class.getName())){
-                playerPosition = (ComponentPosition) entity.getComponent(ComponentPosition.class.getName());
+            if(entity.hasComponent(ComponentPlayerController.class)){
+                playerPosition = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                 break;
             }
 

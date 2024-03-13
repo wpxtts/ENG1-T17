@@ -23,11 +23,11 @@ public class SystemRender {
 
         // Finds all objects to be rendered.
         for (Entity entity : entities) {
-            if(entity.hasComponent(ComponentSprite.class.getName())){
+            if(entity.hasComponent(ComponentSprite.class)){
                 visibleObjects.add(entity);
-                if(entity.hasComponent(ComponentPlayerController.class.getName())){
+                if(entity.hasComponent(ComponentPlayerController.class)){
                     // Updates the camera's position to be over the centre of the player
-                    ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class.getName());
+                    ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                     camera.position.set(player.x + player.width / 2, player.y + player.height / 2, 0);
                     camera.update();
                 }
@@ -56,7 +56,7 @@ public class SystemRender {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         for (Entity entity : visibleObjects) {
-            DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class.getName()), shapeRenderer);
+            DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
         }
 
         // Ends the shape renderer
