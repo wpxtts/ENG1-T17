@@ -51,6 +51,8 @@ public class MenuScreen implements Screen {
             if (mouseY >= 325 && mouseY < 380) {
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     System.out.println("Button pressed on the left");
+                    game.setScreen(new GameScreen(game));
+                    dispose();
                 }
             }
         }
@@ -58,6 +60,8 @@ public class MenuScreen implements Screen {
             if (mouseY >= 325 && mouseY < 380) {
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     System.out.println("Button pressed on the right");
+                    game.setScreen(new SettingsScreen(game));
+                    dispose();
                 }
             }
         }
