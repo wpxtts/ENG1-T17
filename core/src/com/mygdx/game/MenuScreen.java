@@ -33,6 +33,10 @@ public class MenuScreen implements Screen {
         //Writes text to screen using game.font.draw(SpriteBatch, String, float, float)
         game.font.draw(game.batch, "Welcome to Heslington Hustle! ", 100, 150);
         game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+
+        //Draws in Menu buttons
+        game.batch.draw(CreditsImg, 0, 0);
+        game.batch.draw(SettingsImg, 0, 0);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {
