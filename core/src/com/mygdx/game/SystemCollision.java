@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 
 import java.awt.geom.Point2D;
@@ -49,7 +51,9 @@ public class SystemCollision {
         // Check if player is within the predefined radius of the collision object
         if (distance <= IN_RANGE) {
             // Change the color of the player's block (for demonstration purpose, changing to green)
-            player.color = Color.GREEN;
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                player.color = Color.GREEN;
+            }
 
         } else {
             // Reset the color to default (for demonstration purpose, changing back to red)
