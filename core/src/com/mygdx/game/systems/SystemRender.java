@@ -11,10 +11,17 @@ import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
 
+/**
+ * System which renders all sprites.
+ */
 public class SystemRender {
 
     public SystemRender() {}
 
+    /**
+     * Render all entities with sprites.
+     * @param entities all entities
+     */
     public void update(ArrayList<Entity> entities) {
 
         // Initialises a camera for this frame.
@@ -53,6 +60,12 @@ public class SystemRender {
         shapeRenderer.end();
     }
 
+    /**
+     * Temporary method to draw rectangle before we implement sprites.
+     * @param object postion component of object to be rendered
+     * @param shapeRenderer shapeRendered object which can be used to render
+     *                      the rectangle to the screen.
+     */
     void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.BLUE); // Set the color to the player's color
         shapeRenderer.rect(object.getX(), object.getY(), object.getWidth(), object.getHeight());

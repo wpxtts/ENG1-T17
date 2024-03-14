@@ -7,13 +7,14 @@ import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
 
+/**
+ * Updates Input components to reflect current input
+ */
 public class SystemUpdateInput {
     public SystemUpdateInput() {}
 
     public void update(ArrayList<Entity> entities) {
-
-
-
+        // Loop through entities to find those with the Input component.
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentInput.class)){
                 ComponentInput inputComponent = ((ComponentInput)entity.getComponent(ComponentInput.class));
@@ -21,7 +22,7 @@ public class SystemUpdateInput {
 
                 ArrayList<String> newKeysPressed = new ArrayList<>();
 
-                // Moves the player according to the user's input.
+                // Add keys being pressed to the list.
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                     newKeysPressed.add("LEFT");
                 }
@@ -35,12 +36,17 @@ public class SystemUpdateInput {
                     newKeysPressed.add("DOWN");
                 }
                 if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+                    // We differentiated between the first cycle frame is pressed
+                    // down ("SPACE") and then the subsequent cycles when space is still
+                    // held down because the user hasn't let go yet ("SPACE_CONTINUED").
                     if(oldKeysPressed.contains("SPACE") || oldKeysPressed.contains("SPACE_CONTINUED")){
                         newKeysPressed.add("SPACE_CONTINUED");
                     }else {
                         newKeysPressed.add("SPACE");
                     }
                 }
+
+                // Save results back to input component.
                 inputComponent.setKeysPressed(newKeysPressed);
             }
         }

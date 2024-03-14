@@ -6,13 +6,20 @@ import com.mygdx.game.serviceProviders.CollisionEffectProvider;
 
 import java.util.ArrayList;
 
+/**
+ * System in charge of managing collisions
+ */
 public class SystemCollision {
 
     public SystemCollision() {}
 
     public void update(ArrayList<Entity> entities) {
 
+        // Create empty collisionObjects list to be filled
+        // with all entities that could be collided with.
         ArrayList<Entity> collisionObjects = new ArrayList<Entity>();
+
+        // To store player entity.
         Entity player = null;
 
         // Finds collision object entities and player entity.
@@ -64,9 +71,6 @@ public class SystemCollision {
         // Checks if all values are positive, which indicates a collision.
         if (leftGap > 0 && rightGap > 0 && topGap > 0 && bottomGap > 0) {
 
-
-
-
             // Finds the direction with the shortest value
             float leftRightMin = Math.min(leftGap, rightGap);
             float topBottomMin = Math.min(topGap, bottomGap);
@@ -86,15 +90,20 @@ public class SystemCollision {
 
 
         }
+
+        // To check if object is within interaction distant we do a similar check
+        // but with a slightly wider margin.
         if (leftGap+10 > 0 && rightGap+10 > 0 && topGap+10 > 0 && bottomGap+10 > 0) {
-            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class)).getInteractable()) {
+            // If object is interactable then we do an InteractionCheck
+            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class))
+                    .getInteractable()) {
                 InteractionCheck(collisionObject);
             }
         }
     }
 
     void InteractionCheck(Entity collisionObject) {
-        // Current problem is that it doesn't interact unless you are actively running into it
+        // Check if space is pressed, and if so complete collisionEffect.
         ArrayList<String> keysPressed = ((ComponentInput) collisionObject.getComponent(ComponentInput.class)).getKeysPressed();
         if(keysPressed.contains("SPACE")){
             ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect)
