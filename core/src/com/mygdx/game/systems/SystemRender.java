@@ -82,7 +82,7 @@ public class SystemRender {
 
     void DrawSprite(ComponentPosition object, ShapeRenderer shapeRenderer) {
         if (getXSpeed() > 0){
-            setSprite(new Texture(Gdx.files.internal("player_sprite_left.png")));
+            setSprite(new Texture(Gdx.files.internal(Texture(Gdx.files.internal("player_sprite_still.png"))));
         }
     }
 

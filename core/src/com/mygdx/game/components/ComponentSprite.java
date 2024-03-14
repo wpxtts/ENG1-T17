@@ -5,18 +5,18 @@ public class ComponentSprite extends Component{
     // Shows there is a sprite to be rendered.
     // ADD SPRITE STUFF!!!!!!
 
-    String sprite;
+    Texture sprite;
     public ComponentSprite() {}
 
-    public ComponentSprite(String sprite) {
+    public ComponentSprite(Texture sprite) {
 
         this.sprite = sprite;
     }
 
-    public String getSprite(){
+    public Texture getSprite(){
         return sprite;
     }
-    public void setSprite(String sprite){
+    public void setSprite(Texture sprite){
         this.sprite=sprite;
     }
 }
