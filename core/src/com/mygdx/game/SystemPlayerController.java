@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 
 public class SystemPlayerController {
 
@@ -28,15 +29,20 @@ public class SystemPlayerController {
         // Moves the player according to the user's input.
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.x > 0) {
             player.x -= 200 * Gdx.graphics.getDeltaTime();
+            player.sprite = new Texture(Gdx.files.internal("player_sprite_left.png"));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.x < 720) {
             player.x += 200 * Gdx.graphics.getDeltaTime();
+            player.sprite = new Texture(Gdx.files.internal("player_sprite_right.png"));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.y < 480) {
             player.y += 200 * Gdx.graphics.getDeltaTime();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.y > 0) {
             player.y -= 200 * Gdx.graphics.getDeltaTime();
+        }
+        if (!Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
+            player.sprite = new Texture(Gdx.files.internal("player_sprite_still.png"));
         }
 
     }

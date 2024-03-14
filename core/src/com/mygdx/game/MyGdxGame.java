@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -22,7 +23,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		entities = new Entity[2];
 		entities[0] = new Entity();
-		entities[0].SetPlayerControllerComponent(new ComponentPlayerController(100, 100, 100, 100)); //player width made 65 pixels to align with sprite
+		entities[0].SetPlayerControllerComponent(new ComponentPlayerController(100, 100, 100, 100, new Texture(Gdx.files.internal("player_sprite_still.png"))));
 		entities[1] = new Entity();
 		entities[1].SetCollisionComponent(new ComponentCollision(300, 300, 100, 100));
 

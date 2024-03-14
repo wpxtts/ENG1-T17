@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 public class SystemRender {
-    private Texture player_sprite;
     private Rectangle hit_box;
     private SpriteBatch batch;
 
@@ -54,7 +53,7 @@ public class SystemRender {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         //Defines Texture which is image used for player's sprite.
-        player_sprite = new Texture(Gdx.files.internal("player_sprite_1.png"));
+        //player.sprite = new Texture(Gdx.files.internal("player_sprite_still.png"));
 
 
         // Function that draws the player as shape. Commented out.
@@ -64,14 +63,14 @@ public class SystemRender {
         hit_box = new Rectangle();
         hit_box.x = player.x;
         hit_box.y = player.y;
-        hit_box.width = player_sprite.getWidth();
+        hit_box.width = player.sprite.getWidth();
         hit_box.height = player.height;
 
         //renders player Sprite each movement
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
         batch.begin();
-        batch.draw(player_sprite, hit_box.x, hit_box.y);
+        batch.draw(player.sprite, hit_box.x, hit_box.y);
         batch.end();
 
 
