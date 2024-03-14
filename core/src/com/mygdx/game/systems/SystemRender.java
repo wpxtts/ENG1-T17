@@ -15,7 +15,7 @@ public class SystemRender {
 
     public SystemRender() {}
 
-    public void Update(ArrayList<Entity> entities) {
+    public void update(ArrayList<Entity> entities) {
 
         // Initialises a camera for this frame.
         OrthographicCamera camera = new OrthographicCamera();

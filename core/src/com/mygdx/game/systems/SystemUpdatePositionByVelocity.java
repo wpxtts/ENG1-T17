@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SystemUpdatePositionByVelocity {
     public SystemUpdatePositionByVelocity(){}
 
-    public void Update(ArrayList<Entity> entities){
+    public void update(ArrayList<Entity> entities){
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentPosition.class) && entity.hasComponent(ComponentVelocity.class)){
                 ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);

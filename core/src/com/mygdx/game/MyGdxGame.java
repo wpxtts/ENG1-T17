@@ -49,11 +49,11 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 	void UpdateFrame() {
 
-		updateInputSystem.Update(entities);
-		updateVelocityByInputSystem.Update(entities);
-		updatePositionByVelocitySystem.Update(entities);
-		collisionSystem.Update(entities);
-		renderSystem.Update(entities);
+		updateInputSystem.update(entities);
+		updateVelocityByInputSystem.update(entities);
+		updatePositionByVelocitySystem.update(entities);
+		collisionSystem.update(entities);
+		renderSystem.update(entities);
 
 	}
 }

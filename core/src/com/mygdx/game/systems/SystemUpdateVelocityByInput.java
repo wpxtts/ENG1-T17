@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SystemUpdateVelocityByInput {
     public SystemUpdateVelocityByInput(){}
 
-    public void Update(ArrayList<Entity> entities) {
+    public void update(ArrayList<Entity> entities) {
     for(Entity entity : entities){
         if(entity.hasComponent(ComponentInput.class) && entity.hasComponent(ComponentVelocity.class)){
             ComponentInput input = (ComponentInput) entity.getComponent(ComponentInput.class);
