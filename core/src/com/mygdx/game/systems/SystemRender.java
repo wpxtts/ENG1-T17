@@ -68,7 +68,7 @@ public class SystemRender {
      */
     void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.BLUE); // Set the color to the player's color
-        shapeRenderer.rect(object.getX(), object.getY(), object.getWidth(), object.getHeight());
+        shapeRenderer.rect((object.getX()-object.getWidth()/2), (object.getY()-object.getHeight()/2), object.getWidth(), object.getHeight());
     }
 
 }
