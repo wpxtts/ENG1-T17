@@ -39,16 +39,16 @@ public class MenuScreen implements Screen {
 
         //Draws in Menu buttons
         game.batch.setProjectionMatrix(camera.combined);
-        game.batch.draw(CreditsImg, 160, 100, 100, 55);
+        game.batch.draw(CreditsImg, 160, 100, 100, 55); //Uses bottom left as (0,0)
         game.batch.draw(SettingsImg, 560, 100, 100, 55);
         game.batch.end();
 
-        int mouseX = Gdx.input.getX();
+        int mouseX = Gdx.input.getX(); //Uses top left as (0,0)
         int mouseY = Gdx.input.getY();
 
         // System.out.println("Mouse X: " + mouseX + ", Mouse Y: " + mouseY);
         if (mouseX >= 140 && mouseX < 232) {
-            if (mouseY >= 325 && mouseY < 380) {
+            if (mouseY >= 325 && mouseY < 380) { //mouseY <= (480 - 160) && mouseY > (460 - 160 - 55) is just above the button?
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     System.out.println("Button pressed on the left");
                     game.setScreen(new GameScreen(game));
