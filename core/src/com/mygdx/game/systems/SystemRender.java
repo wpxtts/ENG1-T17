@@ -44,12 +44,12 @@ public class SystemRender {
                     camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
                     camera.update();
 
-                    //renders player Sprite each movement
-                    batch = new SpriteBatch();
-                    batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
-                    batch.begin();
-                    batch.draw(player.sprite, getX(), player.y);
-                    batch.end();
+//                    //renders player Sprite each movement
+//                    batch = new SpriteBatch();
+//                    batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
+//                    batch.begin();
+//                    batch.draw(player.sprite, getX(), player.y);
+//                    batch.end();
                 }
             }
 
@@ -81,9 +81,9 @@ public class SystemRender {
     }
 
     void DrawSprite(ComponentPosition object, ShapeRenderer shapeRenderer) {
-        if (getXSpeed() > 0){
-            setSprite(new Texture(Gdx.files.internal(Texture(Gdx.files.internal("player_sprite_still.png"))));
-        }
+//        if (getXSpeed() > 0){
+//            setSprite(new Texture(Gdx.files.internal(Texture(Gdx.files.internal("player_sprite_still.png"))));
+//        }
     }
 
 }

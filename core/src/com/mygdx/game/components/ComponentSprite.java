@@ -1,5 +1,6 @@
 package com.mygdx.game.components;
 
+import com.badlogic.gdx.graphics.Texture;
 public class ComponentSprite extends Component{
 
     // Shows there is a sprite to be rendered.
