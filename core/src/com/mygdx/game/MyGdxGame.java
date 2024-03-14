@@ -8,31 +8,31 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.mygdx.game.entities.*;
+import com.mygdx.game.systems.*;
+
+import java.util.ArrayList;
 
 public class MyGdxGame extends ApplicationAdapter {
-	Entity[] entities;
-	ComponentPlayerController player;
-
-	SystemPlayerController playerControllerSystem;
+	ArrayList<Entity> entities;
+	SystemUpdateInput updateInputSystem;
+	SystemUpdateVelocityByInput updateVelocityByInputSystem;
+	SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
 	SystemCollision collisionSystem;
 	SystemRender renderSystem;
 
 	@Override
 	public void create() {
 
-		entities = new Entity[3];
-		entities[0] = new Entity();
-		entities[0].SetPlayerControllerComponent(new ComponentPlayerController(100, 100, 100, 100));
-		entities[1] = new Entity();
-		entities[1].SetCollisionComponent(new ComponentCollision(300, 300, 100, 100));
+		entities = new ArrayList<>();
+		entities.add(new Player());
 
-		entities[2] = new Entity();
-		entities[2].SetCollisionComponent(new ComponentCollision(100, 100, 100, 100));
+		entities.add(new Block(90, 350,100, 100, true));
+		entities.add(new Block(300,300, 100,100, false));
 
-
-		player = entities[0].GetPlayerControllerComponent();
-
-		playerControllerSystem = new SystemPlayerController();
+		updateInputSystem = new SystemUpdateInput();
+		updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
+		updatePositionByVelocitySystem = new SystemUpdatePositionByVelocity();
 		collisionSystem = new SystemCollision();
 		renderSystem = new SystemRender();
 	}
@@ -49,7 +49,9 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 	void UpdateFrame() {
 
-		playerControllerSystem.Update(entities);
+		updateInputSystem.Update(entities);
+		updateVelocityByInputSystem.Update(entities);
+		updatePositionByVelocitySystem.Update(entities);
 		collisionSystem.Update(entities);
 		renderSystem.Update(entities);
 
