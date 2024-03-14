@@ -13,10 +13,10 @@ public class ComponentSprite extends Component{
         this.sprite = sprite;
     }
 
-    public boolean getInteractable(){
+    public String getSprite(){
         return sprite;
     }
-    public void setInteractable(boolean interactable){
+    public void setSprite(String sprite){
         this.sprite=sprite;
     }
 }

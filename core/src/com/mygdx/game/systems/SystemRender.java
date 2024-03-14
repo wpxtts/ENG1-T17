@@ -71,4 +71,10 @@ public class SystemRender {
         shapeRenderer.rect((object.getX()-object.getWidth()/2), (object.getY()-object.getHeight()/2), object.getWidth(), object.getHeight());
     }
 
+    void DrawSprite(ComponentPosition object, ShapeRenderer shapeRenderer) {
+        if (getXSpeed() > 0){
+            
+        }
+    }
+
 }
