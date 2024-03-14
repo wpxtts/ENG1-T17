@@ -13,6 +13,11 @@ import com.mygdx.game.systems.*;
 
 import java.util.ArrayList;
 
+/**
+ * Main class of the game which manages the creation
+ * of entities and systems, and then the execution of
+ * the systems on those entities.
+ */
 public class MyGdxGame extends ApplicationAdapter {
 	ArrayList<Entity> entities;
 	SystemUpdateInput updateInputSystem;
@@ -21,10 +26,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	SystemCollision collisionSystem;
 	SystemRender renderSystem;
 
+	/**
+	 * Creates entities and systems.
+	 */
 	@Override
 	public void create() {
-
-		entities = new ArrayList<>();
+        entities = new ArrayList<>();
 		entities.add(new Player());
 
 		entities.add(new Library(90, 350,100, 100));
@@ -37,6 +44,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		renderSystem = new SystemRender();
 	}
 
+	/**
+	 * Clear screen and then update all systems.
+	 * This is called every frame.
+	 */
 	@Override
 	public void render() {
 
@@ -47,8 +58,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		UpdateFrame();
 
 	}
-	void UpdateFrame() {
 
+	/**
+	 * Update each system.
+	 */
+	void UpdateFrame() {
 		updateInputSystem.update(entities);
 		updateVelocityByInputSystem.update(entities);
 		updatePositionByVelocitySystem.update(entities);

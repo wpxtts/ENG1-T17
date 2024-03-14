@@ -7,6 +7,7 @@ import com.mygdx.game.entities.Entity;
 import java.util.ArrayList;
 
 public class SystemUpdateVelocityByInput {
+
     public SystemUpdateVelocityByInput(){}
 
     public void update(ArrayList<Entity> entities) {
