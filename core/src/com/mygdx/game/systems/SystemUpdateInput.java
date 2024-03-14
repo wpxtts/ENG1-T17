@@ -12,28 +12,36 @@ public class SystemUpdateInput {
 
     public void update(ArrayList<Entity> entities) {
 
-        ArrayList<String> keysPressed = new ArrayList<>();
 
-        // Moves the player according to the user's input.
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            keysPressed.add("LEFT");
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            keysPressed.add("RIGHT");
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            keysPressed.add("UP");
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            keysPressed.add("DOWN");
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            keysPressed.add("SPACE");
-        }
 
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentInput.class)){
-                ((ComponentInput)entity.getComponent(ComponentInput.class)).setKeysPressed(keysPressed);
+                ComponentInput inputComponent = ((ComponentInput)entity.getComponent(ComponentInput.class));
+                ArrayList<String> oldKeysPressed = inputComponent.getKeysPressed();
+
+                ArrayList<String> newKeysPressed = new ArrayList<>();
+
+                // Moves the player according to the user's input.
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                    newKeysPressed.add("LEFT");
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                    newKeysPressed.add("RIGHT");
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                    newKeysPressed.add("UP");
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                    newKeysPressed.add("DOWN");
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+                    if(oldKeysPressed.contains("SPACE") || oldKeysPressed.contains("SPACE_CONTINUED")){
+                        newKeysPressed.add("SPACE_CONTINUED");
+                    }else {
+                        newKeysPressed.add("SPACE");
+                    }
+                }
+                inputComponent.setKeysPressed(newKeysPressed);
             }
         }
     }
