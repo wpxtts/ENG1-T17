@@ -1,9 +1,8 @@
 package com.mygdx.game.systems;
 
-import com.mygdx.game.components.ComponentCollision;
-import com.mygdx.game.components.ComponentPlayerFlag;
-import com.mygdx.game.components.ComponentPosition;
+import com.mygdx.game.components.*;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.serviceProviders.CollisionEffectProvider;
 
 import java.util.ArrayList;
 
@@ -65,39 +64,43 @@ public class SystemCollision {
         // Checks if all values are positive, which indicates a collision.
         if (leftGap > 0 && rightGap > 0 && topGap > 0 && bottomGap > 0) {
 
-            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class)).getInteractable()) {
-                InteractionCheck();
+
+
+
+            // Finds the direction with the shortest value
+            float leftRightMin = Math.min(leftGap, rightGap);
+            float topBottomMin = Math.min(topGap, bottomGap);
+            float directionValue = Math.min(leftRightMin, topBottomMin);
+
+            // Moves the player, so it's no longer colliding with the
+            // object in the shortest direction.
+            if (directionValue == leftGap) {
+                playerPosition.setX(collisionLeft - playerPosition.getWidth()/2);
+            } else if (directionValue == rightGap) {
+                playerPosition.setX(collisionRight + playerPosition.getWidth()/2);
+            } else if (directionValue == topGap) {
+                playerPosition.setY(collisionTop + playerPosition.getHeight() / 2);
+            } else if (directionValue == bottomGap) {
+                playerPosition.setY(collisionBottom - playerPosition.getHeight() / 2);
             }
 
-            else {
-                // Finds the direction with the shortest value
-                float leftRightMin = Math.min(leftGap, rightGap);
-                float topBottomMin = Math.min(topGap, bottomGap);
-                float directionValue = Math.min(leftRightMin, topBottomMin);
-
-                // Moves the player, so it's no longer colliding with the
-                // object in the shortest direction.
-                if (directionValue == leftGap) {
-                    playerPosition.setX(collisionLeft - playerPosition.getWidth()/2);
-                } else if (directionValue == rightGap) {
-                    playerPosition.setX(collisionRight + playerPosition.getWidth()/2);
-                } else if (directionValue == topGap) {
-                    playerPosition.setY(collisionTop + playerPosition.getHeight() / 2);
-                } else if (directionValue == bottomGap) {
-                    playerPosition.setY(collisionBottom - playerPosition.getHeight() / 2);
-                }
-            }
 
         }
-
+        if (leftGap+10 > 0 && rightGap+10 > 0 && topGap+10 > 0 && bottomGap+10 > 0) {
+            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class)).getInteractable()) {
+                InteractionCheck(collisionObject);
+            }
+        }
     }
 
-    void InteractionCheck() {
-
-        // Add in here whatever happens, will need to change collision component and
-        // probably have a switch case
-
-        System.out.println("Check");
-
+    void InteractionCheck(Entity collisionObject) {
+        // Current problem is that it doesn't interact unless you are actively running into it
+        ArrayList<String> keysPressed = ((ComponentInput) collisionObject.getComponent(ComponentInput.class)).getKeysPressed();
+        if(keysPressed.contains("SPACE")){
+            ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect)
+                    collisionObject.getComponent(ComponentCollisionEffect.class);
+            CollisionEffectProvider collisionEffect = collisionEffectComponent.getCollisionEffectProvider();
+            collisionEffect.collisionEffect();
+        }
     }
 }
