@@ -3,6 +3,7 @@ package com.mygdx.game.systems;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.components.ComponentPlayerFlag;
 import com.mygdx.game.components.ComponentPosition;
@@ -41,6 +42,13 @@ public class SystemRender {
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                     camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
                     camera.update();
+
+                    //renders player Sprite each movement
+                    batch = new SpriteBatch();
+                    batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
+                    batch.begin();
+                    batch.draw(player.sprite, getX(), player.y);
+                    batch.end();
                 }
             }
 
