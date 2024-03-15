@@ -25,7 +25,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
 	SystemCollision collisionSystem;
 	SystemRender renderSystem;
-	SystemResize resizeSystem;
 
 	/**
 	 * Creates entities and systems.
@@ -47,7 +46,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		updatePositionByVelocitySystem = new SystemUpdatePositionByVelocity();
 		collisionSystem = new SystemCollision();
 		renderSystem = new SystemRender();
-		resizeSystem = new SystemResize();
 	}
 
 	/**
@@ -74,10 +72,5 @@ public class MyGdxGame extends ApplicationAdapter {
 		updatePositionByVelocitySystem.update(entities);
 		collisionSystem.update(entities);
 
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		resizeSystem.refit(width, height, extendViewport);
 	}
 }
