@@ -96,6 +96,9 @@ public class SystemRender {
         //Draws in each entity's Sprite at its coordinates
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
         batch.begin();
+        // We have to remember that .draw draws the sprite from the bottom left corner,
+        // but we store positions as the centre of sprites.
+        // Therefor a conversion has to be made before drawing.
         batch.draw(sprite.getSprite(), object.getX()-object.getWidth()/2, object.getY()-object.getHeight()/2,object.getWidth(),object.getHeight());
         batch.end();
 
