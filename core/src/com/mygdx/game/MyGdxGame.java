@@ -1,17 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.mygdx.game.entities.*;
-import com.mygdx.game.systems.*;
-
-import java.util.ArrayList;
+import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.Screen;
 
 /**
  * Main class of the game which manages the creation
@@ -19,29 +10,20 @@ import java.util.ArrayList;
  * the systems on those entities.
  */
 public class MyGdxGame extends ApplicationAdapter {
-	ArrayList<Entity> entities;
-	SystemUpdateInput updateInputSystem;
-	SystemUpdateVelocityByInput updateVelocityByInputSystem;
-	SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
-	SystemCollision collisionSystem;
-	SystemRender renderSystem;
-
+//	ArrayList<Entity> entities;
+//	SystemUpdateInput updateInputSystem;
+//	SystemUpdateVelocityByInput updateVelocityByInputSystem;
+//	SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
+//	SystemCollision collisionSystem;
+//	SystemRender renderSystem;
+	Screen currentScreen;
 	/**
 	 * Creates entities and systems.
 	 */
 	@Override
 	public void create() {
-        entities = new ArrayList<>();
-		entities.add(new Player());
-
-		entities.add(new Library(90, 300,50, 100));
-		entities.add(new DuckPond(300,300, 100,100));
-
-		updateInputSystem = new SystemUpdateInput();
-		updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
-		updatePositionByVelocitySystem = new SystemUpdatePositionByVelocity();
-		collisionSystem = new SystemCollision();
-		renderSystem = new SystemRender();
+		currentScreen = new GameScreen();
+		currentScreen.create();
 	}
 
 	/**
@@ -50,12 +32,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	 */
 	@Override
 	public void render() {
-
-		// Turn the screen black.
-		ScreenUtils.clear(0, 0, 0, 1);
-
-		// updates all the systems every frame
-		UpdateFrame();
+		currentScreen.render();
 
 	}
 
@@ -63,11 +40,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	 * Update each system.
 	 */
 	void UpdateFrame() {
-		updateInputSystem.update(entities);
-		updateVelocityByInputSystem.update(entities);
-		updatePositionByVelocitySystem.update(entities);
-		collisionSystem.update(entities);
-		renderSystem.update(entities);
+		currentScreen.updateFrame();
 
 	}
 }
