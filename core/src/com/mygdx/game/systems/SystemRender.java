@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.components.ComponentPlayerFlag;
 import com.mygdx.game.components.ComponentPosition;
 import com.mygdx.game.components.ComponentSprite;
+import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class SystemRender {
      * @param entities all entities
      */
     public void update(ArrayList<Entity> entities) {
+        //Initialises Spritebatch for drawing in sprites
+        SpriteBatch batch = new SpriteBatch();
 
         // Initialises a camera for this frame.
         OrthographicCamera camera = new OrthographicCamera();
@@ -43,13 +46,6 @@ public class SystemRender {
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                     camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
                     camera.update();
-
-//                    //renders player Sprite each movement
-//                    batch = new SpriteBatch();
-//                    batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
-//                    batch.begin();
-//                    batch.draw(player.sprite, getX(), player.y);
-//                    batch.end();
                 }
             }
 
@@ -62,7 +58,12 @@ public class SystemRender {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         for (Entity entity : visibleObjects) {
-            DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
+            //DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
+            boolean isPlayer = false;
+            if(entity.hasComponent(ComponentPlayerFlag.class)){
+                isPlayer = true;
+            }
+            DrawSprite((ComponentPosition) entity.getComponent(ComponentPosition.class), (ComponentVelocity) entity.getComponent(ComponentVelocity.class), (ComponentSprite) entity.getComponent(ComponentSprite.class), batch, camera, isPlayer);
         }
 
         // Ends the shape renderer
@@ -75,15 +76,50 @@ public class SystemRender {
      * @param shapeRenderer shapeRendered object which can be used to render
      *                      the rectangle to the screen.
      */
-    void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.BLUE); // Set the color to the player's color
-        shapeRenderer.rect((object.getX()-object.getWidth()/2), (object.getY()-object.getHeight()/2), object.getWidth(), object.getHeight());
+
+    public void dispose(ArrayList<Entity> entities) {
+        // Note the player controller is initialised as null, meaning the code will break if there
+        // is no player entity.
+        ArrayList<Entity> visibleObjects = new ArrayList<>();
+
+        // Finds all assets to be disposed of.
+        for (Entity entity : entities) {
+            if (entity.hasComponent(ComponentSprite.class)) {
+                ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
+                sprite.getSprite().dispose();
+            }
+        }
     }
 
-    void DrawSprite(ComponentPosition object, ShapeRenderer shapeRenderer) {
-//        if (getXSpeed() > 0){
-//            setSprite(new Texture(Gdx.files.internal(Texture(Gdx.files.internal("player_sprite_still.png"))));
-//        }
+    void DrawSprite(ComponentPosition object, ComponentVelocity velocity, ComponentSprite sprite, SpriteBatch batch, OrthographicCamera camera, boolean isPlayer) {
+
+        //Draws in each entity's Sprite at its coordinates
+        batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
+        batch.begin();
+        // We have to remember that .draw draws the sprite from the bottom left corner,
+        // but we store positions as the centre of sprites.
+        // Therefor a conversion has to be made before drawing.
+        batch.draw(sprite.getSprite(), object.getX()-object.getWidth()/2, object.getY()-object.getHeight()/2,object.getWidth(),object.getHeight());
+        batch.end();
+
+        if (isPlayer){
+            //Changes player's sprite when moving or still (based on velocity)
+            if (velocity.getXSpeed() > 0) {
+                //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_right.png")));
+
+            }
+            if (velocity.getXSpeed() < 0) {
+                //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_left.png")));
+
+            }
+            if (velocity.getXSpeed() == 0) {
+                //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_still.png")));
+
+            }
+        }
     }
 
 }
