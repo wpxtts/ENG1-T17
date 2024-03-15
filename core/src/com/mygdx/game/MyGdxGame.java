@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,7 +16,7 @@ public class MyGdxGame extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont(); // use libGDX's default Arial font
-		this.setScreen((Screen) new MenuScreen(this));
+		this.setScreen(new MenuScreen(this));
 	}
 
 	public void render() {
