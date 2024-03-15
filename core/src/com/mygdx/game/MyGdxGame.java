@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.MainScreen;
 import com.mygdx.game.screens.Screen;
 
 /**
@@ -22,16 +23,16 @@ public class MyGdxGame extends ApplicationAdapter {
 	 */
 	@Override
 	public void create() {
-		currentScreen = new GameScreen();
+		currentScreen = new MainScreen();
 		currentScreen.create();
 	}
-
 	/**
 	 * Clear screen and then update all systems.
 	 * This is called every frame.
 	 */
 	@Override
 	public void render() {
+		this.updateFrame();
 		currentScreen.render();
 
 	}
@@ -39,8 +40,16 @@ public class MyGdxGame extends ApplicationAdapter {
 	/**
 	 * Update each system.
 	 */
-	void UpdateFrame() {
-		currentScreen.updateFrame();
+	void updateFrame() {
+		Screen newScreen = currentScreen.updateFrame();
+		if(newScreen!=null){
+			this.changeScreen(newScreen);
+		}
 
+	}
+	// To change screen
+	void changeScreen(Screen newScreen){
+		currentScreen = newScreen;
+		currentScreen.create();
 	}
 }
