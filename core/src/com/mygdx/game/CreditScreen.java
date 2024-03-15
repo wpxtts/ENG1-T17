@@ -134,6 +134,14 @@ public class CreditScreen implements Screen{
         table.add(titleLabel);
         table.row();
 
+        // Names
+        String[] names = {"William", "Seyi", "George", "Alex", "Ben", "Meg", "James"};
+        for (String name : names) {
+            Label nameLabel = new Label(name, skin, "default");
+            table.add(nameLabel).colspan(2).center().padBottom(10);
+            table.row();
+        }
+
         //create buttons
         TextButton back = new TextButton("Back", skin, "small");
 
