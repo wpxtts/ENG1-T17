@@ -74,4 +74,15 @@ public class MyGdxGame extends ApplicationAdapter {
 		renderSystem.update(entities);
 
 	}
+
+	@Override
+	public void dispose() {
+		//disposes of all used assets when game is finshed
+		renderSystem.dispose(entities);
+	}
+
+	public void resize(ArrayList<Entity> entities, int width, int height) {
+		//Updates window when screen is resized
+		renderSystem.resize(entities, width, height);
+	}
 }
