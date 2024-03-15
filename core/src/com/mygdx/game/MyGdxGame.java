@@ -34,7 +34,7 @@ public class MyGdxGame extends ApplicationAdapter {
         entities = new ArrayList<>();
 		entities.add(new Player());
 
-		entities.add(new Library(90, 300,50, 100));
+		entities.add(new DuckPond(90, 300,50, 100));
 		entities.add(new DuckPond(300,300, 100,100));
 
 		updateInputSystem = new SystemUpdateInput();
