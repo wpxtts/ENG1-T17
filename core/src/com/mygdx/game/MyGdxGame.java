@@ -45,7 +45,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		if(newScreen!=null){
 			this.changeScreen(newScreen);
 		}
-
 	}
 	// To change screen
 	void changeScreen(Screen newScreen){

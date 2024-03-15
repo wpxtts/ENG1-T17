@@ -2,7 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.entities.*;
-import com.mygdx.game.systems.SystemClicked;
+import com.mygdx.game.systems.SystemCheckClicks;
 import com.mygdx.game.systems.SystemRender;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MainScreen extends Screen {
     ArrayList<Entity> entities;
     SystemRender renderSystem;
-    SystemClicked clickedSystem;
+    SystemCheckClicks clickedSystem;
     /**
      * Creates entities and systems.
      */
@@ -23,7 +23,7 @@ public class MainScreen extends Screen {
         entities = new ArrayList<>();
         entities.add(new Block(100,100,100,100,false));
         renderSystem = new SystemRender();
-        clickedSystem = new SystemClicked();
+        clickedSystem = new SystemCheckClicks();
     }
 
     /**
@@ -34,7 +34,7 @@ public class MainScreen extends Screen {
 
         // Turn the screen black.
         ScreenUtils.clear(0, 0, 0, 1);
-
+        renderSystem.update(entities);
 //        // updates all the systems every frame
 //        Screen newScreen = UpdateFrame();
 //        return newScreen;
@@ -45,8 +45,6 @@ public class MainScreen extends Screen {
      * Update each system.
      */
     public Screen updateFrame() {
-
-        renderSystem.update(entities);
         Screen newScreen = clickedSystem.update(entities);
         return newScreen;
     }
