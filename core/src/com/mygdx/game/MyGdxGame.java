@@ -25,6 +25,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
 	SystemCollision collisionSystem;
 	SystemRender renderSystem;
+	SystemResize resizeSystem;
 
 	/**
 	 * Creates entities and systems.
@@ -33,15 +34,20 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create() {
         entities = new ArrayList<>();
 		entities.add(new Player());
+		entities.add(new Map(0,0, 480,720));
 
 		entities.add(new Library(90, 300,50, 100));
 		entities.add(new DuckPond(300,300, 100,100));
+		entities.add(new Piazza(300,300, 100,100));
+		entities.add(new Accommodation(300,300, 100,100));
+
 
 		updateInputSystem = new SystemUpdateInput();
 		updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
 		updatePositionByVelocitySystem = new SystemUpdatePositionByVelocity();
 		collisionSystem = new SystemCollision();
 		renderSystem = new SystemRender();
+		resizeSystem = new SystemResize();
 	}
 
 	/**
@@ -67,7 +73,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		updateVelocityByInputSystem.update(entities);
 		updatePositionByVelocitySystem.update(entities);
 		collisionSystem.update(entities);
-		renderSystem.update(entities);
 
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		resizeSystem.refit(width, height, extendViewport);
 	}
 }
