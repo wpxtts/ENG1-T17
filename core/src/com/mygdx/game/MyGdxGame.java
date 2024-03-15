@@ -71,6 +71,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		updateVelocityByInputSystem.update(entities);
 		updatePositionByVelocitySystem.update(entities);
 		collisionSystem.update(entities);
+		renderSystem.update(entities);
 
 	}
 }
