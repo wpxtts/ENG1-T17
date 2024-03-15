@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.components.ComponentPlayerFlag;
 import com.mygdx.game.components.ComponentPosition;
 import com.mygdx.game.components.ComponentSprite;
@@ -25,9 +27,15 @@ public class SystemRender {
      * Render all entities with sprites.
      * @param entities all entities
      */
+
+    public ExtendViewport extendViewport;
     public void update(ArrayList<Entity> entities) {
         //Initialises Spritebatch for drawing in sprites
         SpriteBatch batch = new SpriteBatch();
+        //Keeps aspect ratio of screen but extends visible world to fill empty space
+        extendViewport = new ExtendViewport(720, 480);
+        extendViewport.getCamera().position.set(800, 400, 0);
+        extendViewport.apply();
 
         // Initialises a camera for this frame.
         OrthographicCamera camera = new OrthographicCamera();
@@ -56,6 +64,10 @@ public class SystemRender {
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+//        Image backgroundImage = new Image(Assets.loadTexture("map.png"));
+//        backgroundImage.setBounds(0,0,screenWidth, screenHeight);
+//        backgroundImage.setOrigin(screenWidth/2,screenHeight/2);
 
         for (Entity entity : visibleObjects) {
             //DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
