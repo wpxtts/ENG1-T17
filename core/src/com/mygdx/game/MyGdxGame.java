@@ -35,4 +35,12 @@ public class MyGdxGame extends Game {
 		this.setScreen(new GameScreen(this));
 	}
 
+	public void toMainMenu(){
+		this.setScreen(new MenuScreen(this));
+	}
+
+	public void toTutorialScreen(){
+		this.setScreen(new TutorialScreen(this));
+	}
+
 }

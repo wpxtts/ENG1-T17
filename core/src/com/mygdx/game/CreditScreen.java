@@ -98,6 +98,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -128,38 +129,23 @@ public class CreditScreen implements Screen{
         // temporary until we have asset manager in
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
+
+        Label titleLabel = new Label( "Credits", skin ,"big");
+        table.add(titleLabel);
+        table.row();
+
         //create buttons
-        TextButton newGame = new TextButton("WE on the credit screen", skin);
-        TextButton tutorial = new TextButton("Tutorial", skin);
-        TextButton credits = new TextButton("Credits", skin);
+        TextButton back = new TextButton("Back", skin, "small");
 
         //add buttons to table
-        table.add(newGame).fillX().uniformX();
+        table.add(back).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
-        table.add(tutorial).fillX().uniformX();
-        table.row();
-        table.add(credits).fillX().uniformX();
 
         // create button listeners
-        credits.addListener(new ChangeListener() {
+        back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("Credits");
-                parent.toCreditScreen();
-            }
-        });
-
-        newGame.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("New Game");
-            }
-        });
-
-        tutorial.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("Tutorial");
+                parent.toMainMenu();
             }
         });
 
