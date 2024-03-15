@@ -10,7 +10,6 @@ public class ComponentSprite extends Component{
     public ComponentSprite() {}
 
     public ComponentSprite(Texture sprite) {
-
         this.sprite = sprite;
     }
 
