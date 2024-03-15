@@ -16,7 +16,7 @@ public class MyGdxGame extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont(); // use libGDX's default Arial font
-		this.setScreen(new MenuScreen());
+		this.setScreen(new MenuScreen(this));
 	}
 
 	public void render() {
@@ -26,6 +26,13 @@ public class MyGdxGame extends Game {
 	public void dispose() {
 		batch.dispose();
 		font.dispose();
+	}
+
+	public void toCreditScreen(){
+		this.setScreen(new CreditScreen(this));
+	}
+	public void toGameScreen(){
+		this.setScreen(new GameScreen(this));
 	}
 
 }

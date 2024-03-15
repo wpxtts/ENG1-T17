@@ -104,12 +104,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class MenuScreen implements Screen{
+public class CreditScreen implements Screen{
 
     private Stage stage;
     MyGdxGame parent;
 
-    public MenuScreen(MyGdxGame gameLoop){
+    public CreditScreen(MyGdxGame gameLoop){
 
         this.parent = gameLoop;
         /// create stage and set it as input processor
@@ -129,7 +129,7 @@ public class MenuScreen implements Screen{
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         //create buttons
-        TextButton newGame = new TextButton("New Game", skin);
+        TextButton newGame = new TextButton("WE on the credit screen", skin);
         TextButton tutorial = new TextButton("Tutorial", skin);
         TextButton credits = new TextButton("Credits", skin);
 
@@ -153,7 +153,6 @@ public class MenuScreen implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("New Game");
-                parent.toGameScreen();
             }
         });
 
