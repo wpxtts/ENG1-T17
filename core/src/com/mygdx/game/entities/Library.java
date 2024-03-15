@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Library extends POI{
     public Library(int x, int y, int height, int width) {
-        super(x,y,height,width);
+        super(x,y,100,width);
         this.addComponent(new ComponentCollisionEffect(new LibraryEffectProvider()));
         this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("library.png"))));
     }

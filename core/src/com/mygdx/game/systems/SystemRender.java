@@ -77,23 +77,18 @@ public class SystemRender {
      *                      the rectangle to the screen.
      */
 
-    public void dispose(ArrayList<Entity> entities){
+    public void dispose(ArrayList<Entity> entities) {
         // Note the player controller is initialised as null, meaning the code will break if there
         // is no player entity.
         ArrayList<Entity> visibleObjects = new ArrayList<>();
 
         // Finds all assets to be disposed of.
         for (Entity entity : entities) {
-            if(entity.hasComponent(ComponentSprite.class)){
+            if (entity.hasComponent(ComponentSprite.class)) {
                 ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
                 sprite.getSprite().dispose();
             }
         }
-    }
-
-    void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.BLUE); // Set the color to the player's color
-        shapeRenderer.rect((object.getX()-object.getWidth()/2), (object.getY()-object.getHeight()/2), object.getWidth(), object.getHeight());
     }
 
     void DrawSprite(ComponentPosition object, ComponentVelocity velocity, ComponentSprite sprite, SpriteBatch batch, OrthographicCamera camera, boolean isPlayer) {
@@ -101,7 +96,7 @@ public class SystemRender {
         //Draws in each entity's Sprite at its coordinates
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
         batch.begin();
-        batch.draw(sprite.getSprite(), object.getX(), object.getY());
+        batch.draw(sprite.getSprite(), object.getX(), object.getY(),object.getWidth(),object.getHeight());
         batch.end();
 
         if (isPlayer){
