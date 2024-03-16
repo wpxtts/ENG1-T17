@@ -32,13 +32,18 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
         entities = new ArrayList<>();
+		entities.add(new Map(0,0, Gdx.graphics.getHeight(),Gdx.graphics.getWidth()));
 		entities.add(new Player());
-		entities.add(new Map(0,0, 480,720));
 
 		entities.add(new Library(90, 300,50, 100));
 		entities.add(new DuckPond(300,300, 100,100));
 		entities.add(new Piazza(300,300, 100,100));
 		entities.add(new Accommodation(300,300, 100,100));
+
+//		entities.add(new Library(10, 300,50, 100));
+//		entities.add(new DuckPond(600,300, 100,100));
+//		entities.add(new Piazza(600,100, 100,100));
+//		entities.add(new Accommodation(300,100, 100,100));
 
 
 		updateInputSystem = new SystemUpdateInput();

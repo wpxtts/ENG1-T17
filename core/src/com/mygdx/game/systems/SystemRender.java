@@ -108,7 +108,8 @@ public class SystemRender {
     }
 
     static void DrawSprite(ComponentPosition object, ComponentVelocity velocity, ComponentSprite sprite, SpriteBatch batch, OrthographicCamera camera, boolean isPlayer) {
-
+        object.setWidth(sprite.getSprite().getWidth());
+        object.setHeight(sprite.getSprite().getHeight());
         //Draws in each entity's Sprite at its coordinates
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
         batch.begin();
