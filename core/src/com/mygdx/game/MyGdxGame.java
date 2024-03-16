@@ -32,7 +32,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
         entities = new ArrayList<>();
-		entities.add(new Map(0,0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth()));
+		entities.add(new Map(0,0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth())); //currently the map's sprite size is 3000 x 1896
 		entities.add(new Player());
 
 //		entities.add(new Library(90, 300,50, 100));
