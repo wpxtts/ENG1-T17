@@ -12,6 +12,6 @@ public class Piazza extends POI{
     public Piazza(int x, int y, int height, int width) {
         super(x,y,height,width);
         this.addComponent(new ComponentCollisionEffect(new PiazzaEffectProvider()));
-        this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("piazza.jpg"))));
+        this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("piazza.png"))));
     }
 }
