@@ -11,7 +11,8 @@ import com.mygdx.game.components.ComponentPosition;
 import com.mygdx.game.components.ComponentSprite;
 import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.entities.Entity;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+//import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
@@ -35,7 +36,8 @@ public class SystemRender {
         // Initialises a camera and viewport for this frame.
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+//        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 
         // Note the player controller is initialised as null, meaning the code will break if there
@@ -51,6 +53,7 @@ public class SystemRender {
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                     camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
                     camera.update();
+                    viewport.apply(true);
                 }
             }
 
