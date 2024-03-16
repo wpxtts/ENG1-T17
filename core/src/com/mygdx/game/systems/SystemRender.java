@@ -28,17 +28,43 @@ public class SystemRender {
      * Render all entities with sprites.
      * @param entities all entities
      */
-    private static Viewport viewport;
+//    private static Viewport viewport;
+    private static float screenWidth,screenHeight,cameraWidth,cameraHeight;
+    private static float cameraLeftBound, cameraRightBound, cameraTopBound, cameraBottomBound;
+
     public static void update(ArrayList<Entity> entities) {
         //Initialises Spritebatch for drawing in sprites
         SpriteBatch batch = new SpriteBatch();
 
         // Initialises a camera and viewport for this frame.
-        OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cameraWidth = Gdx.graphics.getWidth();
+        cameraHeight = Gdx.graphics.getHeight();
+
+        // Get screen dimensions
+//        screenWidth = Gdx.graphics.getDisplayMode().width;
+//        screenHeight = Gdx.graphics.getDisplayMode().height;
+        screenWidth = Gdx.graphics.getDisplayMode().width;
+        screenHeight = Gdx.graphics.getDisplayMode().height;
+
+//        OrthographicCamera camera = new OrthographicCamera(cameraWidth, cameraHeight);
+        OrthographicCamera camera = new OrthographicCamera(screenWidth, screenHeight);
+        camera.position.set(cameraWidth / 2f, cameraHeight / 2f, 0);
+//        camera.position.set(0, 0, 0);
+        camera.update();
+
+//        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        camera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+
 //        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+
+//        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+
+        // Calculate camera bounds
+        cameraLeftBound = cameraWidth / 2f;
+        cameraRightBound = (screenWidth - cameraWidth) / 2f;
+        cameraBottomBound = cameraHeight / 2f;
+        cameraTopBound = (screenHeight - cameraHeight) / 2f;
 
         // Note the player controller is initialised as null, meaning the code will break if there
         // is no player entity.
@@ -51,20 +77,26 @@ public class SystemRender {
                 if(entity.hasComponent(ComponentPlayerFlag.class)){
                     // Updates the camera's position to be over the centre of the player
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
+//                    camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
+                    //camera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+                    camera.position.set(
+                            Math.min(cameraRightBound, Math.max(cameraLeftBound, player.getX())),
+                            Math.min(cameraTopBound, Math.max(cameraBottomBound, player.getY())),
+                            0
+                    );
                     camera.update();
-                    viewport.apply(true);
+//                    viewport.apply(true);
                 }
             }
-
-
         }
+
         
         // Defines the shape renderer to draw shapes.
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
+        batch.begin();
         for (Entity entity : visibleObjects) {
             //DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
             boolean isPlayer = false;
@@ -73,6 +105,7 @@ public class SystemRender {
             }
             DrawSprite((ComponentPosition) entity.getComponent(ComponentPosition.class), (ComponentVelocity) entity.getComponent(ComponentVelocity.class), (ComponentSprite) entity.getComponent(ComponentSprite.class), batch, camera, isPlayer);
         }
+        batch.end();
 
         // Ends the shape renderer
         shapeRenderer.end();
@@ -102,7 +135,12 @@ public class SystemRender {
     public void resize(ArrayList<Entity> entities, int width, int height){
         SystemRender.update(entities);
         // Update the viewport when the screen is resized
-        viewport.update(width, height, true);
+//        viewport.update(width, height, true);
+        // Update screen dimensions and camera bounds on resize
+        cameraLeftBound = cameraWidth / 2f;
+        cameraRightBound = screenWidth - cameraWidth / 2f;
+        cameraBottomBound = cameraHeight / 2f;
+        cameraTopBound = screenHeight - cameraHeight / 2f;
     }
 
     void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
@@ -115,9 +153,7 @@ public class SystemRender {
 //        object.setHeight(sprite.getSprite().getHeight());
         //Draws in each entity's Sprite at its coordinates
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
-        batch.begin();
         batch.draw(sprite.getSprite(), object.getX(), object.getY());
-        batch.end();
 
         if (isPlayer){
             //Changes player's sprite when moving or still (based on velocity)
