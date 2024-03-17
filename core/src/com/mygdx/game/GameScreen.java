@@ -31,6 +31,7 @@ import com.mygdx.game.entities.*;
 import com.mygdx.game.systems.*;
 
 import java.util.ArrayList;
+
 public class GameScreen implements Screen {
     final MyGdxGame game;
     SpriteBatch batch;
@@ -43,6 +44,7 @@ public class GameScreen implements Screen {
     SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
     SystemCollision collisionSystem;
     SystemRender renderSystem;
+    TimeSystem timeSystem;
 
     public GameScreen(final MyGdxGame game) {
         this.game = game;
@@ -58,6 +60,8 @@ public class GameScreen implements Screen {
         collisionSystem = new SystemCollision();
         renderSystem = new SystemRender();
 
+        timeSystem = new TimeSystem();
+
     }
     @Override
     public void render(float delta) {
@@ -69,6 +73,17 @@ public class GameScreen implements Screen {
             // Switch to PauseMenu screen
             game.setScreen(new PauseMenu(game));
         }
+        timeSystem.update(delta);
+
+        // Get current hour and minute from the time system
+        int hour = timeSystem.getCurrentHour();
+        int minute = timeSystem.getCurrentMinute();
+
+        // Draw the digital clock
+        String timeString = String.format("%02d:%02d", hour, minute);
+        game.batch.begin();
+        game.font.draw(game.batch, timeString, 10, Gdx.graphics.getHeight() - 10);
+        game.batch.end();
 
         // Update all the systems every frame
         UpdateFrame();
@@ -102,6 +117,7 @@ public class GameScreen implements Screen {
         img.dispose();
         //shapeRenderer.dispose();
     }
+
     /**
      * Update each system.
      */
@@ -111,6 +127,5 @@ public class GameScreen implements Screen {
         updatePositionByVelocitySystem.update(entities);
         collisionSystem.update(entities);
         renderSystem.update(entities);
-
     }
 }
