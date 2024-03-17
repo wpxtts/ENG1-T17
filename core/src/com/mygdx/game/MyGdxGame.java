@@ -41,9 +41,9 @@ public class MyGdxGame extends ApplicationAdapter {
 //		entities.add(new Accommodation(300,300, 100,100));
 
 		entities.add(new Library(1000, 450,50, 100)); //square may be a 50 pixel change
-		entities.add(new DuckPond(1505,505, 100,100));
-		entities.add(new Piazza(2150,950, 100,100));
-		entities.add(new Accommodation(1300,1300, 100,100));
+		entities.add(new DuckPond(1336,381, 100,100));
+		entities.add(new Piazza(2200,1000, 100,100));
+		entities.add(new Accommodation(1100,1950, 100,100));
 
 
 		updateInputSystem = new SystemUpdateInput();
