@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.components.ComponentPlayerFlag;
 import com.mygdx.game.components.ComponentPosition;
 import com.mygdx.game.components.ComponentSprite;
@@ -28,7 +29,7 @@ public class SystemRender {
      * Render all entities with sprites.
      * @param entities all entities
      */
-    private static Viewport viewport;
+
     public static void update(ArrayList<Entity> entities) {
         //Initialises Spritebatch for drawing in sprites
         SpriteBatch batch = new SpriteBatch();
@@ -36,9 +37,6 @@ public class SystemRender {
         // Initialises a camera and viewport for this frame.
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-//        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 
         // Note the player controller is initialised as null, meaning the code will break if there
         // is no player entity.
@@ -51,9 +49,30 @@ public class SystemRender {
                 if(entity.hasComponent(ComponentPlayerFlag.class)){
                     // Updates the camera's position to be over the centre of the player
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
+//                    camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
+//                    camera.update();
+                    float targetX = player.getX();
+                    float targetY = player.getY();
+
+                    // Check if player is past the center of the window
+                    if (player.getX() < (Gdx.graphics.getWidth() / 2f)) {
+                        // If the camera can follow without leaving the bounds of the game world, set the player as center
+                        targetX = Gdx.graphics.getWidth() / 2f;
+                    }
+                    if (player.getX() > (4500 - (Gdx.graphics.getWidth()/ 2f))){
+                        targetX = 4500 - (Gdx.graphics.getWidth() / 2f);
+                    }
+                    if (player.getY() < (Gdx.graphics.getHeight() / 2f)) {
+                        targetY = Gdx.graphics.getHeight() / 2f;
+                    }
+                    if (player.getY() > (2845 - (Gdx.graphics.getHeight() / 2f))) {
+                        targetY = 2845 - (Gdx.graphics.getHeight() / 2f);
+                    }
+
+                    // Interpolate camera position for smooth movement
+//                    camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
+                    camera.position.set(targetX, targetY, 0);
                     camera.update();
-                    viewport.apply(true);
                 }
             }
 
@@ -101,8 +120,6 @@ public class SystemRender {
 
     public void resize(ArrayList<Entity> entities, int width, int height){
         SystemRender.update(entities);
-        // Update the viewport when the screen is resized
-        viewport.update(width, height, true);
     }
 
     void DrawCuboid(ComponentPosition object, ShapeRenderer shapeRenderer) {
