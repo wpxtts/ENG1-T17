@@ -1,12 +1,12 @@
-package com.mygdx.game;
+package com.mygdx.game.systems;
 
-public class TimeSystem {
+public class SystemTime {
     private static final float realSecondsPerInGameHour = 8.57f; //value based on 2-minute days, 10 minutes total game play
     private float elapsedRealTime; // Tracks the elapsed real time
 
     private int hour;
 
-    public TimeSystem() {
+    public SystemTime() {
         // Set elapsedRealTime to 8am at the start of the game
         int startHour = 8;
         elapsedRealTime = startHour * realSecondsPerInGameHour;
