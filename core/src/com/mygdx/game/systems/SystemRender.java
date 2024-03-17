@@ -59,14 +59,14 @@ public class SystemRender {
                         // If the camera can follow without leaving the bounds of the game world, set the player as center
                         targetX = Gdx.graphics.getWidth() / 2f;
                     }
-                    if (player.getX() > (4500 - (Gdx.graphics.getWidth()/ 2f))){
-                        targetX = 4500 - (Gdx.graphics.getWidth() / 2f);
+                    if (player.getX() > (6750 - (Gdx.graphics.getWidth()/ 2f))){
+                        targetX = 6750 - (Gdx.graphics.getWidth() / 2f);
                     }
                     if (player.getY() < (Gdx.graphics.getHeight() / 2f)) {
                         targetY = Gdx.graphics.getHeight() / 2f;
                     }
-                    if (player.getY() > (2845 - (Gdx.graphics.getHeight() / 2f))) {
-                        targetY = 2845 - (Gdx.graphics.getHeight() / 2f);
+                    if (player.getY() > (4267 - (Gdx.graphics.getHeight() / 2f))) {
+                        targetY = 4267 - (Gdx.graphics.getHeight() / 2f);
                     }
 
                     // Interpolate camera position for smooth movement
