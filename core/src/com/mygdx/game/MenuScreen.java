@@ -98,6 +98,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -128,6 +129,13 @@ public class MenuScreen implements Screen{
         // temporary until we have asset manager in
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
+        // Add game title as a label
+        Label titleLabel = new Label("Heslington Hustle", skin, "big");
+        table.add(titleLabel).colspan(3).padBottom(50).center(); // Center the title horizontally
+        table.row();
+
+        table.row();
+
         //create buttons
         TextButton newGame = new TextButton("New Game", skin);
         TextButton tutorial = new TextButton("Tutorial", skin);
@@ -136,9 +144,9 @@ public class MenuScreen implements Screen{
         //add buttons to table
         table.add(newGame).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
-        table.add(tutorial).fillX().uniformX();
+        table.add(tutorial).fillX().uniformX().center();;
         table.row();
-        table.add(credits).fillX().uniformX();
+        table.add(credits).fillX().uniformX().center();;
 
         // create button listeners
         credits.addListener(new ChangeListener() {

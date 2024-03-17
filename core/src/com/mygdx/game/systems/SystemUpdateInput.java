@@ -45,6 +45,9 @@ public class SystemUpdateInput {
                         newKeysPressed.add("SPACE");
                     }
                 }
+                if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                    newKeysPressed.add("ESCAPE");
+                }
 
                 // Save results back to input component.
                 inputComponent.setKeysPressed(newKeysPressed);

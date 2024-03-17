@@ -64,9 +64,16 @@ public class GameScreen implements Screen {
         // Turn the screen black.
         ScreenUtils.clear(0, 0, 0, 1);
 
-        // updates all the systems every frame
+        // Check for escape key input to open the pause menu
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            // Switch to PauseMenu screen
+            game.setScreen(new PauseMenu(game));
+        }
+
+        // Update all the systems every frame
         UpdateFrame();
     }
+
 
 
     @Override

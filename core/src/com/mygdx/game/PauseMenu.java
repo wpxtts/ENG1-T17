@@ -12,14 +12,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class TutorialScreen implements Screen {
+public class PauseMenu implements Screen {
 
     private Stage stage;
     MyGdxGame parent;
 
-    public TutorialScreen(MyGdxGame gameLoop) {
+    public PauseMenu(MyGdxGame gameLoop) {
         this.parent = gameLoop;
-        // create stage and set it as input processor
+        /// create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
     }
@@ -34,48 +34,42 @@ public class TutorialScreen implements Screen {
         // temporary until we have asset manager in
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        // Tutorial text
-        Label tutorialLabel = new Label("Welcome to the tutorial!", skin, "big");
-        table.add(tutorialLabel).colspan(2).center().padBottom(50);
+        // Add game title
+        Label titleLabel = new Label("Pause Menu", skin, "big");
+        table.add(titleLabel).colspan(2).padBottom(50).center();
         table.row();
 
-        Label instruction1 = new Label("1. Use arrow keys to move.", skin);
-        table.add(instruction1).colspan(2).left().padBottom(20);
-        table.row();
-
-        Label instruction2 = new Label("2. Press spacebar to interact with activities.", skin);
-        table.add(instruction2).colspan(2).left().padBottom(20);
-        table.row();
-
-        Label instruction3 = new Label("3. Balance eating, relaxing and studying to do well on your exams!", skin);
-        table.add(instruction3).colspan(2).left().padBottom(20);
-        table.row();
-
-        // Back button
+        // Create buttons
         TextButton back = new TextButton("Back", skin, "small");
+
+        // Add buttons to table
+        table.add(back).fillX().uniformX();
+        table.row().pad(10, 0, 10, 0);
+
+        // Create button listeners
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.toMainMenu();
+                // Switch back to the GameScreen
+                //////////////////////////////
             }
         });
-        table.add(back).fillX().uniformX().colspan(2);
     }
 
     @Override
     public void render(float delta) {
-        // clear the screen ready for next set of images to be drawn
+        // Clear the screen ready for next set of images to be drawn
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // tell our stage to do actions and draw itself
+        // Tell our stage to do actions and draw itself
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        // change the stage's viewport when the screen size is changed
+        // Change the stage's viewport when the screen size is changed
         stage.getViewport().update(width, height, true);
     }
 
@@ -96,7 +90,7 @@ public class TutorialScreen implements Screen {
 
     @Override
     public void dispose() {
-        // dispose of assets when not needed anymore
+        // Dispose of assets when not needed anymore
         stage.dispose();
     }
 }
