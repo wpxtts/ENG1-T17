@@ -51,7 +51,7 @@ public class PauseMenu implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 // Switch back to the GameScreen
-                //////////////////////////////
+                parent.setScreen( new GameScreen(parent));
             }
         });
     }
