@@ -67,11 +67,13 @@ public class GameScreen implements Screen {
         // Draw the digital clock
         String timeString = String.format("%02d:%02d", hour, minute);
         game.batch.begin();
-        game.font.draw(game.batch, timeString, 10, Gdx.graphics.getHeight() - 10);
-        game.batch.end();
 
         // Update all the systems every frame
         UpdateFrame();
+
+        // Update clock in corner to display after updating, so that it appears on top.
+        game.font.draw(game.batch, timeString, 10, Gdx.graphics.getHeight() - 10);
+        game.batch.end();
     }
 
 
