@@ -8,7 +8,7 @@ import com.mygdx.game.serviceProviders.CollisionEffectProvider;
 import java.util.HashMap;
 
 public class POI extends Entity{
-    public POI(int x, int y, int height, int width) {
+    public POI(double x, double y, double height, double width) {
         this.components = new HashMap<>();
         this.addComponent(new ComponentPosition(x, y, height, width));
         this.addComponent(new ComponentCollision(true));

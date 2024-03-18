@@ -9,7 +9,7 @@ import com.mygdx.game.serviceProviders.LibraryEffectProvider;
 import java.util.HashMap;
 
 public class Library extends POI{
-    public Library(int x, int y, int height, int width) {
+    public Library(double x, double y, double height, double width) {
         super(x,y,height,width);
         this.addComponent(new ComponentCollisionEffect(new LibraryEffectProvider()));
         this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("library.png"))));

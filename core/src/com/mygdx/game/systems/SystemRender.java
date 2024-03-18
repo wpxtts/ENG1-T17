@@ -44,30 +44,30 @@ public class SystemRender {
                 if(entity.hasComponent(ComponentPlayerFlag.class)){
                     // Updates the camera's position to be over the centre of the player
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
+                    camera.position.set((float) Gdx.graphics.getWidth() /2, (float) Gdx.graphics.getHeight() /2, 0);
                     camera.update();
-                    float targetX = player.getX();
-                    float targetY = player.getY();
+                    float targetX = (float) player.getX();
+                    float targetY = (float) player.getY();
 
-                    // Check if player is past the center of the window
-                    if (player.getX() < (Gdx.graphics.getWidth() / 2f)) {
-                        // If the camera can follow without leaving the bounds of the game world, set the player as center
-                        targetX = Gdx.graphics.getWidth() / 2f;
-                    }
-                    if (player.getX() > (6750 - (Gdx.graphics.getWidth()/ 2f))){
-                        targetX = 6750 - (Gdx.graphics.getWidth() / 2f);
-                    }
-                    if (player.getY() < (Gdx.graphics.getHeight() / 2f)) {
-                        targetY = Gdx.graphics.getHeight() / 2f;
-                    }
-                    if (player.getY() > (4267 - (Gdx.graphics.getHeight() / 2f))) {
-                        targetY = 4267 - (Gdx.graphics.getHeight() / 2f);
-                    }
+//                    // Check if player is past the center of the window
+//                    if (player.getX() < (Gdx.graphics.getWidth() / 2f)) {
+//                        // If the camera can follow without leaving the bounds of the game world, set the player as center
+//                        targetX = Gdx.graphics.getWidth() / 2f;
+//                    }
+//                    if (player.getX() > (6750 - (Gdx.graphics.getWidth()/ 2f))){
+//                        targetX = 6750 - (Gdx.graphics.getWidth() / 2f);
+//                    }
+//                    if (player.getY() < (Gdx.graphics.getHeight() / 2f)) {
+//                        targetY = Gdx.graphics.getHeight() / 2f;
+//                    }
+//                    if (player.getY() > (4267 - (Gdx.graphics.getHeight() / 2f))) {
+//                        targetY = 4267 - (Gdx.graphics.getHeight() / 2f);
+//                    }
 
                     // Interpolate camera position for smooth movement
 //                    camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
-                    camera.position.set(targetX, targetY, 0);
-                    camera.update();
+//                    camera.position.set(targetX, targetY, 0);
+//                    camera.update();
 
                 }
             }
@@ -120,7 +120,7 @@ public class SystemRender {
         //Draws in each entity's Sprite at its coordinates
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
         batch.begin();
-        batch.draw(sprite.getSprite(), object.getX(), object.getY());
+        batch.draw(sprite.getSprite(), (float) (object.getX()), (float) (object.getY()), (float) (object.getWidth()), (float) (object.getHeight()));
         batch.end();
 
         if (isPlayer){

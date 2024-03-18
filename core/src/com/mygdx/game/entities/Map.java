@@ -6,9 +6,9 @@ import com.mygdx.game.components.*;
 
 import java.util.HashMap;
 
-public class Map extends POI{
+public class Map extends Entity{
     public Map(int x, int y, int height, int width) {
-        super(x,y,height,width);
+        this.addComponent(new ComponentPosition(x,y,height,width));
         //this.addComponent(new ComponentCollisionEffect(new PiazzaEffectProvider()));
         this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("map.png"))));
     }

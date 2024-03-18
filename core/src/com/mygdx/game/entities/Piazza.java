@@ -9,7 +9,7 @@ import com.mygdx.game.serviceProviders.PiazzaEffectProvider;
 import java.util.HashMap;
 
 public class Piazza extends POI{
-    public Piazza(int x, int y, int height, int width) {
+    public Piazza(double x, double y, double height, double width) {
         super(x,y,height,width);
         this.addComponent(new ComponentCollisionEffect(new PiazzaEffectProvider()));
         this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("piazza.png"))));

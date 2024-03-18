@@ -48,44 +48,45 @@ public class SystemCollision {
 
         ComponentPosition playerPosition = (ComponentPosition) playerEntity.getComponent(ComponentPosition.class);
 
+
         // These are the four edges of the collision object.
-        float collisionLeft = collisionPosition.getX() - collisionPosition.getWidth() / 2;
-        float collisionRight = collisionPosition.getX() + collisionPosition.getWidth() / 2;
-        float collisionTop = collisionPosition.getY() + collisionPosition.getHeight() / 2;
-        float collisionBottom = collisionPosition.getY() - collisionPosition.getHeight() / 2;
+        double collisionLeft = collisionPosition.getRawX();
+        double collisionRight = collisionPosition.getRawX() + collisionPosition.getRawWidth();
+        double collisionTop = collisionPosition.getRawY() + collisionPosition.getRawHeight();
+        double collisionBottom = collisionPosition.getRawY();
 
         // These are the four edges of the player.
-        float playerLeft = playerPosition.getX() - playerPosition.getWidth() / 2;
-        float playerRight = playerPosition.getX() + playerPosition.getWidth() / 2;
-        float playerTop = playerPosition.getY() + playerPosition.getHeight() / 2;
-        float playerBottom = playerPosition.getY() - playerPosition.getHeight() / 2;
+        double playerLeft = playerPosition.getRawX();
+        double playerRight = playerPosition.getRawX() + playerPosition.getRawWidth();
+        double playerTop = playerPosition.getRawY() + playerPosition.getRawHeight();
+        double playerBottom = playerPosition.getRawY();
 
         // These gap values are positive if they overlap, meaning if all of them
         // are positive there is a collision, and the smallest value indicates the
         // direction to push the player in to correct the collision.
-        float leftGap =  playerRight - collisionLeft;
-        float rightGap = collisionRight - playerLeft;
-        float topGap = collisionTop - playerBottom;
-        float bottomGap = playerTop - collisionBottom;
+        double leftGap =  playerRight - collisionLeft;
+        double rightGap = collisionRight - playerLeft;
+        double topGap = collisionTop - playerBottom;
+        double bottomGap = playerTop - collisionBottom;
 
         // Checks if all values are positive, which indicates a collision.
         if (leftGap > 0 && rightGap > 0 && topGap > 0 && bottomGap > 0) {
 
             // Finds the direction with the shortest value
-            float leftRightMin = Math.min(leftGap, rightGap);
-            float topBottomMin = Math.min(topGap, bottomGap);
-            float directionValue = Math.min(leftRightMin, topBottomMin);
+            double leftRightMin = Math.min(leftGap, rightGap);
+            double topBottomMin = Math.min(topGap, bottomGap);
+            double directionValue = Math.min(leftRightMin, topBottomMin);
 
             // Moves the player, so it's no longer colliding with the
             // object in the shortest direction.
             if (directionValue == leftGap) {
-                playerPosition.setX(collisionLeft - playerPosition.getWidth()/2);
+                playerPosition.setX(collisionLeft - playerPosition.getRawWidth());
             } else if (directionValue == rightGap) {
-                playerPosition.setX(collisionRight + playerPosition.getWidth()/2);
+                playerPosition.setX(collisionRight);
             } else if (directionValue == topGap) {
-                playerPosition.setY(collisionTop + playerPosition.getHeight() / 2);
+                playerPosition.setY(collisionTop);
             } else if (directionValue == bottomGap) {
-                playerPosition.setY(collisionBottom - playerPosition.getHeight() / 2);
+                playerPosition.setY(collisionBottom - playerPosition.getRawHeight());
             }
 
 

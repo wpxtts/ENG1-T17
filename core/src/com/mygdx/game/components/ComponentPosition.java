@@ -1,47 +1,53 @@
 package com.mygdx.game.components;
 
+import com.badlogic.gdx.Gdx;
+
 public class ComponentPosition extends Component{
 
     // Contains all the variables which determine the size
     // and position of an object..
 
-    float x;
-    float y;
-    float height;
-    float width;
+    double x;
+    double y;
+    double height;
+    double width;
 
-    public ComponentPosition(float x, float y, float height, float width) {
+    public ComponentPosition(double x, double y, double height, double width) {
         this.x = x;
         this.y = y;
         this.height = height;
         this.width = width;
     }
 
-    public float getX(){
-        return x;
+    public double getX(){
+        return x* Gdx.graphics.getWidth();
     }
-    public void setX(float x){
+    public double getRawX(){return x;}
+    public void setX(double x){
         this.x = x;
     }
 
-    public float getY(){
-        return y;
+    public double getY(){
+        return y*Gdx.graphics.getHeight();
     }
-    public void setY(float y){
+    public double getRawY(){return y;}
+    public void setY(double y){
         this.y = y;
     }
 
-    public float getHeight(){
-        return height;
+    public double getHeight(){
+        return height*Gdx.graphics.getHeight();
     }
-    public void setHeight(float height){
+    public double getRawHeight(){return height;}
+    public void setHeight(double height){
         this.height = height;
     }
 
-    public float getWidth(){
-        return width;
+    public double getWidth(){
+        return width*Gdx.graphics.getWidth();
     }
-    public void setWidth(float width){
+    public double getRawWidth(){return width;};
+    public void setWidth(double width){
         this.width = width;
     }
 }
