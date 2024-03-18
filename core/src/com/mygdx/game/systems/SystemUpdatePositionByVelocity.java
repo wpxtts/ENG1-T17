@@ -26,16 +26,16 @@ public class SystemUpdatePositionByVelocity {
                 ComponentVelocity velocity = (ComponentVelocity) entity.getComponent(ComponentVelocity.class);
 
                 // We check the player is within bounds before changing position.
-//                if ((-1000<position.getX() || velocity.getXSpeed()>0) &&
-//                        (position.getX()<(6759 - position.getWidth())||velocity.getXSpeed()<0)) {
+                if ((0<position.getRawX() || velocity.getXSpeed()>0) &&
+                        (position.getRawX()<(2 - position.getRawWidth())||velocity.getXSpeed()<0)) {
                     // We use deltaTime to avoid speed being tied to frame rate (which
                     // can vary from computer to computer).
                     position.setX(position.getRawX() +velocity.getXSpeed() * Gdx.graphics.getDeltaTime());
-//                }
-//                if ((-1000<position.getY() || velocity.getYSpeed()>0) &&
-//                        (position.getY()<(4265 - position.getHeight())||velocity.getYSpeed()<0)) {
+                }
+                if ((0<position.getRawY() || velocity.getYSpeed()>0) &&
+                        (position.getRawY()<(2 - position.getRawHeight())||velocity.getYSpeed()<0)) {
                     position.setY(position.getRawY() +velocity.getYSpeed() * Gdx.graphics.getDeltaTime());
-//                }
+                }
             }
         }
     }

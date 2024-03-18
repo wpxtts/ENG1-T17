@@ -31,7 +31,7 @@ public class SystemUpdateVelocityByInput {
                 boolean up = keysPressed.contains("UP");
                 boolean down = keysPressed.contains("DOWN");
                 // Speed increment determines the speed of the player.
-                double speedIncrement = 0.15;
+                double speedIncrement = 0.2;
                 float newXSpeed = 0;
                 float newYSpeed = 0;
                 if(left){

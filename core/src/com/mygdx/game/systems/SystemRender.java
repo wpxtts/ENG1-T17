@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.components.ComponentPlayerFlag;
 import com.mygdx.game.components.ComponentPosition;
 import com.mygdx.game.components.ComponentSprite;
@@ -44,30 +45,31 @@ public class SystemRender {
                 if(entity.hasComponent(ComponentPlayerFlag.class)){
                     // Updates the camera's position to be over the centre of the player
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    camera.position.set((float) Gdx.graphics.getWidth() /2, (float) Gdx.graphics.getHeight() /2, 0);
+//                    camera.position.set((float) Gdx.graphics.getWidth() /2, (float) Gdx.graphics.getHeight() /2,
+                    camera.position.set((float) (player.getX()+player.getWidth()/2), (float) (player.getY()+player.getHeight()/2), 0);
                     camera.update();
-                    float targetX = (float) player.getX();
-                    float targetY = (float) player.getY();
+                    float targetX = (float) (player.getX()+player.getWidth()/2);
+                    float targetY = (float) (player.getY()+player.getHeight()/2);
 
-//                    // Check if player is past the center of the window
-//                    if (player.getX() < (Gdx.graphics.getWidth() / 2f)) {
-//                        // If the camera can follow without leaving the bounds of the game world, set the player as center
-//                        targetX = Gdx.graphics.getWidth() / 2f;
-//                    }
-//                    if (player.getX() > (6750 - (Gdx.graphics.getWidth()/ 2f))){
-//                        targetX = 6750 - (Gdx.graphics.getWidth() / 2f);
-//                    }
-//                    if (player.getY() < (Gdx.graphics.getHeight() / 2f)) {
-//                        targetY = Gdx.graphics.getHeight() / 2f;
-//                    }
-//                    if (player.getY() > (4267 - (Gdx.graphics.getHeight() / 2f))) {
-//                        targetY = 4267 - (Gdx.graphics.getHeight() / 2f);
-//                    }
+                    // Check if player is past the center of the window
+                    if ((float) (player.getX()+player.getWidth()/2) < (Gdx.graphics.getWidth() / 2f)) {
+                        // If the camera can follow without leaving the bounds of the game world, set the player as center
+                        targetX = Gdx.graphics.getWidth() / 2f;
+                    }
+                    if ((float) (player.getX()+player.getWidth()/2) > (1.5f*Gdx.graphics.getWidth())){
+                        targetX = 1.5f*Gdx.graphics.getWidth();
+                    }
+                    if ((float) (player.getY()+player.getHeight()/2) < (Gdx.graphics.getHeight() / 2f)) {
+                        targetY = Gdx.graphics.getHeight() / 2f;
+                    }
+                    if ((float) (player.getY()+player.getHeight()/2) > (1.5f*Gdx.graphics.getHeight())){
+                        targetY = 1.5f*Gdx.graphics.getHeight();
+                    }
 
                     // Interpolate camera position for smooth movement
-//                    camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
-//                    camera.position.set(targetX, targetY, 0);
-//                    camera.update();
+                    camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
+                    camera.position.set(targetX, targetY, 0);
+                    camera.update();
 
                 }
             }
