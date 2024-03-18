@@ -29,8 +29,11 @@ public class SystemCollision {
                 collisionObjects.add(entity);
 
             }
-            if(entity.hasComponent(ComponentPlayerFlag.class)){
-                player = entity;
+            if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
+                ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class);
+                if(flag.getFlag().equals("Player")){
+                    player = entity;
+                }
             }
 
         }

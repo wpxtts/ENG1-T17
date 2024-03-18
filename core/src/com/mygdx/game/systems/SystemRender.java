@@ -7,13 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.components.ComponentPlayerFlag;
+import com.mygdx.game.components.ComponentSpecialEntityFlag;
 import com.mygdx.game.components.ComponentPosition;
+import com.mygdx.game.components.ComponentSpecialEntityFlag;
 import com.mygdx.game.components.ComponentSprite;
 import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.Map;
 
 import java.util.ArrayList;
+
+import static com.badlogic.gdx.utils.JsonValue.ValueType.object;
 
 /**
  * System which renders all sprites.
@@ -38,38 +42,55 @@ public class SystemRender {
         // is no player entity.
         ArrayList<Entity> visibleObjects = new ArrayList<>();
 
+        float mapWidth = 1;
+        float mapHeight = 1;
+        // Finds the map
+        for(Entity entity: entities){
+            if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
+                String flag = ((ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class)).getFlag();
+                if(flag.equals("Map")){
+                    Map map = (Map) entity;
+                    ComponentPosition mapPosition = (ComponentPosition) entity.getComponent(ComponentPosition.class);
+                    mapWidth = (float) mapPosition.getRawWidth();
+                    mapHeight = (float) mapPosition.getRawHeight();
+                }
+            }
+        }
+
         // Finds all objects to be rendered.
         for (Entity entity : entities) {
             if(entity.hasComponent(ComponentSprite.class)){
                 visibleObjects.add(entity);
-                if(entity.hasComponent(ComponentPlayerFlag.class)){
-                    // Updates the camera's position to be over the centre of the player
-                    ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-//                    camera.position.set((float) Gdx.graphics.getWidth() /2, (float) Gdx.graphics.getHeight() /2,
-                    camera.position.set((float) (player.getX()+player.getWidth()/2), (float) (player.getY()+player.getHeight()/2), 0);
-                    camera.update();
-                    float targetX = (float) (player.getX()+player.getWidth()/2);
-                    float targetY = (float) (player.getY()+player.getHeight()/2);
+                if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
+                    String flag = ((ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class)).getFlag();
+                    if(flag.equals("Player")){
+                        // Updates the camera's position to be over the centre of the player
+                        ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
+                        camera.position.set((float) (player.getX()+player.getWidth()/2), (float) (player.getY()+player.getHeight()/2), 0);
+                        camera.update();
+                        float targetX = (float) (player.getX()+player.getWidth()/2);
+                        float targetY = (float) (player.getY()+player.getHeight()/2);
 
-                    // Check if player is past the center of the window
-                    if ((float) (player.getX()+player.getWidth()/2) < (Gdx.graphics.getWidth() / 2f)) {
-                        // If the camera can follow without leaving the bounds of the game world, set the player as center
-                        targetX = Gdx.graphics.getWidth() / 2f;
-                    }
-                    if ((float) (player.getX()+player.getWidth()/2) > (1.5f*Gdx.graphics.getWidth())){
-                        targetX = 1.5f*Gdx.graphics.getWidth();
-                    }
-                    if ((float) (player.getY()+player.getHeight()/2) < (Gdx.graphics.getHeight() / 2f)) {
-                        targetY = Gdx.graphics.getHeight() / 2f;
-                    }
-                    if ((float) (player.getY()+player.getHeight()/2) > (1.5f*Gdx.graphics.getHeight())){
-                        targetY = 1.5f*Gdx.graphics.getHeight();
-                    }
+                        // Check if player is past the center of the window
+                        if ((float) (player.getX()+player.getWidth()/2) < (Gdx.graphics.getWidth() / 2f)) {
+                            // If the camera can follow without leaving the bounds of the game world, set the player as center
+                            targetX = Gdx.graphics.getWidth() / 2f;
+                        }
+                        if ((float) (player.getX()+player.getWidth()/2) > ((mapWidth-0.5)*Gdx.graphics.getWidth())){
+                            targetX = (float) (mapWidth-0.5)*Gdx.graphics.getWidth();
+                        }
+                        if ((float) (player.getY()+player.getHeight()/2) < (Gdx.graphics.getHeight() / 2f)) {
+                            targetY = Gdx.graphics.getHeight() / 2f;
+                        }
+                        if ((float) (player.getY()+player.getHeight()/2) > ((mapHeight-0.5)*Gdx.graphics.getHeight())){
+                            targetY = (float) (mapHeight-0.5)*Gdx.graphics.getHeight();
+                        }
 
-                    // Interpolate camera position for smooth movement
-                    camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
-                    camera.position.set(targetX, targetY, 0);
-                    camera.update();
+                        // Interpolate camera position for smooth movement
+                        camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
+                        camera.position.set(targetX, targetY, 0);
+                        camera.update();
+                    }
 
                 }
             }
@@ -83,12 +104,13 @@ public class SystemRender {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         for (Entity entity : visibleObjects) {
-            //DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
-            boolean isPlayer = false;
-            if(entity.hasComponent(ComponentPlayerFlag.class)){
-                isPlayer = true;
-            }
-            DrawSprite((ComponentPosition) entity.getComponent(ComponentPosition.class), (ComponentVelocity) entity.getComponent(ComponentVelocity.class), (ComponentSprite) entity.getComponent(ComponentSprite.class), batch, camera, isPlayer);
+//            //DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
+//            boolean isPlayer = false;
+//            if(entity.hasComponent(ComponentPlayerFlag.class)){
+//                isPlayer = true;
+//            }
+//            DrawSprite((ComponentPosition) entity.getComponent(ComponentPosition.class), (ComponentVelocity) entity.getComponent(ComponentVelocity.class), (ComponentSprite) entity.getComponent(ComponentSprite.class), batch, camera, isPlayer);
+            DrawSprite(entity, batch, camera);
         }
 
         // Ends the shape renderer
@@ -116,33 +138,42 @@ public class SystemRender {
         }
     }
 
-    static void DrawSprite(ComponentPosition object, ComponentVelocity velocity, ComponentSprite sprite, SpriteBatch batch, OrthographicCamera camera, boolean isPlayer) {
+    static void DrawSprite(Entity entity, SpriteBatch batch, OrthographicCamera camera) {
 //        object.setWidth(sprite.getSprite().getWidth());
 //        object.setHeight(sprite.getSprite().getHeight());
         //Draws in each entity's Sprite at its coordinates
+        ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);
+        ComponentVelocity velocity = (ComponentVelocity)  entity.getComponent(ComponentVelocity.class);
+        ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
+
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
         batch.begin();
-        batch.draw(sprite.getSprite(), (float) (object.getX()), (float) (object.getY()), (float) (object.getWidth()), (float) (object.getHeight()));
+        batch.draw(sprite.getSprite(), (float) (position.getX()), (float) (position.getY()), (float) (position.getWidth()), (float) (position.getHeight()));
         batch.end();
 
-        if (isPlayer){
-            //Changes player's sprite when moving or still (based on velocity)
-            if (velocity.getXSpeed() > 0) {
-                //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_right.png")));
+        if (entity.hasComponent(ComponentSpecialEntityFlag.class)){
 
-            }
-            if (velocity.getXSpeed() < 0) {
-                //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_left.png")));
+            ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag)  entity.getComponent(ComponentSpecialEntityFlag.class);
+            if(flag.getFlag().equals("Player")){
+                //Changes player's sprite when moving or still (based on velocity)
+                if (velocity.getXSpeed() > 0) {
+                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                    sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_right.png")));
 
-            }
-            if (velocity.getXSpeed() == 0) {
-                //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_still.png")));
+                }
+                if (velocity.getXSpeed() < 0) {
+                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                    sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_left.png")));
 
+                }
+                if (velocity.getXSpeed() == 0) {
+                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                    sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_still.png")));
+
+                }
             }
         }
+
     }
 
 }
