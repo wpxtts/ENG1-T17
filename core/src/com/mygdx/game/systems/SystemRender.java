@@ -46,6 +46,29 @@ public class SystemRender {
                     ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                     camera.position.set(player.getX() + player.getWidth() / 2, player.getY() + player.getHeight() / 2, 0);
                     camera.update();
+                    float targetX = player.getX();
+                    float targetY = player.getY();
+
+                    // Check if player is past the center of the window
+                    if (player.getX() < (Gdx.graphics.getWidth() / 2f)) {
+                        // If the camera can follow without leaving the bounds of the game world, set the player as center
+                        targetX = Gdx.graphics.getWidth() / 2f;
+                    }
+                    if (player.getX() > (6750 - (Gdx.graphics.getWidth()/ 2f))){
+                        targetX = 6750 - (Gdx.graphics.getWidth() / 2f);
+                    }
+                    if (player.getY() < (Gdx.graphics.getHeight() / 2f)) {
+                        targetY = Gdx.graphics.getHeight() / 2f;
+                    }
+                    if (player.getY() > (4267 - (Gdx.graphics.getHeight() / 2f))) {
+                        targetY = 4267 - (Gdx.graphics.getHeight() / 2f);
+                    }
+
+                    // Interpolate camera position for smooth movement
+//                    camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
+                    camera.position.set(targetX, targetY, 0);
+                    camera.update();
+
                 }
             }
 
@@ -91,15 +114,13 @@ public class SystemRender {
         }
     }
 
-    void DrawSprite(ComponentPosition object, ComponentVelocity velocity, ComponentSprite sprite, SpriteBatch batch, OrthographicCamera camera, boolean isPlayer) {
-
+    static void DrawSprite(ComponentPosition object, ComponentVelocity velocity, ComponentSprite sprite, SpriteBatch batch, OrthographicCamera camera, boolean isPlayer) {
+//        object.setWidth(sprite.getSprite().getWidth());
+//        object.setHeight(sprite.getSprite().getHeight());
         //Draws in each entity's Sprite at its coordinates
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
         batch.begin();
-        // We have to remember that .draw draws the sprite from the bottom left corner,
-        // but we store positions as the centre of sprites.
-        // Therefor a conversion has to be made before drawing.
-        batch.draw(sprite.getSprite(), object.getX()-object.getWidth()/2, object.getY()-object.getHeight()/2,object.getWidth(),object.getHeight());
+        batch.draw(sprite.getSprite(), object.getX(), object.getY());
         batch.end();
 
         if (isPlayer){

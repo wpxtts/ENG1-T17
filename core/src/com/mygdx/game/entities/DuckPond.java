@@ -13,6 +13,6 @@ public class DuckPond extends POI{
     public DuckPond(int x, int y, int height, int width) {
         super(x,y,height,width);
         this.addComponent(new ComponentCollisionEffect(new DuckPondEffectProvider()));
-        this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("duck_pond.jpg"))));
+        this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("duck_pond.png"))));
     }
 }

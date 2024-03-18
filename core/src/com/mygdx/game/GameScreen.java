@@ -31,10 +31,13 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame game) {
         this.game = game;
         entities = new ArrayList<>();
+        entities.add(new Map(0,0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth())); //currently the map's sprite size is 3000 x 1896
         entities.add(new Player());
 
-        entities.add(new Library(90, 300,50, 100));
-        entities.add(new DuckPond(300,300, 100,100));
+        entities.add(new Library(1600, 700,50, 100));
+        entities.add(new DuckPond(2070,600, 100,100));
+        entities.add(new Piazza(3330,1500, 100,100));
+        entities.add(new Accommodation(1650,2925, 100,100));
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();

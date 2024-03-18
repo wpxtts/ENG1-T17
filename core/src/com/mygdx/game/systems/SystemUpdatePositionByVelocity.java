@@ -27,13 +27,13 @@ public class SystemUpdatePositionByVelocity {
 
                 // We check the player is within bounds before changing position.
                 if ((-1000<position.getX() || velocity.getXSpeed()>0) &&
-                        (position.getX()<1000||velocity.getXSpeed()<0)) {
+                        (position.getX()<(6759 - position.getWidth())||velocity.getXSpeed()<0)) {
                     // We use deltaTime to avoid speed being tied to frame rate (which
                     // can vary from computer to computer).
                     position.setX(position.getX() +velocity.getXSpeed() * Gdx.graphics.getDeltaTime());
                 }
                 if ((-1000<position.getY() || velocity.getYSpeed()>0) &&
-                        (position.getY()<1000||velocity.getYSpeed()<0)) {
+                        (position.getY()<(4265 - position.getHeight())||velocity.getYSpeed()<0)) {
                     position.setY(position.getY() +velocity.getYSpeed() * Gdx.graphics.getDeltaTime());
                 }
             }
