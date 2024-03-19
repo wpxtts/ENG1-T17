@@ -16,6 +16,10 @@ public class TutorialScreen implements Screen {
     MyGdxGame parent;
     private Texture backgroundImage;
 
+    /**
+     * Creates the new tutorial screen and specifies the background image.
+     * @param gameLoop the parent game loop
+     */
     public TutorialScreen(MyGdxGame gameLoop) {
         this.parent = gameLoop;
         // create stage and set it as input processor
@@ -29,6 +33,10 @@ public class TutorialScreen implements Screen {
         stage.addActor(background); // Add the background image to the stage
     }
 
+    /**
+     * Creates the text and buttons that are displayed to make up
+     * the tutorial screen.
+     */
     @Override
     public void show() {
         // Create a table that fills the screen. Everything else will go inside this table.
@@ -67,6 +75,10 @@ public class TutorialScreen implements Screen {
         table.add(back).fillX().uniformX().colspan(2);
     }
 
+    /**
+     * Render the tutorial screen
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         // clear the screen ready for next set of images to be drawn
@@ -78,6 +90,11 @@ public class TutorialScreen implements Screen {
         stage.draw();
     }
 
+    /**
+     * Deal with the screen re-sizing
+     * @param width the new screen width
+     * @param height the new screen height
+     */
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
@@ -101,6 +118,9 @@ public class TutorialScreen implements Screen {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * Dispose of assets when not needed anymore
+     */
     @Override
     public void dispose() {
         // dispose of assets when not needed anymore
