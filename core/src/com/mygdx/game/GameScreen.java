@@ -77,7 +77,7 @@ public class GameScreen implements Screen {
 
         // Update clock in corner to display after updating, so that it appears on top.
         game.batch.begin();
-        game.font.draw(game.batch, timeString, 10, Gdx.graphics.getHeight() - 10);
+        game.font.draw(game.batch, timeString, 20, 20);
         game.batch.end();
 
     }
