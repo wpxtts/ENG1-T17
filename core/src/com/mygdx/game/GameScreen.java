@@ -34,6 +34,7 @@ public class GameScreen implements Screen {
     SystemTime timeSystem;
     SystemText textSystem;
 
+
     public GameScreen(final MyGdxGame game) {
         this.game = game;
         entities = new HashMap<>();
@@ -45,7 +46,7 @@ public class GameScreen implements Screen {
         entities.put("Library",new Library(1.35, 1.4,0.4, 0.4));
         entities.put("DuckPond",new DuckPond(0.75,0.4, 0.35,0.25));
         entities.put("Piazza",new Piazza(1.3,0.6, 0.2,0.4));
-        entities.put("Accommodation",new Accommodation(0.5,1.2, 0.2,0.2));
+        entities.put("Accommodation",new Accommodation(0.5,1.2, 0.2,0.2,this));
 
         entities.put("Map",new Map(0,0, 2, 2)); //currently the map's sprite size is 3000 x 1896
 
@@ -66,6 +67,11 @@ public class GameScreen implements Screen {
         textSystem = new SystemText();
 
     }
+    public void endGame(){
+        System.out.println("End Game");
+        game.toScoreScreen();
+    }
+
     @Override
     public void render(float delta) {
         // Turn the screen black.
@@ -153,6 +159,7 @@ public class GameScreen implements Screen {
         collisionSystem.update(entities);
         renderSystem.update(entities,game.shapeRenderer,game.batch);
         textSystem.update(entities);
-        timeSystem.update(entities);
+        timeSystem.update(entities,this);
     }
+
 }

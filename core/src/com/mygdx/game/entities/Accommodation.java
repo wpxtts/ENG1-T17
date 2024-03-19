@@ -2,6 +2,7 @@ package com.mygdx.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.GameScreen;
 import com.mygdx.game.components.ComponentCollisionEffect;
 import com.mygdx.game.components.ComponentSprite;
 import com.mygdx.game.serviceProviders.AccommodationEffectProvider;
@@ -18,9 +19,9 @@ public class Accommodation extends POI {
      * @param height The height of the accommodation
      * @param width The width of the accommodation
      */
-    public Accommodation(double x, double y, double height, double width) {
+    public Accommodation(double x, double y, double height, double width, GameScreen gameScreen) {
         super(x, y, height, width);
-        this.addComponent(new ComponentCollisionEffect(new AccommodationEffectProvider()));
+        this.addComponent(new ComponentCollisionEffect(new AccommodationEffectProvider(gameScreen)));
         this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("accommodation.png"))));
     }
 }

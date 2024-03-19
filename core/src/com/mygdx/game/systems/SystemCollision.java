@@ -1,5 +1,6 @@
 package com.mygdx.game.systems;
 
+import com.mygdx.game.GameScreen;
 import com.mygdx.game.components.*;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.Tracker;

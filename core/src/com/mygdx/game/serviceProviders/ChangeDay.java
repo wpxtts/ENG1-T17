@@ -1,5 +1,7 @@
 package com.mygdx.game.serviceProviders;
 
+import com.badlogic.gdx.Screen;
+import com.mygdx.game.GameScreen;
 import com.mygdx.game.components.ComponentBoolean;
 import com.mygdx.game.components.ComponentTime;
 import com.mygdx.game.components.ComponentValue;
@@ -11,7 +13,7 @@ import java.util.HashMap;
 public class ChangeDay{
     ChangeDay() {};
 
-    public static void changeDay(HashMap<String, Entity>entities){
+    public static void changeDay(HashMap<String, Entity>entities, GameScreen gameScreen){
         TimeTracker timeTracker = (TimeTracker) entities.get("TimeTracker");
         ComponentTime time = (ComponentTime) timeTracker.getComponent(ComponentTime.class);
         time.setDay(time.getDay()+1);
@@ -28,6 +30,12 @@ public class ChangeDay{
             studyLeftValue.setValue(1);
         }else{
             studyLeftValue.setValue(2);
+        }
+
+        if(time.getDay()==8){
+            //End game
+            gameScreen.endGame();
+
         }
     }
 

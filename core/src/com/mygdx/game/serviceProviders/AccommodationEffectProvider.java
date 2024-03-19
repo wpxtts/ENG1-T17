@@ -1,5 +1,6 @@
 package com.mygdx.game.serviceProviders;
 
+import com.mygdx.game.GameScreen;
 import com.mygdx.game.components.ComponentValue;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.Tracker;
@@ -14,7 +15,10 @@ public class AccommodationEffectProvider extends CollisionEffectProvider {
     /**
      * Constructs an AccommodationEffectProvider.
      */
-    public AccommodationEffectProvider() {}
+    GameScreen gameScreen;
+    public AccommodationEffectProvider(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
+    }
 
     /**
      * Provides the collision effect for accommodation entities.
@@ -24,6 +28,6 @@ public class AccommodationEffectProvider extends CollisionEffectProvider {
         Entity studyLeftTracker = entities.get("StudyLeftTracker");
         ComponentValue energy = (ComponentValue) energyTracker.getComponent(ComponentValue.class);
         energy.setValue(100);
-        ChangeDay.changeDay(entities);
+        ChangeDay.changeDay(entities, gameScreen);
     }
 }

@@ -1,6 +1,7 @@
 package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.GameScreen;
 import com.mygdx.game.components.ComponentTime;
 import com.mygdx.game.components.ComponentValue;
 import com.mygdx.game.entities.Entity;
@@ -33,7 +34,7 @@ public class SystemTime {
      * Manages all time based updates, including updating the in game time and
      * adjusting the trackers.
      */
-    public void update(HashMap<String, Entity> entities) {
+    public void update(HashMap<String, Entity> entities, GameScreen gameScreen) {
 
         // Acquire all entities with the tracker component
         ArrayList<Entity> timeObjects = new ArrayList<>();
@@ -52,7 +53,7 @@ public class SystemTime {
                             Entity energyTracker = entities.get("EnergyTracker");
                             ComponentValue energy = (ComponentValue) energyTracker.getComponent(ComponentValue.class);
                             energy.setValue(60);
-                            ChangeDay.changeDay(entities);
+                            ChangeDay.changeDay(entities, gameScreen);
                         }
                     }
                 }
