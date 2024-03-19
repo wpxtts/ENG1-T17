@@ -77,7 +77,7 @@ public class GameScreen implements Screen {
         game.batch.end();
 
         // Update clock in corner to display after updating, so that it appears on top.
-        game.batch.begin();
+        game.hudBatch.begin();
 
         // Set font color to black
         game.font.setColor(Color.BLACK);
@@ -89,8 +89,8 @@ public class GameScreen implements Screen {
         ComponentTime time = (ComponentTime)entities.get("TimeTracker").getComponent(ComponentTime.class);
 
         // Draw the clock
-        game.font.draw(game.batch, time.getTimeString(), 20, 30);
-        game.batch.end();
+        game.font.draw(game.hudBatch, time.getTimeString(), 20, 30);
+        game.hudBatch.end();
 
     }
 

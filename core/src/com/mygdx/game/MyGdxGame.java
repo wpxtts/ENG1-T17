@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class MyGdxGame extends Game {
 
 	public SpriteBatch batch;
+	public SpriteBatch hudBatch;
 	public BitmapFont font;
 	public ShapeRenderer shapeRenderer;
 	private Stage stage;
@@ -24,6 +25,7 @@ public class MyGdxGame extends Game {
 	 */
 	public void create() {
 		batch = new SpriteBatch();
+		hudBatch = new SpriteBatch();
 		font = new BitmapFont(); // use libGDX's default Arial font
 		this.setScreen(new MenuScreen(this));
 		shapeRenderer = new ShapeRenderer();

@@ -17,11 +17,6 @@ public class SystemTime {
     // Tracks the elapsed real time
     private static final int wakeUpHour = 8;
 
-//    // Tracks the current in-game hour
-//    private int hour;
-//
-//    // Tracks the current in-game day
-//    int day;
 
     /**
      * Constructs a SystemTime object and initializes the starting in-game time.
@@ -29,10 +24,6 @@ public class SystemTime {
      */
     public SystemTime() {
 
-//        // Set elapsedRealTime to 8:00 AM at the start of the game
-//        int startHour = 8;
-//        elapsedRealTime = startHour * realSecondsPerInGameHour;
-//        day = 1;
     }
 
 
