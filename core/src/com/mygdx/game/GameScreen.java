@@ -27,6 +27,7 @@ public class GameScreen implements Screen {
     SystemCollision collisionSystem;
     SystemRender renderSystem;
     SystemTime timeSystem;
+    SystemText textSystem;
 
     public GameScreen(final MyGdxGame game) {
         this.game = game;
@@ -46,8 +47,8 @@ public class GameScreen implements Screen {
         updatePositionByVelocitySystem = new SystemUpdatePositionByVelocity();
         collisionSystem = new SystemCollision();
         renderSystem = new SystemRender();
-
         timeSystem = new SystemTime();
+        textSystem = new SystemText();
 
     }
     @Override
@@ -60,14 +61,8 @@ public class GameScreen implements Screen {
             // Switch to PauseMenu screen
             game.setScreen(new PauseMenu(game));
         }
-        timeSystem.update(delta);
+        timeSystem.update();
 
-        // Get current hour and minute from the time system
-        int hour = timeSystem.getCurrentHour();
-        int minute = timeSystem.getCurrentMinute();
-
-        // Draw the digital clock
-        String timeString = String.format("%02d:%02d", hour, minute);
         game.batch.begin();
 
         // Update all the systems every frame
@@ -77,7 +72,7 @@ public class GameScreen implements Screen {
 
         // Update clock in corner to display after updating, so that it appears on top.
         game.batch.begin();
-        game.font.draw(game.batch, timeString, 20, 20);
+        game.font.draw(game.batch, timeSystem.getTimeString(), 20, 20);
         game.batch.end();
 
     }
@@ -122,5 +117,6 @@ public class GameScreen implements Screen {
         updatePositionByVelocitySystem.update(entities);
         collisionSystem.update(entities);
         renderSystem.update(entities);
+        textSystem.update(entities);
     }
 }
