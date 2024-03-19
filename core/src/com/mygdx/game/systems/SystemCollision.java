@@ -35,13 +35,8 @@ public class SystemCollision {
             if (entity.hasComponent(ComponentCollision.class)) {
                 collisionObjects.add(entity);
             }
-            if (entity.hasComponent(ComponentSpecialEntityFlag.class)) {
-                ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class);
-                if (flag.getFlag().equals("Player")) {
-                    player = entity;
-                }
-            }
         }
+        player = entities.get("Player");
 
         // If the entity is the player, check its collision with all objects.
         if (player != null) {
@@ -107,7 +102,7 @@ public class SystemCollision {
         if (leftGap + 0.015 > 0 && rightGap + 0.015 > 0 && topGap + 0.015 > 0 && bottomGap + 0.015 > 0) {
             // If object is interactable then we do an InteractionCheck
             ComponentCollision collisionComponent = (ComponentCollision) collisionObject.getComponent(ComponentCollision.class);
-            if (collisionComponent != null && collisionComponent.getInteractable()) {
+            if (collisionComponent.getInteractable()) {
                 InteractionCheck(collisionObject);
             }
         }
@@ -119,14 +114,12 @@ public class SystemCollision {
      */
     void InteractionCheck(Entity collisionObject) {
         // Check if space is pressed, and if so complete collisionEffect.
-        ComponentInput inputComponent = (ComponentInput) collisionObject.getComponent(ComponentInput.class);
-        if (inputComponent != null && inputComponent.getKeysPressed().contains("SPACE")) {
-            ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect) collisionObject.getComponent(ComponentCollisionEffect.class);
-            if (collisionEffectComponent != null) {
+        if(collisionObject.hasComponent(ComponentInput.class) && collisionObject.hasComponent(ComponentCollisionEffect.class)){
+            ComponentInput inputComponent = (ComponentInput) collisionObject.getComponent(ComponentInput.class);
+            if (inputComponent.getKeysPressed().contains("SPACE")) {
+                ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect) collisionObject.getComponent(ComponentCollisionEffect.class);
                 CollisionEffectProvider collisionEffect = collisionEffectComponent.getCollisionEffectProvider();
-                if (collisionEffect != null) {
-                    collisionEffect.collisionEffect();
-                }
+                collisionEffect.collisionEffect();
             }
         }
     }

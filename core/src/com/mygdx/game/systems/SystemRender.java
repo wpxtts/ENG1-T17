@@ -99,19 +99,6 @@ public class SystemRender {
             }
 
 
-////            System.out.println(entity);
-//            if(entity.hasComponent(ComponentSprite.class)){
-//                visibleObjects.add(entity);
-////                System.out.println("hello");
-//                if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
-//                    String flag = ((ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class)).getFlag();
-//                    if(flag.equals("Player")){
-//
-//
-//                }
-//            }
-
-
         }
         visibleObjects.add(0,entities.get("Map"));
 
@@ -148,19 +135,14 @@ public class SystemRender {
      * @param camera the camera used for rendering
      */
     void DrawSprite(Entity entity, SpriteBatch batch, OrthographicCamera camera) {
-//        object.setWidth(sprite.getSprite().getWidth());
-//        object.setHeight(sprite.getSprite().getHeight());
         //Draws in each entity's Sprite at its coordinates
         ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);
         ComponentVelocity velocity = (ComponentVelocity)  entity.getComponent(ComponentVelocity.class);
         ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
 
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
-        // Test deletion
+
         batch.draw(sprite.getSprite(), (float) (position.getX()), (float) (position.getY()), (float) (position.getWidth()), (float) (position.getHeight()));
-
-
-
 
         // This changes the direction of the player sprite
         if (entity.hasComponent(ComponentSpecialEntityFlag.class)){
