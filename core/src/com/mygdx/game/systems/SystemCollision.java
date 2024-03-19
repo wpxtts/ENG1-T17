@@ -97,7 +97,7 @@ public class SystemCollision {
 
         // To check if object is within interaction distant we do a similar check
         // but with a slightly wider margin.
-        if (leftGap+10 > 0 && rightGap+10 > 0 && topGap+10 > 0 && bottomGap+10 > 0) {
+        if (leftGap+0.015 > 0 && rightGap+0.015 > 0 && topGap+0.015 > 0 && bottomGap+0.015 > 0) {
             // If object is interactable then we do an InteractionCheck
             if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class))
                     .getInteractable()) {
