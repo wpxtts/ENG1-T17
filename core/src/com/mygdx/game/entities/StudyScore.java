@@ -1,11 +1,10 @@
 package com.mygdx.game.entities;
 
-import com.mygdx.game.components.ComponentTracker;
+import com.mygdx.game.components.ComponentValue;
 
 public class StudyScore extends Tracker {
 
-    StudyScore(String text, float x, float y, float scale) {
-        super(text, x, y, scale);
-        this.addComponent(new ComponentTracker(100, 30));
+    StudyScore(int value) {
+        super(value);
     }
 }

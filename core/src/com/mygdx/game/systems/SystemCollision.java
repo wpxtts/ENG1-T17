@@ -2,6 +2,7 @@ package com.mygdx.game.systems;
 
 import com.mygdx.game.components.*;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.Tracker;
 import com.mygdx.game.serviceProviders.CollisionEffectProvider;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class SystemCollision {
         // If the entity is the player, check its collision with all objects.
         if (player != null) {
             for (Entity collisionObject : collisionObjects) {
-                AABBCollision(collisionObject, player);
+                AABBCollision(collisionObject, player, entities);
             }
         }
     }
@@ -51,7 +52,7 @@ public class SystemCollision {
      * @param collisionObject The entity representing the collision object
      * @param playerEntity The entity representing the player
      */
-    void AABBCollision(Entity collisionObject, Entity playerEntity) {
+    void AABBCollision(Entity collisionObject, Entity playerEntity, HashMap<String,Entity>entities) {
 
         ComponentPosition collisionPosition = (ComponentPosition) collisionObject.getComponent(ComponentPosition.class);
         ComponentPosition playerPosition = (ComponentPosition) playerEntity.getComponent(ComponentPosition.class);
@@ -103,7 +104,7 @@ public class SystemCollision {
             // If object is interactable then we do an InteractionCheck
             ComponentCollision collisionComponent = (ComponentCollision) collisionObject.getComponent(ComponentCollision.class);
             if (collisionComponent.getInteractable()) {
-                InteractionCheck(collisionObject);
+                InteractionCheck(entities,collisionObject);
             }
         }
     }
@@ -112,14 +113,14 @@ public class SystemCollision {
      * Checks if the player entity is interacting with the given collision object entity.
      * @param collisionObject The entity representing the collision object
      */
-    void InteractionCheck(Entity collisionObject) {
+    void InteractionCheck(HashMap<String,Entity> entities, Entity collisionObject) {
         // Check if space is pressed, and if so complete collisionEffect.
         if(collisionObject.hasComponent(ComponentInput.class) && collisionObject.hasComponent(ComponentCollisionEffect.class)){
             ComponentInput inputComponent = (ComponentInput) collisionObject.getComponent(ComponentInput.class);
             if (inputComponent.getKeysPressed().contains("SPACE")) {
                 ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect) collisionObject.getComponent(ComponentCollisionEffect.class);
                 CollisionEffectProvider collisionEffect = collisionEffectComponent.getCollisionEffectProvider();
-                collisionEffect.collisionEffect();
+                collisionEffect.collisionEffect((Tracker)entities.get("EnergyTracker"));
             }
         }
     }

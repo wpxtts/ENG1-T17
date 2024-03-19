@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import com.mygdx.game.components.ComponentTime;
+import com.mygdx.game.components.ComponentValue;
 import com.mygdx.game.entities.*;
 import com.mygdx.game.systems.*;
 
@@ -48,6 +49,8 @@ public class GameScreen implements Screen {
         entities.put("Map",new Map(0,0, 2, 2)); //currently the map's sprite size is 3000 x 1896
 
         entities.put("TimeTracker",new TimeTracker());
+
+        entities.put("EnergyTracker",new Tracker(100));
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
@@ -87,9 +90,11 @@ public class GameScreen implements Screen {
 
         // Get time
         ComponentTime time = (ComponentTime)entities.get("TimeTracker").getComponent(ComponentTime.class);
-
+        String output = "Time: "+time.getTimeString();
+        ComponentValue energy = (ComponentValue) (entities.get("EnergyTracker").getComponent(ComponentValue.class));
+        output += " | Energy: "+Integer.toString(energy.getValue());
         // Draw the clock
-        game.font.draw(game.hudBatch, time.getTimeString(), 20, 30);
+        game.font.draw(game.hudBatch, output, 20, 30);
         game.hudBatch.end();
 
     }

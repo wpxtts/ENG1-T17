@@ -6,8 +6,8 @@ import com.mygdx.game.serviceProviders.TextEffectProvider;
 import java.util.HashMap;
 
 public class Tracker extends Entity {
-    public Tracker(String text, float x, float y, float scale) {
+    public Tracker(int value) {
         this.components = new HashMap<>();
-        this.addComponent(new ComponentText(new TextEffectProvider(),text, x, y, scale));
+        this.addComponent(new ComponentValue(value));
     }
 }

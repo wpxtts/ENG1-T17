@@ -1,5 +1,8 @@
 package com.mygdx.game.serviceProviders;
 
+import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.Tracker;
+
 import java.util.Random;
 
 /**
@@ -16,7 +19,7 @@ public class CollisionEffectProvider {
      * Provides a generic collision effect.
      * This implementation generates a random integer between 0 and 99 and prints it.
      */
-    public void collisionEffect() {
+    public void collisionEffect(Tracker energyTracker) {
         Random rand = new Random();
         System.out.println(rand.nextInt(100));
     }
