@@ -39,9 +39,12 @@ public class MyGdxGame extends Game {
 	/**
 	 * Clear up screen from leftover sprites and text
 	 */
+	@Override
 	public void dispose() {
+		System.out.println("MyGdxGame.java dispose called");
 		batch.dispose();
 		font.dispose();
+		shapeRenderer.dispose();
 	}
 
 	/**

@@ -20,16 +20,23 @@ import java.util.Objects;
  * System which renders all sprites.
  */
 public class SystemRender {
+    Texture playerLeft;
+    Texture playerRegular;
+    Texture playerRight;
+    public SystemRender() {
+        playerRight = new Texture(Gdx.files.internal("player_sprite_right.png"));
+        playerLeft = new Texture(Gdx.files.internal("player_sprite_left.png"));
+        playerRegular = new Texture(Gdx.files.internal("player_sprite_still.png"));
 
-    public SystemRender() {}
+    }
 
     /**
      * Render all entities with sprites.
      * @param entities all entities
      */
-    public void update(HashMap<String, Entity> entities) {
+    public void update(HashMap<String, Entity> entities,ShapeRenderer shapeRenderer,SpriteBatch batch) {
         //Initialises Spritebatch for drawing in sprites
-        SpriteBatch batch = new SpriteBatch();
+//        SpriteBatch batch = new SpriteBatch();
 
         // Initialises a camera for this frame.
         OrthographicCamera camera = new OrthographicCamera();
@@ -109,7 +116,7 @@ public class SystemRender {
         visibleObjects.add(0,entities.get("Map"));
 
         // Defines the shape renderer to draw shapes.
-        ShapeRenderer shapeRenderer = new ShapeRenderer();
+//        ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
@@ -125,8 +132,8 @@ public class SystemRender {
      * Dispose all assets used in rendering.
      * @param entities all entities
      */
-    public void dispose(ArrayList<Entity> entities) {
-        for (Entity entity : entities) {
+    public void dispose(HashMap<String,Entity> entities) {
+        for (Entity entity : entities.values()) {
             if (entity.hasComponent(ComponentSprite.class)) {
                 ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
                 sprite.getSprite().dispose();
@@ -140,7 +147,7 @@ public class SystemRender {
      * @param batch the sprite batch to use for drawing
      * @param camera the camera used for rendering
      */
-    static void DrawSprite(Entity entity, SpriteBatch batch, OrthographicCamera camera) {
+    void DrawSprite(Entity entity, SpriteBatch batch, OrthographicCamera camera) {
 //        object.setWidth(sprite.getSprite().getWidth());
 //        object.setHeight(sprite.getSprite().getHeight());
         //Draws in each entity's Sprite at its coordinates
@@ -149,10 +156,13 @@ public class SystemRender {
         ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
 
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
-        batch.begin();
+        // Test deletion
         batch.draw(sprite.getSprite(), (float) (position.getX()), (float) (position.getY()), (float) (position.getWidth()), (float) (position.getHeight()));
-        batch.end();
 
+
+
+
+        // This changes the direction of the player sprite
         if (entity.hasComponent(ComponentSpecialEntityFlag.class)){
 
             ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag)  entity.getComponent(ComponentSpecialEntityFlag.class);
@@ -160,17 +170,17 @@ public class SystemRender {
                 //Changes player's sprite when moving or still (based on velocity)
                 if (velocity.getXSpeed() > 0) {
                     //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                    sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_right.png")));
+                    sprite.setSprite(playerRight);
 
                 }
                 if (velocity.getXSpeed() < 0) {
                     //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                    sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_left.png")));
+                    sprite.setSprite(playerLeft);
 
                 }
                 if (velocity.getXSpeed() == 0) {
                     //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                    sprite.setSprite(new Texture(Gdx.files.internal("player_sprite_still.png")));
+                    sprite.setSprite(playerRegular);
 
                 }
             }

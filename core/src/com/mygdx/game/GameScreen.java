@@ -113,10 +113,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        font.dispose();
-        img.dispose();
-//        shapeRenderer.dispose();
+        System.out.println("GameScreen dispose called");
+        game.batch.dispose();
+        game.font.dispose();
+//        img.dispose();
+        renderSystem.dispose(entities);
+        game.shapeRenderer.dispose();
     }
 
     /**
@@ -127,7 +129,7 @@ public class GameScreen implements Screen {
         updateVelocityByInputSystem.update(entities);
         updatePositionByVelocitySystem.update(entities);
         collisionSystem.update(entities);
-        renderSystem.update(entities);
+        renderSystem.update(entities,game.shapeRenderer,game.batch);
         textSystem.update(entities);
         timeSystem.update(entities);
     }
