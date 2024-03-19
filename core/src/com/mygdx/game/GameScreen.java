@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -72,7 +73,15 @@ public class GameScreen implements Screen {
 
         // Update clock in corner to display after updating, so that it appears on top.
         game.batch.begin();
-        game.font.draw(game.batch, timeSystem.getTimeString(), 20, 20);
+        
+        // Set font color to black
+        game.font.setColor(Color.BLACK);
+
+        // Set font scale
+        game.font.getData().setScale(2);
+
+        // Draw the clock
+        game.font.draw(game.batch, timeSystem.getTimeString(), 20, 30);
         game.batch.end();
 
     }
