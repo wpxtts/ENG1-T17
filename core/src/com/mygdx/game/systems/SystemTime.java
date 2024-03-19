@@ -1,6 +1,9 @@
 package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.entities.Entity;
+
+import java.util.ArrayList;
 
 /**
  * SystemTime class manages the in-game time simulation.
@@ -32,9 +35,20 @@ public class SystemTime {
 
 
     /**
-     * Updates the in-game time based on the elapsed real time.
+     * Manages all time based updates, including updating the in game time and
+     * adjusting the trackers.
      */
-    public void update() {
+    public void update(ArrayList<Entity> entities) {
+
+        // Acquire all entities with the tracker component
+        ArrayList<Entity> trackerObjects = new ArrayList<>();
+
+        /*for (Entity entity : entities) {
+            if (entity.hasComponent(ComponentTracker.class)) {
+                trackerObjects.add(entity);
+            }
+        }*/
+
         // Increment the elapsed real time
         // Delta time is the time elapsed since the last frame
         float delta = Gdx.graphics.getDeltaTime();
@@ -47,6 +61,7 @@ public class SystemTime {
 
             hour++; // Increment hour
 
+            // Check if a day has passed and increment day
             if (hour == 24) {
                 hour = 0;
                 day++;
@@ -54,12 +69,8 @@ public class SystemTime {
         }
     }
 
-    public int getDay() {return day;}
-
-    public int getHour() {return hour;}
-
     /**
-     * Retrieves the current in-game minute.
+     * Calculates the current in-game minute.
      * @return The current in-game minute
      */
     public int getCurrentMinute() {
@@ -73,7 +84,7 @@ public class SystemTime {
         // Calculate current minute
         int minute = getCurrentMinute();
 
-        // Draw the digital clock
+        // Write and return the digital clock string
         return String.format("Day %2d - %02d:%02d", day, hour, minute);
     }
 }
