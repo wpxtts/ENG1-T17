@@ -66,7 +66,7 @@ public class CreditScreen implements Screen{
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.toMainMenu();
+                parent.toMainScreen();
             }
         });
 

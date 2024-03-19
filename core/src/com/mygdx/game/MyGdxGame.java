@@ -61,7 +61,7 @@ public class MyGdxGame extends Game {
 	/**
 	 * Change screen to MenuScreen
 	 */
-	public void toMainMenu(){
+	public void toMainScreen(){
 		this.setScreen(new MenuScreen(this));
 	}
 
