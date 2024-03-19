@@ -14,6 +14,8 @@ public class SystemTime {
 
     // Tracks the current in-game hour
     private int hour;
+
+    // Tracks the current in-game day
     int day;
 
     /**

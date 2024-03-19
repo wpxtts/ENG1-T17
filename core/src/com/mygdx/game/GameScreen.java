@@ -73,7 +73,7 @@ public class GameScreen implements Screen {
 
         // Update clock in corner to display after updating, so that it appears on top.
         game.batch.begin();
-        
+
         // Set font color to black
         game.font.setColor(Color.BLACK);
 
