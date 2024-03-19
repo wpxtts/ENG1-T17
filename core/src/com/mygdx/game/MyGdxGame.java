@@ -68,4 +68,8 @@ public class MyGdxGame extends Game {
 		this.setScreen(new TutorialScreen(this));
 	}
 
+	public void toScoreScreen(){
+		this.setScreen(new ScoreScreen(this));
+	}
+
 }

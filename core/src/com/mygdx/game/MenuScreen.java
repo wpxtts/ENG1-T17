@@ -159,7 +159,7 @@ public class MenuScreen implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Credits");
-                parent.toCreditScreen();
+                parent.toScoreScreen();
             }
         });
 

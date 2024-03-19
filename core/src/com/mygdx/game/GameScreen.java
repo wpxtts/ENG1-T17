@@ -36,10 +36,10 @@ public class GameScreen implements Screen {
         entities.add(new Map(0,0, 2, 2)); //currently the map's sprite size is 3000 x 1896
         entities.add(new Player());
 
-        entities.add(new Library(1.3, 1.4,0.3, 0.3));
-        entities.add(new DuckPond(0.75,0.4, 0.25,0.3));
+        entities.add(new Library(1.35, 1.4,0.4, 0.4));
+        entities.add(new DuckPond(0.75,0.4, 0.35,0.25));
         entities.add(new Piazza(1.3,0.6, 0.2,0.4));
-        entities.add(new Accommodation(0.6,1.3, 0.2,0.2));
+        entities.add(new Accommodation(0.5,1.3, 0.25,0.25));
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
