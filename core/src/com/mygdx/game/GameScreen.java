@@ -14,6 +14,7 @@ import com.mygdx.game.entities.*;
 import com.mygdx.game.systems.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameScreen implements Screen {
     final MyGdxGame game;
@@ -21,7 +22,7 @@ public class GameScreen implements Screen {
     BitmapFont font;
     Texture img;
     Stage stage;
-    ArrayList<Entity> entities;
+    HashMap<String, Entity> entities;
     SystemUpdateInput updateInputSystem;
     SystemUpdateVelocityByInput updateVelocityByInputSystem;
     SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
@@ -32,16 +33,18 @@ public class GameScreen implements Screen {
 
     public GameScreen(final MyGdxGame game) {
         this.game = game;
-        entities = new ArrayList<>();
+        entities = new HashMap<>();
 
 
-        entities.add(new Map(0,0, 2, 2)); //currently the map's sprite size is 3000 x 1896
-        entities.add(new Player());
 
-        entities.add(new Library(1.35, 1.4,0.4, 0.4));
-        entities.add(new DuckPond(0.75,0.4, 0.35,0.25));
-        entities.add(new Piazza(1.3,0.6, 0.2,0.4));
-        entities.add(new Accommodation(0.5,1.2, 0.2,0.2));
+        entities.put("Player",new Player());
+
+        entities.put("Library",new Library(1.35, 1.4,0.4, 0.4));
+        entities.put("DuckPond",new DuckPond(0.75,0.4, 0.35,0.25));
+        entities.put("Piazza",new Piazza(1.3,0.6, 0.2,0.4));
+        entities.put("Accommodation",new Accommodation(0.5,1.2, 0.2,0.2));
+
+        entities.put("Map",new Map(0,0, 2, 2)); //currently the map's sprite size is 3000 x 1896
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();

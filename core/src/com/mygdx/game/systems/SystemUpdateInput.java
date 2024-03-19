@@ -6,6 +6,7 @@ import com.mygdx.game.components.ComponentInput;
 import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * SystemUpdateInput class updates Input components to reflect the current input state.
@@ -22,9 +23,9 @@ public class SystemUpdateInput {
      * Updates Input components of entities to reflect the current input state.
      * @param entities The list of entities to update
      */
-    public void update(ArrayList<Entity> entities) {
+    public void update(HashMap<String, Entity> entities) {
         // Loop through entities to find those with the Input component.
-        for(Entity entity : entities){
+        for(Entity entity : entities.values()){
             if(entity.hasComponent(ComponentInput.class)){
                 ComponentInput inputComponent = ((ComponentInput)entity.getComponent(ComponentInput.class));
                 ArrayList<String> oldKeysPressed = inputComponent.getKeysPressed();

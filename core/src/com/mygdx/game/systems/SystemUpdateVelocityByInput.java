@@ -5,6 +5,7 @@ import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * SystemUpdateVelocityByInput class updates the velocity of entities based on user input.
@@ -22,9 +23,9 @@ public class SystemUpdateVelocityByInput {
      * Update velocities of entities based on user input.
      * @param entities The list of entities to update
      */
-    public void update(ArrayList<Entity> entities) {
+    public void update(HashMap<String, Entity> entities) {
         // Loop through all entities to find those with Input and Velocity components.
-        for(Entity entity : entities){
+        for(Entity entity : entities.values()){
             if(entity.hasComponent(ComponentInput.class) && entity.hasComponent(ComponentVelocity.class)){
                 ComponentInput input = (ComponentInput) entity.getComponent(ComponentInput.class);
                 ComponentVelocity velocity = (ComponentVelocity) entity.getComponent(ComponentVelocity.class);

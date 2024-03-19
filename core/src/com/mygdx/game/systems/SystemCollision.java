@@ -5,6 +5,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.serviceProviders.CollisionEffectProvider;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * SystemCollision is responsible for managing collision detection and resolution in the game.
@@ -20,7 +21,7 @@ public class SystemCollision {
      * Updates the collision system with the current state of the game entities.
      * @param entities The list of entities in the game
      */
-    public void update(ArrayList<Entity> entities) {
+    public void update(HashMap<String, Entity> entities) {
 
         // Create empty collisionObjects list to be filled
         // with all entities that could be collided with.
@@ -30,7 +31,7 @@ public class SystemCollision {
         Entity player = null;
 
         // Finds collision object entities and player entity.
-        for (Entity entity : entities) {
+        for (Entity entity : entities.values()) {
             if (entity.hasComponent(ComponentCollision.class)) {
                 collisionObjects.add(entity);
             }

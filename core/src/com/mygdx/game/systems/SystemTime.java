@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * SystemTime class manages the in-game time simulation.
@@ -38,7 +39,7 @@ public class SystemTime {
      * Manages all time based updates, including updating the in game time and
      * adjusting the trackers.
      */
-    public void update(ArrayList<Entity> entities) {
+    public void update(HashMap<String, Entity> entities) {
 
         // Acquire all entities with the tracker component
         ArrayList<Entity> trackerObjects = new ArrayList<>();

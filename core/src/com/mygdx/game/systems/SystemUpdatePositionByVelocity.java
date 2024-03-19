@@ -7,6 +7,7 @@ import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * SystemUpdatePositionByVelocity class updates the position of entities based on their velocity,
@@ -24,12 +25,12 @@ public class SystemUpdatePositionByVelocity {
      * Updates the position of all entities based on their velocity.
      * @param entities The list of entities to update
      */
-    public void update(ArrayList<Entity> entities){
+    public void update(HashMap<String,Entity> entities){
         float mapWidth = 1;
         float mapHeight = 1;
 
         // Get map height and width
-        for(Entity entity : entities){
+        for(Entity entity : entities.values()){
             if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
                 ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class);
                 if(flag.getFlag().equals("Map")){
@@ -41,7 +42,7 @@ public class SystemUpdatePositionByVelocity {
         }
 
         // Update positions based on velocity
-        for(Entity entity : entities){
+        for(Entity entity : entities.values()){
             if(entity.hasComponent(ComponentPosition.class) && entity.hasComponent(ComponentVelocity.class)){
                 ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                 ComponentVelocity velocity = (ComponentVelocity) entity.getComponent(ComponentVelocity.class);

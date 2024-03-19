@@ -13,6 +13,8 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.Map;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * System which renders all sprites.
@@ -25,7 +27,7 @@ public class SystemRender {
      * Render all entities with sprites.
      * @param entities all entities
      */
-    public void update(ArrayList<Entity> entities) {
+    public void update(HashMap<String, Entity> entities) {
         //Initialises Spritebatch for drawing in sprites
         SpriteBatch batch = new SpriteBatch();
 
@@ -40,7 +42,7 @@ public class SystemRender {
         float mapWidth = 1;
         float mapHeight = 1;
         // Finds the map
-        for(Entity entity: entities){
+        for(Entity entity: entities.values()){
             if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
                 String flag = ((ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class)).getFlag();
                 if(flag.equals("Map")){
@@ -51,47 +53,60 @@ public class SystemRender {
                 }
             }
         }
-
+//        System.out.println(entities);
         // Finds all objects to be rendered.
-        for (Entity entity : entities) {
-            if(entity.hasComponent(ComponentSprite.class)){
-                visibleObjects.add(entity);
-                if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
-                    String flag = ((ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class)).getFlag();
-                    if(flag.equals("Player")){
-                        // Updates the camera's position to be over the centre of the player
-                        ComponentPosition player = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                        camera.position.set((float) (player.getX()+player.getWidth()/2), (float) (player.getY()+player.getHeight()/2), 0);
-                        camera.update();
-                        float targetX = (float) (player.getX()+player.getWidth()/2);
-                        float targetY = (float) (player.getY()+player.getHeight()/2);
+        for (String name : entities.keySet()) {
+            Entity currentEntity = entities.get(name);
+            if(currentEntity.hasComponent(ComponentSprite.class)){
+                if(name.equals("Player")) {
+                    // Updates the camera's position to be over the centre of the player
+                    ComponentPosition player = (ComponentPosition) currentEntity.getComponent(ComponentPosition.class);
+                    camera.position.set((float) (player.getX()+player.getWidth()/2), (float) (player.getY()+player.getHeight()/2), 0);
+                    camera.update();
+                    float targetX = (float) (player.getX()+player.getWidth()/2);
+                    float targetY = (float) (player.getY()+player.getHeight()/2);
 
-                        // Check if player is past the center of the window
-                        if ((float) (player.getX()+player.getWidth()/2) < (Gdx.graphics.getWidth() / 2f)) {
-                            // If the camera can follow without leaving the bounds of the game world, set the player as center
-                            targetX = Gdx.graphics.getWidth() / 2f;
-                        }
-                        if ((float) (player.getX()+player.getWidth()/2) > ((mapWidth-0.5)*Gdx.graphics.getWidth())){
-                            targetX = (float) (mapWidth-0.5)*Gdx.graphics.getWidth();
-                        }
-                        if ((float) (player.getY()+player.getHeight()/2) < (Gdx.graphics.getHeight() / 2f)) {
-                            targetY = Gdx.graphics.getHeight() / 2f;
-                        }
-                        if ((float) (player.getY()+player.getHeight()/2) > ((mapHeight-0.5)*Gdx.graphics.getHeight())){
-                            targetY = (float) (mapHeight-0.5)*Gdx.graphics.getHeight();
-                        }
-
-                        // Interpolate camera position for smooth movement
-                        camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
-                        camera.position.set(targetX, targetY, 0);
-                        camera.update();
+                    // Check if player is past the center of the window
+                    if ((float) (player.getX()+player.getWidth()/2) < (Gdx.graphics.getWidth() / 2f)) {
+                        // If the camera can follow without leaving the bounds of the game world, set the player as center
+                        targetX = Gdx.graphics.getWidth() / 2f;
+                    }
+                    if ((float) (player.getX()+player.getWidth()/2) > ((mapWidth-0.5)*Gdx.graphics.getWidth())){
+                        targetX = (float) (mapWidth-0.5)*Gdx.graphics.getWidth();
+                    }
+                    if ((float) (player.getY()+player.getHeight()/2) < (Gdx.graphics.getHeight() / 2f)) {
+                        targetY = Gdx.graphics.getHeight() / 2f;
+                    }
+                    if ((float) (player.getY()+player.getHeight()/2) > ((mapHeight-0.5)*Gdx.graphics.getHeight())){
+                        targetY = (float) (mapHeight-0.5)*Gdx.graphics.getHeight();
                     }
 
+                    // Interpolate camera position for smooth movement
+                    camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
+                    camera.position.set(targetX, targetY, 0);
+                    camera.update();
+                }
+                if(!name.equals("Map")){
+                    visibleObjects.add(currentEntity);
                 }
             }
 
 
+////            System.out.println(entity);
+//            if(entity.hasComponent(ComponentSprite.class)){
+//                visibleObjects.add(entity);
+////                System.out.println("hello");
+//                if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
+//                    String flag = ((ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class)).getFlag();
+//                    if(flag.equals("Player")){
+//
+//
+//                }
+//            }
+
+
         }
+        visibleObjects.add(0,entities.get("Map"));
 
         // Defines the shape renderer to draw shapes.
         ShapeRenderer shapeRenderer = new ShapeRenderer();

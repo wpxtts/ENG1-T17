@@ -5,16 +5,17 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.serviceProviders.TextEffectProvider;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SystemText {
 
     public SystemText() {}
 
-    public void update(ArrayList<Entity> entities) {
+    public void update(HashMap<String,Entity> entities) {
 
         ArrayList<Entity> textObjects = new ArrayList<Entity>();
 
-        for (Entity entity : entities) {
+        for (Entity entity : entities.values()) {
             if (entity.hasComponent(ComponentText.class)) {
                 textObjects.add(entity);
             }
