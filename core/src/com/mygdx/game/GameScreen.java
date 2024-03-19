@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import com.mygdx.game.components.ComponentTime;
 import com.mygdx.game.entities.*;
 import com.mygdx.game.systems.*;
 
@@ -45,6 +46,8 @@ public class GameScreen implements Screen {
         entities.put("Accommodation",new Accommodation(0.5,1.2, 0.2,0.2));
 
         entities.put("Map",new Map(0,0, 2, 2)); //currently the map's sprite size is 3000 x 1896
+
+        entities.put("TimeTracker",new TimeTracker());
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
@@ -82,8 +85,11 @@ public class GameScreen implements Screen {
         // Set font scale
         game.font.getData().setScale(2);
 
+        // Get time
+        ComponentTime time = (ComponentTime)entities.get("TimeTracker").getComponent(ComponentTime.class);
+
         // Draw the clock
-        game.font.draw(game.batch, timeSystem.getTimeString(), 20, 30);
+        game.font.draw(game.batch, time.getTimeString(), 20, 30);
         game.batch.end();
 
     }

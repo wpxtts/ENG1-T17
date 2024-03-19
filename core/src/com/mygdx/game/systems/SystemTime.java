@@ -1,6 +1,7 @@
 package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.components.ComponentTime;
 import com.mygdx.game.entities.Entity;
 
 import java.util.ArrayList;
@@ -11,16 +12,16 @@ import java.util.HashMap;
  */
 public class SystemTime {
     // Value representing the real time equivalent of one in-game hour
-    private static final float realSecondsPerInGameHour = 8.57f;
+    private static final float realSecondsPerInGameMinute = 0.25f;
 
     // Tracks the elapsed real time
-    private float elapsedRealTime;
+    private static final int wakeUpHour = 8;
 
-    // Tracks the current in-game hour
-    private int hour;
-
-    // Tracks the current in-game day
-    int day;
+//    // Tracks the current in-game hour
+//    private int hour;
+//
+//    // Tracks the current in-game day
+//    int day;
 
     /**
      * Constructs a SystemTime object and initializes the starting in-game time.
@@ -28,10 +29,10 @@ public class SystemTime {
      */
     public SystemTime() {
 
-        // Set elapsedRealTime to 8:00 AM at the start of the game
-        int startHour = 8;
-        elapsedRealTime = startHour * realSecondsPerInGameHour;
-        day = 1;
+//        // Set elapsedRealTime to 8:00 AM at the start of the game
+//        int startHour = 8;
+//        elapsedRealTime = startHour * realSecondsPerInGameHour;
+//        day = 1;
     }
 
 
@@ -42,50 +43,64 @@ public class SystemTime {
     public void update(HashMap<String, Entity> entities) {
 
         // Acquire all entities with the tracker component
-        ArrayList<Entity> trackerObjects = new ArrayList<>();
+        ArrayList<Entity> timeObjects = new ArrayList<>();
 
-        /*for (Entity entity : entities) {
-            if (entity.hasComponent(ComponentTracker.class)) {
-                trackerObjects.add(entity);
-            }
-        }*/
-
-        // Increment the elapsed real time
-        // Delta time is the time elapsed since the last frame
-        float delta = Gdx.graphics.getDeltaTime();
-        elapsedRealTime += delta;
-
-        // Check if an "hour" has passed
-        if (elapsedRealTime >= realSecondsPerInGameHour) {
-            // Reset elapsed time for the next "hour"
-            elapsedRealTime -= realSecondsPerInGameHour;
-
-            hour++; // Increment hour
-
-            // Check if a day has passed and increment day
-            if (hour == 24) {
-                hour = 0;
-                day++;
+        for (Entity entity : entities.values()) {
+            if (entity.hasComponent(ComponentTime.class)) {
+                ComponentTime time = (ComponentTime) entity.getComponent(ComponentTime.class);
+                time.setLastUpdated(time.getLastUpdated()+Gdx.graphics.getDeltaTime());
+                if(time.getLastUpdated()>realSecondsPerInGameMinute){
+                    time.setLastUpdated(0);
+                    time.setMinute(time.getMinute()+1);
+                    if(time.getMinute()>=60){
+                        time.setHour(time.getHour()+1);
+                        time.setMinute(0);
+                        if(time.getHour()>=24){
+                            // NEXT DAY
+                            time.setDay(time.getDay()+1);
+                            time.setHour(wakeUpHour);
+                        }
+                    }
+                }
             }
         }
+
+//        // Increment the elapsed real time
+//        // Delta time is the time elapsed since the last frame
+//        float delta = Gdx.graphics.getDeltaTime();
+//        elapsedRealTime += delta;
+//
+//        // Check if an "hour" has passed
+//        if (elapsedRealTime >= realSecondsPerInGameHour) {
+//            // Reset elapsed time for the next "hour"
+//            elapsedRealTime -= realSecondsPerInGameHour;
+//
+//            hour++; // Increment hour
+//
+//            // Check if a day has passed and increment day
+//            if (hour == 24) {
+//                hour = 0;
+//                day++;
+//            }
+//        }
     }
 
     /**
      * Calculates the current in-game minute.
      * @return The current in-game minute
      */
-    public int getCurrentMinute() {
-        // Calculate the current minute based on elapsed real time
-        float remainder = elapsedRealTime % realSecondsPerInGameHour;
-        float minute = remainder / realSecondsPerInGameHour * 60;
-        return (int) minute;
-    }
-
-    public String getTimeString() {
-        // Calculate current minute
-        int minute = getCurrentMinute();
-
-        // Write and return the digital clock string
-        return String.format("Day %2d - %02d:%02d", day, hour, minute);
-    }
+//    public int getCurrentMinute() {
+//        // Calculate the current minute based on elapsed real time
+//        float remainder = elapsedRealTime % realSecondsPerInGameHour;
+//        float minute = remainder / realSecondsPerInGameHour * 60;
+//        return (int) minute;
+//    }
+//
+//    public String getTimeString() {
+////        // Calculate current minute
+////        int minute = getCurrentMinute();
+//
+//        // Write and return the digital clock string
+//        return String.format("Day %2d - %02d:%02d", day, hour, minute);
+//    }
 }
