@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import com.mygdx.game.components.Component;
 import com.mygdx.game.components.ComponentTime;
 import com.mygdx.game.components.ComponentValue;
 import com.mygdx.game.entities.*;
@@ -51,6 +52,9 @@ public class GameScreen implements Screen {
         entities.put("TimeTracker",new TimeTracker());
 
         entities.put("EnergyTracker",new Tracker(100));
+        entities.put("StudyTracker", new Tracker(0));
+        entities.put("EatTracker", new Tracker(0));
+        entities.put("FunTracker", new Tracker(0));
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
@@ -86,13 +90,19 @@ public class GameScreen implements Screen {
         game.font.setColor(Color.BLACK);
 
         // Set font scale
-        game.font.getData().setScale(2);
+        game.font.getData().setScale(1);
 
         // Get time
         ComponentTime time = (ComponentTime)entities.get("TimeTracker").getComponent(ComponentTime.class);
         String output = "Time: "+time.getTimeString();
         ComponentValue energy = (ComponentValue) (entities.get("EnergyTracker").getComponent(ComponentValue.class));
         output += " | Energy: "+Integer.toString(energy.getValue());
+        ComponentValue study = (ComponentValue) (entities.get("StudyTracker").getComponent(ComponentValue.class));
+        output += " |Study:"+Integer.toString(study.getValue());
+        ComponentValue eat = (ComponentValue) (entities.get("EatTracker").getComponent(ComponentValue.class));
+        output += " |Eat:"+Integer.toString(eat.getValue());
+        ComponentValue fun = (ComponentValue) (entities.get("FunTracker").getComponent(ComponentValue.class));
+        output += " |Fun:"+Integer.toString(fun.getValue());
         // Draw the clock
         game.font.draw(game.hudBatch, output, 20, 30);
         game.hudBatch.end();

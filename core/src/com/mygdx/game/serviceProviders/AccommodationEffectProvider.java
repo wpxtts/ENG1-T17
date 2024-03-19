@@ -1,7 +1,10 @@
 package com.mygdx.game.serviceProviders;
 
 import com.mygdx.game.components.ComponentValue;
+import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.Tracker;
+
+import java.util.HashMap;
 
 /**
  * AccommodationEffectProvider provides collision effects specific to accommodation entities.
@@ -16,8 +19,7 @@ public class AccommodationEffectProvider extends CollisionEffectProvider {
     /**
      * Provides the collision effect for accommodation entities.
      */
-    public void collisionEffect(Tracker energyTracker) {
-        ComponentValue energy = (ComponentValue) energyTracker.getComponent(ComponentValue.class);
-        System.out.println("Accommodation");
+    public void collisionEffect(HashMap<String, Entity> entities) {
+        ChangeDay.changeDay(entities);
     }
 }

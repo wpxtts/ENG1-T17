@@ -120,7 +120,7 @@ public class SystemCollision {
             if (inputComponent.getKeysPressed().contains("SPACE")) {
                 ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect) collisionObject.getComponent(ComponentCollisionEffect.class);
                 CollisionEffectProvider collisionEffect = collisionEffectComponent.getCollisionEffectProvider();
-                collisionEffect.collisionEffect((Tracker)entities.get("EnergyTracker"));
+                collisionEffect.collisionEffect(entities);
             }
         }
     }
