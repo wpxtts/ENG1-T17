@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -27,6 +28,9 @@ public class GameScreen implements Screen {
     SystemCollision collisionSystem;
     SystemRender renderSystem;
     SystemTime timeSystem;
+    boolean isFadingOut = false;
+    float fadeOutDuration = 1.0f; // Adjust duration as needed
+    float fadeOutTimer = 0.0f;
 
     public GameScreen(final MyGdxGame game) {
         this.game = game;
@@ -55,34 +59,68 @@ public class GameScreen implements Screen {
         // Turn the screen black.
         ScreenUtils.clear(0, 0, 0, 1);
 
-        // Check for escape key input to open the pause menu
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            // Switch to PauseMenu screen
-            game.setScreen(new PauseMenu(game));
+        if (!isFadingOut) {
+            // Check for escape key input to open the pause menu
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                // Switch to PauseMenu screen
+                game.setScreen(new PauseMenu(game));
+            }
+
+            timeSystem.update(delta);
+
+            // Get current hour and minute from the time system
+            int hour = timeSystem.getCurrentHour();
+            int minute = timeSystem.getCurrentMinute();
+
+            // Draw the digital clock
+            String timeString = String.format("%02d:%02d", hour, minute);
+            game.batch.begin();
+
+            // Update all the systems every frame
+            UpdateFrame();
+
+            game.batch.end();
+
+            // Update clock in corner to display after updating, so that it appears on top.
+            game.batch.begin();
+            game.font.draw(game.batch, timeString, 20, 20);
+            game.batch.end();
+
+            // Check if it's 10 PM and trigger fade-out
+            if (hour == 22 && minute == 0) {
+                isFadingOut = true;
+            }
+        } else {
+            // Fade out effect
+            fadeOutTimer += delta;
+            float alpha = Math.min(1.0f, fadeOutTimer / fadeOutDuration);
+
+            // Use ShapeRenderer to draw a semi-transparent black rectangle over the screen
+            game.shapeRenderer.setColor(0, 0, 0, alpha);
+            game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            game.shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            game.shapeRenderer.end();
+
+            // If fade-out is complete, load new day
+            if (fadeOutTimer >= fadeOutDuration) {
+                LoadNewDay();
+            }
         }
-        timeSystem.update(delta);
-
-        // Get current hour and minute from the time system
-        int hour = timeSystem.getCurrentHour();
-        int minute = timeSystem.getCurrentMinute();
-
-        // Draw the digital clock
-        String timeString = String.format("%02d:%02d", hour, minute);
-        game.batch.begin();
-
-        // Update all the systems every frame
-        UpdateFrame();
-
-        game.batch.end();
-
-        // Update clock in corner to display after updating, so that it appears on top.
-        game.batch.begin();
-        game.font.draw(game.batch, timeString, 20, 20);
-        game.batch.end();
-
     }
 
 
+
+
+
+    void LoadNewDay() {
+        // Reset fade-out variables
+        isFadingOut = false;
+        fadeOutTimer = 0.0f;
+
+        // Implement logic to load new day
+        // For example, reset entities, update time, etc.
+        // You may want to create a method to handle this.
+    }
 
     @Override
     public void resize(int width, int height) {

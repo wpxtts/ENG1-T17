@@ -9,20 +9,25 @@ import com.mygdx.game.entities.Entity;
 import java.util.ArrayList;
 
 /**
- * System to update any entities position by their velocity (if
- * they have a position and velocity).
+ * SystemUpdatePositionByVelocity class updates the position of entities based on their velocity,
+ * if they have both position and velocity components.
+ * It also ensures entities stay within the bounds of the map.
  */
 public class SystemUpdatePositionByVelocity {
+
+    /**
+     * Constructs a SystemUpdatePositionByVelocity object.
+     */
     public SystemUpdatePositionByVelocity(){}
 
     /**
-     * This updates all entities position by their velocity (if
-     * they have a position and velocity).
-     * @param entities all the entities
+     * Updates the position of all entities based on their velocity.
+     * @param entities The list of entities to update
      */
     public void update(ArrayList<Entity> entities){
         float mapWidth = 1;
         float mapHeight = 1;
+
         // Get map height and width
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
@@ -35,16 +40,15 @@ public class SystemUpdatePositionByVelocity {
             }
         }
 
+        // Update positions based on velocity
         for(Entity entity : entities){
             if(entity.hasComponent(ComponentPosition.class) && entity.hasComponent(ComponentVelocity.class)){
                 ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);
                 ComponentVelocity velocity = (ComponentVelocity) entity.getComponent(ComponentVelocity.class);
 
-                // We check the player is within bounds before changing position.
+                // Ensure entities stay within map bounds
                 if ((0<position.getRawX() || velocity.getXSpeed()>0) &&
                         (position.getRawX()<(mapWidth - position.getRawWidth())||velocity.getXSpeed()<0)) {
-                    // We use deltaTime to avoid speed being tied to frame rate (which
-                    // can vary from computer to computer).
                     position.setX(position.getRawX() +velocity.getXSpeed() * Gdx.graphics.getDeltaTime());
                 }
                 if ((0<position.getRawY() || velocity.getYSpeed()>0) &&
