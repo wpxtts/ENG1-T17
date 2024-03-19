@@ -7,50 +7,58 @@ import com.mygdx.game.serviceProviders.CollisionEffectProvider;
 import java.util.ArrayList;
 
 /**
- * System in charge of managing collisions
+ * SystemCollision is responsible for managing collision detection and resolution in the game.
  */
 public class SystemCollision {
 
+    /**
+     * Constructs a SystemCollision object.
+     */
     public SystemCollision() {}
 
+    /**
+     * Updates the collision system with the current state of the game entities.
+     * @param entities The list of entities in the game
+     */
     public void update(ArrayList<Entity> entities) {
 
         // Create empty collisionObjects list to be filled
         // with all entities that could be collided with.
-        ArrayList<Entity> collisionObjects = new ArrayList<Entity>();
+        ArrayList<Entity> collisionObjects = new ArrayList<>();
 
         // To store player entity.
         Entity player = null;
 
         // Finds collision object entities and player entity.
         for (Entity entity : entities) {
-
-            if(entity.hasComponent(ComponentCollision.class)){
+            if (entity.hasComponent(ComponentCollision.class)) {
                 collisionObjects.add(entity);
-
             }
-            if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
+            if (entity.hasComponent(ComponentSpecialEntityFlag.class)) {
                 ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class);
-                if(flag.getFlag().equals("Player")){
+                if (flag.getFlag().equals("Player")) {
                     player = entity;
                 }
             }
-
         }
 
         // If the entity is the player, check its collision with all objects.
-        for (Entity collisionObject : collisionObjects) {
-            AABBCollision(collisionObject, player);
+        if (player != null) {
+            for (Entity collisionObject : collisionObjects) {
+                AABBCollision(collisionObject, player);
+            }
         }
-
     }
 
+    /**
+     * Handles axis-aligned bounding box (AABB) collision detection and resolution between two entities.
+     * @param collisionObject The entity representing the collision object
+     * @param playerEntity The entity representing the player
+     */
     void AABBCollision(Entity collisionObject, Entity playerEntity) {
 
         ComponentPosition collisionPosition = (ComponentPosition) collisionObject.getComponent(ComponentPosition.class);
-
         ComponentPosition playerPosition = (ComponentPosition) playerEntity.getComponent(ComponentPosition.class);
-
 
         // These are the four edges of the collision object.
         double collisionLeft = collisionPosition.getRawX();
@@ -67,7 +75,7 @@ public class SystemCollision {
         // These gap values are positive if they overlap, meaning if all of them
         // are positive there is a collision, and the smallest value indicates the
         // direction to push the player in to correct the collision.
-        double leftGap =  playerRight - collisionLeft;
+        double leftGap = playerRight - collisionLeft;
         double rightGap = collisionRight - playerLeft;
         double topGap = collisionTop - playerBottom;
         double bottomGap = playerTop - collisionBottom;
@@ -91,29 +99,34 @@ public class SystemCollision {
             } else if (directionValue == bottomGap) {
                 playerPosition.setY(collisionBottom - playerPosition.getRawHeight());
             }
-
-
         }
 
-        // To check if object is within interaction distant we do a similar check
+        // To check if object is within interaction distance we do a similar check
         // but with a slightly wider margin.
-        if (leftGap+0.015 > 0 && rightGap+0.015 > 0 && topGap+0.015 > 0 && bottomGap+0.015 > 0) {
+        if (leftGap + 0.015 > 0 && rightGap + 0.015 > 0 && topGap + 0.015 > 0 && bottomGap + 0.015 > 0) {
             // If object is interactable then we do an InteractionCheck
-            if (((ComponentCollision) collisionObject.getComponent(ComponentCollision.class))
-                    .getInteractable()) {
+            ComponentCollision collisionComponent = (ComponentCollision) collisionObject.getComponent(ComponentCollision.class);
+            if (collisionComponent != null && collisionComponent.getInteractable()) {
                 InteractionCheck(collisionObject);
             }
         }
     }
 
+    /**
+     * Checks if the player entity is interacting with the given collision object entity.
+     * @param collisionObject The entity representing the collision object
+     */
     void InteractionCheck(Entity collisionObject) {
         // Check if space is pressed, and if so complete collisionEffect.
-        ArrayList<String> keysPressed = ((ComponentInput) collisionObject.getComponent(ComponentInput.class)).getKeysPressed();
-        if(keysPressed.contains("SPACE")){
-            ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect)
-                    collisionObject.getComponent(ComponentCollisionEffect.class);
-            CollisionEffectProvider collisionEffect = collisionEffectComponent.getCollisionEffectProvider();
-            collisionEffect.collisionEffect();
+        ComponentInput inputComponent = (ComponentInput) collisionObject.getComponent(ComponentInput.class);
+        if (inputComponent != null && inputComponent.getKeysPressed().contains("SPACE")) {
+            ComponentCollisionEffect collisionEffectComponent = (ComponentCollisionEffect) collisionObject.getComponent(ComponentCollisionEffect.class);
+            if (collisionEffectComponent != null) {
+                CollisionEffectProvider collisionEffect = collisionEffectComponent.getCollisionEffectProvider();
+                if (collisionEffect != null) {
+                    collisionEffect.collisionEffect();
+                }
+            }
         }
     }
 }

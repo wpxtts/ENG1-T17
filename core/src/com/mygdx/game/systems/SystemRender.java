@@ -7,17 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.components.ComponentSpecialEntityFlag;
-import com.mygdx.game.components.ComponentPosition;
-import com.mygdx.game.components.ComponentSpecialEntityFlag;
-import com.mygdx.game.components.ComponentSprite;
-import com.mygdx.game.components.ComponentVelocity;
+import com.mygdx.game.components.*;
+
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.Map;
 
 import java.util.ArrayList;
-
-import static com.badlogic.gdx.utils.JsonValue.ValueType.object;
 
 /**
  * System which renders all sprites.
@@ -97,19 +92,13 @@ public class SystemRender {
 
 
         }
-        
+
         // Defines the shape renderer to draw shapes.
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         for (Entity entity : visibleObjects) {
-//            //DrawCuboid((ComponentPosition) entity.getComponent(ComponentPosition.class), shapeRenderer);
-//            boolean isPlayer = false;
-//            if(entity.hasComponent(ComponentPlayerFlag.class)){
-//                isPlayer = true;
-//            }
-//            DrawSprite((ComponentPosition) entity.getComponent(ComponentPosition.class), (ComponentVelocity) entity.getComponent(ComponentVelocity.class), (ComponentSprite) entity.getComponent(ComponentSprite.class), batch, camera, isPlayer);
             DrawSprite(entity, batch, camera);
         }
 
@@ -118,18 +107,10 @@ public class SystemRender {
     }
 
     /**
-     * Temporary method to draw rectangle before we implement sprites.
-     * @param object postion component of object to be rendered
-     * @param shapeRenderer shapeRendered object which can be used to render
-     *                      the rectangle to the screen.
+     * Dispose all assets used in rendering.
+     * @param entities all entities
      */
-
     public void dispose(ArrayList<Entity> entities) {
-        // Note the player controller is initialised as null, meaning the code will break if there
-        // is no player entity.
-        ArrayList<Entity> visibleObjects = new ArrayList<>();
-
-        // Finds all assets to be disposed of.
         for (Entity entity : entities) {
             if (entity.hasComponent(ComponentSprite.class)) {
                 ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
@@ -138,6 +119,12 @@ public class SystemRender {
         }
     }
 
+    /**
+     * Draw a sprite of an entity.
+     * @param entity the entity to draw
+     * @param batch the sprite batch to use for drawing
+     * @param camera the camera used for rendering
+     */
     static void DrawSprite(Entity entity, SpriteBatch batch, OrthographicCamera camera) {
 //        object.setWidth(sprite.getSprite().getWidth());
 //        object.setHeight(sprite.getSprite().getHeight());

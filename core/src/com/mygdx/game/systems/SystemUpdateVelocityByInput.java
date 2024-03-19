@@ -7,16 +7,20 @@ import com.mygdx.game.entities.Entity;
 import java.util.ArrayList;
 
 /**
- * System to update an entities velocity in accordance to user
- * input (as opposed to being controlled by an AI for example).
+ * SystemUpdateVelocityByInput class updates the velocity of entities based on user input.
+ * It checks for entities with both input and velocity components and modifies the velocity
+ * according to the keys pressed by the user.
  */
 public class SystemUpdateVelocityByInput {
 
+    /**
+     * Constructs a SystemUpdateVelocityByInput object.
+     */
     public SystemUpdateVelocityByInput(){}
 
     /**
-     * Update velocities in accordance to user input
-     * @param entities all the entities.
+     * Update velocities of entities based on user input.
+     * @param entities The list of entities to update
      */
     public void update(ArrayList<Entity> entities) {
         // Loop through all entities to find those with Input and Velocity components.
@@ -49,7 +53,7 @@ public class SystemUpdateVelocityByInput {
                 if((left||right)&&(up||down)){
                     // If we are moving diagonally (meaning we are moving
                     // left/right and up/down at the same time), then to avoid
-                    // this being faster the going in a straight line (as you
+                    // this being faster than going in a straight line (as you
                     // will get the xSpeed and the ySpeed), we have to apply a
                     // damping.
                     // The 0.707 is an approximation of 1/sqrt(2), which can

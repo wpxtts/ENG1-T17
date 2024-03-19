@@ -8,11 +8,20 @@ import com.mygdx.game.entities.Entity;
 import java.util.ArrayList;
 
 /**
- * Updates Input components to reflect current input
+ * SystemUpdateInput class updates Input components to reflect the current input state.
+ * It checks for keyboard input and updates the list of keys being pressed.
  */
 public class SystemUpdateInput {
+
+    /**
+     * Constructs a SystemUpdateInput object.
+     */
     public SystemUpdateInput() {}
 
+    /**
+     * Updates Input components of entities to reflect the current input state.
+     * @param entities The list of entities to update
+     */
     public void update(ArrayList<Entity> entities) {
         // Loop through entities to find those with the Input component.
         for(Entity entity : entities){
@@ -36,7 +45,7 @@ public class SystemUpdateInput {
                     newKeysPressed.add("DOWN");
                 }
                 if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-                    // We differentiated between the first cycle frame is pressed
+                    // We differentiate between the first cycle frame is pressed
                     // down ("SPACE") and then the subsequent cycles when space is still
                     // held down because the user hasn't let go yet ("SPACE_CONTINUED").
                     if(oldKeysPressed.contains("SPACE") || oldKeysPressed.contains("SPACE_CONTINUED")){

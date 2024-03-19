@@ -1,8 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -14,6 +16,7 @@ public class MyGdxGame extends Game {
 
 	public SpriteBatch batch;
 	public BitmapFont font;
+	public ShapeRenderer shapeRenderer;
 	private Stage stage;
 
 	/**
@@ -23,6 +26,7 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont(); // use libGDX's default Arial font
 		this.setScreen(new MenuScreen(this));
+		shapeRenderer = new ShapeRenderer();
 	}
 
 	/**
