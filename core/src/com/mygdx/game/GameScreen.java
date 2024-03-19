@@ -55,6 +55,7 @@ public class GameScreen implements Screen {
         entities.put("StudyTracker", new Tracker(0));
         entities.put("EatTracker", new Tracker(0));
         entities.put("FunTracker", new Tracker(0));
+        entities.put("StudyLeftTracker", new StudyLeft(2,false));
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();

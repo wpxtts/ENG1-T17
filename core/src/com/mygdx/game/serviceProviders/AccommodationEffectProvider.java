@@ -21,6 +21,7 @@ public class AccommodationEffectProvider extends CollisionEffectProvider {
      */
     public void collisionEffect(HashMap<String, Entity> entities) {
         Entity energyTracker = entities.get("EnergyTracker");
+        Entity studyLeftTracker = entities.get("StudyLeftTracker");
         ComponentValue energy = (ComponentValue) energyTracker.getComponent(ComponentValue.class);
         energy.setValue(100);
         ChangeDay.changeDay(entities);

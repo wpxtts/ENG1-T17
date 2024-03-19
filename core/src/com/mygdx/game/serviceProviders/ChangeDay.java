@@ -1,6 +1,8 @@
 package com.mygdx.game.serviceProviders;
 
+import com.mygdx.game.components.ComponentBoolean;
 import com.mygdx.game.components.ComponentTime;
+import com.mygdx.game.components.ComponentValue;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.TimeTracker;
 
@@ -15,6 +17,18 @@ public class ChangeDay{
         time.setDay(time.getDay()+1);
         time.setHour(8);
         time.setMinute(0);
+
+        Entity studyLeftTracker = entities.get("StudyLeftTracker");
+        ComponentValue studyLeftValue = (ComponentValue) studyLeftTracker.getComponent(ComponentValue.class);
+        ComponentBoolean crammed = (ComponentBoolean) studyLeftTracker.getComponent(ComponentBoolean.class);
+        if(studyLeftValue.getValue()==0){
+            crammed.setTruth(true);
+        }
+        if(crammed.getTruth()){
+            studyLeftValue.setValue(1);
+        }else{
+            studyLeftValue.setValue(2);
+        }
     }
 
 }
