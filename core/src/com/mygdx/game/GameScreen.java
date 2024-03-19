@@ -73,9 +73,13 @@ public class GameScreen implements Screen {
         // Update all the systems every frame
         UpdateFrame();
 
+        game.batch.end();
+
         // Update clock in corner to display after updating, so that it appears on top.
+        game.batch.begin();
         game.font.draw(game.batch, timeString, 10, Gdx.graphics.getHeight() - 10);
         game.batch.end();
+
     }
 
 
@@ -106,7 +110,7 @@ public class GameScreen implements Screen {
         batch.dispose();
         font.dispose();
         img.dispose();
-        //shapeRenderer.dispose();
+//        shapeRenderer.dispose();
     }
 
     /**
