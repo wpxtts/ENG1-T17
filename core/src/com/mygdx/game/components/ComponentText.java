@@ -1,8 +1,5 @@
 package com.mygdx.game.components;
 
-@ -0,0 +1,36 @@
-package com.mygdx.game.components;
-
 import com.mygdx.game.serviceProviders.TextEffectProvider;
 
 public class ComponentText extends Component {
