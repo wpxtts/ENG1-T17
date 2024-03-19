@@ -2,12 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.entities.*;
 import com.mygdx.game.systems.*;
 
@@ -25,6 +20,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	SystemUpdatePositionByVelocity updatePositionByVelocitySystem;
 	SystemCollision collisionSystem;
 	SystemRender renderSystem;
+	SystemText textSystem;
 
 	/**
 	 * Creates entities and systems.
@@ -45,12 +41,15 @@ public class MyGdxGame extends ApplicationAdapter {
 		entities.add(new Piazza(3330,1500, 100,100));
 		entities.add(new Accommodation(1650,2925, 100,100));
 
+		entities.add(new TrackerTime("Test String", 350, 350, 1.5f));
+
 
 		updateInputSystem = new SystemUpdateInput();
 		updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
 		updatePositionByVelocitySystem = new SystemUpdatePositionByVelocity();
 		collisionSystem = new SystemCollision();
 		renderSystem = new SystemRender();
+		textSystem = new SystemText();
 	}
 
 	/**
@@ -77,6 +76,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		updatePositionByVelocitySystem.update(entities);
 		collisionSystem.update(entities);
 		renderSystem.update(entities);
+		textSystem.update(entities);
 
 	}
 
