@@ -20,6 +20,9 @@ public class AccommodationEffectProvider extends CollisionEffectProvider {
      * Provides the collision effect for accommodation entities.
      */
     public void collisionEffect(HashMap<String, Entity> entities) {
+        Entity energyTracker = entities.get("EnergyTracker");
+        ComponentValue energy = (ComponentValue) energyTracker.getComponent(ComponentValue.class);
+        energy.setValue(100);
         ChangeDay.changeDay(entities);
     }
 }

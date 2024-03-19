@@ -2,7 +2,9 @@ package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.components.ComponentTime;
+import com.mygdx.game.components.ComponentValue;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.serviceProviders.ChangeDay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,9 +49,10 @@ public class SystemTime {
                         time.setHour(time.getHour()+1);
                         time.setMinute(0);
                         if(time.getHour()>=24){
-                            // NEXT DAY
-                            time.setDay(time.getDay()+1);
-                            time.setHour(wakeUpHour);
+                            Entity energyTracker = entities.get("EnergyTracker");
+                            ComponentValue energy = (ComponentValue) energyTracker.getComponent(ComponentValue.class);
+                            energy.setValue(60);
+                            ChangeDay.changeDay(entities);
                         }
                     }
                 }
