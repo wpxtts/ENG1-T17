@@ -61,7 +61,6 @@ public class GameScreen implements Screen {
             // Switch to PauseMenu screen
             game.setScreen(new PauseMenu(game));
         }
-        timeSystem.update();
 
         game.batch.begin();
 
@@ -118,5 +117,6 @@ public class GameScreen implements Screen {
         collisionSystem.update(entities);
         renderSystem.update(entities);
         textSystem.update(entities);
+        timeSystem.update(entities);
     }
 }
