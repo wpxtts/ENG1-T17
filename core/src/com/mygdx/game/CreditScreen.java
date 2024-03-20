@@ -48,7 +48,7 @@ public class CreditScreen implements Screen{
         table.row();
 
         // Names
-        String[] names = {"William", "Seyi", "George", "Alex", "Ben", "Meg", "James","Raymond \"Raeleus\" Buckley for the Buttons"};
+        String[] names = {"William Potts", "Seyi Towolawi", "George Jopson", "Alex Staicu", "Ben Slater", "Meg Tierney", "James Burgess","Raymond \"Raeleus\" Buckley for the Buttons"};
         for (String name : names) {
             Label nameLabel = new Label(name, skin, "default");
             table.add(nameLabel).colspan(2).center().padBottom(10);
@@ -59,8 +59,8 @@ public class CreditScreen implements Screen{
         TextButton back = new TextButton("Back", skin, "small");
 
         //add buttons to table
-        table.add(back).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.add(back).fillX().center().uniformX();
+        table.row().center().pad(10, 0, 10, 0);
 
         // create button listeners
         back.addListener(new ChangeListener() {
