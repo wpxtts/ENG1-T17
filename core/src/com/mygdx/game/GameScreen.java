@@ -100,38 +100,8 @@ public class GameScreen implements Screen {
             game.setScreen(new PauseMenu(game));
         }
 
-//        game.batch.begin();
-//        game.hudBatch.begin();
-
         // Update all the systems every frame
         UpdateFrame();
-
-//        game.hudBatch.end();
-//        game.batch.end();
-
-//        // Update clock in corner to display after updating, so that it appears on top.
-//        game.hudBatch.begin();
-//
-//        // Set font color to black
-//        game.font.setColor(Color.BLACK);
-//
-//        // Set font scale
-//        game.font.getData().setScale(1);
-//
-//        // Get time
-//        ComponentTime time = (ComponentTime)entities.get("TimeTracker").getComponent(ComponentTime.class);
-//        String output = "Time: "+time.getTimeString();
-//        ComponentValue energy = (ComponentValue) (entities.get("EnergyTracker").getComponent(ComponentValue.class));
-//        output += " | Energy: "+Integer.toString(energy.getValue());
-//        ComponentValue study = (ComponentValue) (entities.get("StudyTracker").getComponent(ComponentValue.class));
-//        output += " |Study:"+Integer.toString(study.getValue());
-//        ComponentValue eat = (ComponentValue) (entities.get("EatTracker").getComponent(ComponentValue.class));
-//        output += " |Eat:"+Integer.toString(eat.getValue());
-//        ComponentValue fun = (ComponentValue) (entities.get("FunTracker").getComponent(ComponentValue.class));
-//        output += " |Fun:"+Integer.toString(fun.getValue());
-//        // Draw the clock
-//        game.font.draw(game.hudBatch, output, 20, 30);
-//        game.hudBatch.end();
 
     }
 
