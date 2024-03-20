@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * POI (Point of Interest) represents a generic point of interest entity in the game.
  */
-public class POI extends Entity {
+public abstract class POI extends Entity {
 
     /**
      * Constructs a POI entity with the specified position and dimensions.
