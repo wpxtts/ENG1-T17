@@ -1,5 +1,8 @@
 package com.mygdx.game.components;
 
+/**
+ * Stores a value
+ */
 public class ComponentValue extends Component {
 
     int value;

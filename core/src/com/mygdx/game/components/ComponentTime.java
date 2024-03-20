@@ -1,5 +1,8 @@
 package com.mygdx.game.components;
 
+/**
+ * Stores current time
+ */
 public class ComponentTime extends Component{
     int day;
     int hour;

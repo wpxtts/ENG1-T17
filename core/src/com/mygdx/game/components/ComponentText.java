@@ -2,8 +2,11 @@ package com.mygdx.game.components;
 
 import com.mygdx.game.serviceProviders.TextEffectProvider;
 
+/**
+ * Component to store text
+ */
 public class ComponentText extends Component {
-
+    // TextEffectProvider provides the write text functionality
     TextEffectProvider textEffectProvider;
     String text;
     float textX;

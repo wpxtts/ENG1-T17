@@ -4,7 +4,6 @@ package com.mygdx.game.components;
 /**
  * ComponentCollision represents a collision component that can be added to make an object collidable with the player.
  */
-
 public class ComponentCollision extends Component {
 
     // Indicates whether the object is interactable with the player
