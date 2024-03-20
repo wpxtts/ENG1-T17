@@ -61,11 +61,11 @@ public class GameScreen implements Screen {
         entities.put("FunTracker", new ValueTracker(0,"Fun"));
         entities.put("StudyLeftTracker", new StudyLeft(2,false));
 
-        entities.put("EnergyText",new TrackerText("EnergyTracker",game.hudBatch,game.font,10,15,1));
-        entities.put("StudyText",new TrackerText("StudyTracker",game.hudBatch,game.font,100,15,1));
-        entities.put("EatText",new TrackerText("EatTracker",game.hudBatch,game.font,200,15,1));
-        entities.put("FunText",new TrackerText("FunTracker",game.hudBatch,game.font,300,15,1));
-        entities.put("TimeText",new TrackerText("TimeTracker",game.hudBatch,game.font,400,15,1));
+        entities.put("EnergyText",new TrackerText("EnergyTracker",game.hudBatch,game.font,210,30,2));
+        entities.put("StudyText",new TrackerText("StudyTracker",game.hudBatch,game.font,370,30,2));
+        entities.put("EatText",new TrackerText("EatTracker",game.hudBatch,game.font,490,30,2));
+        entities.put("FunText",new TrackerText("FunTracker",game.hudBatch,game.font,570,30,2));
+        entities.put("TimeText",new TrackerText("TimeTracker",game.hudBatch,game.font,10,30,2));
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
