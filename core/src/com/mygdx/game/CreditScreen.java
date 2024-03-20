@@ -111,7 +111,7 @@ public class CreditScreen implements Screen{
 
     @Override
     public void dispose() {
-        // dispose of assets when not needed anymore
+        // dispose of assets when not needed anymore to save memory usage
         stage.dispose();
     }
 
