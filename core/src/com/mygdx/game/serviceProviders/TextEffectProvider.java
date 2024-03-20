@@ -9,15 +9,20 @@ public class TextEffectProvider {
     SpriteBatch spriteBatch;
     BitmapFont font;
 
+    // Constructs the effect provider, defining a batch
     public TextEffectProvider(SpriteBatch batch,BitmapFont font){
         this.spriteBatch = batch;
-        System.out.println(batch);
         this.font = font;
     }
+
+    // Function called to write text
     public void writeText(String text, float x, float y, float scale){
+
+        // Sets the colour and scale of the font
         font.setColor(Color.BLACK);
         font.getData().setScale(scale);
 
+        // Draws the specified text
         font.draw(spriteBatch, text, x, y);
 
     }

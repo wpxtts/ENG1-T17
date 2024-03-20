@@ -33,7 +33,6 @@ public class PiazzaEffectProvider extends CollisionEffectProvider {
             energy.setValue(energy.getValue()+10);
             time.setHour(time.getHour()+1);
             eat.setValue(eat.getValue()+1);
-            System.out.println("Interacted with duck pond!");
         }
     }
 }
