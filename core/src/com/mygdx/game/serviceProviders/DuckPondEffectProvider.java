@@ -33,7 +33,6 @@ public class DuckPondEffectProvider extends CollisionEffectProvider {
             energy.setValue(energy.getValue()-20);
             time.setHour(time.getHour()+1);
             fun.setValue(fun.getValue()+1);
-            System.out.println("Interacted with duck pond!");
         }
     }
 }
