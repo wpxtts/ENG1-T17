@@ -127,6 +127,7 @@ public class SystemRender extends UpdateSystem{
 
 
         }
+        // Ensures Map is rendered as background (must be rendered first)
         visibleObjects.add(0,entities.get("Map"));
 
         for (Entity entity : visibleObjects) {
@@ -161,31 +162,7 @@ public class SystemRender extends UpdateSystem{
         ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
 
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
-        batch.draw(sprite.getSprite(), (float) (position.getX()), (float) (position.getY()), (float) (position.getWidth()), (float) (position.getHeight()));
-
-////        // This changes the direction of the player sprite
-//        if (entity.hasComponent(ComponentSpecialEntityFlag.class)){
-//
-//            ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag)  entity.getComponent(ComponentSpecialEntityFlag.class);
-//            if(flag.getFlag().equals("Player")){
-//                //Changes player's sprite when moving or still (based on velocity)
-//                if (velocity.getXSpeed() > 0) {
-//                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-//                    sprite.setSprite(playerRight);
-//
-//                }
-//                if (velocity.getXSpeed() < 0) {
-//                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-//                    sprite.setSprite(playerLeft);
-//
-//                }
-//                if (velocity.getXSpeed() == 0) {
-//                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-//                    sprite.setSprite(playerRegular);
-//
-//                }
-//            }
-//        }
+        batch.draw(sprite.getSprite(), (float) (position.getX()), (float) (position.getY()), (float) (position.getWidth()), (float) (position.getHeight())); //draws Sprite
 
     }
 
