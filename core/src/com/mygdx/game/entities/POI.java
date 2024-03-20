@@ -25,7 +25,6 @@ public abstract class POI extends Entity {
         this.components = new HashMap<>();
         this.addComponent(new ComponentPosition(x, y, height, width));
         this.addComponent(new ComponentCollision(true));
-        this.addComponent(new ComponentSprite(new Texture(Gdx.files.internal("poi.jpg"))));
         this.addComponent(new ComponentInput());
     }
 }
