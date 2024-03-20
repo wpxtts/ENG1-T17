@@ -6,7 +6,7 @@ import com.mygdx.game.components.*;
 
 import java.util.HashMap;
 
-public class TimeTracker extends Entity{
+public class TimeTracker extends Tracker{
     public TimeTracker() {
         this.components = new HashMap<>();
         this.addComponent(new ComponentTime());

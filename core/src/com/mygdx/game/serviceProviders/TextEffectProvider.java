@@ -9,16 +9,16 @@ public class TextEffectProvider {
     SpriteBatch spriteBatch;
     BitmapFont font;
 
-    public TextEffectProvider(){
-        spriteBatch = new SpriteBatch();
-        font = new BitmapFont();
+    public TextEffectProvider(SpriteBatch batch,BitmapFont font){
+        this.spriteBatch = batch;
+        System.out.println(batch);
+        this.font = font;
     }
     public void writeText(String text, float x, float y, float scale){
         font.setColor(Color.BLACK);
         font.getData().setScale(scale);
 
-        spriteBatch.begin();
         font.draw(spriteBatch, text, x, y);
-        spriteBatch.end();
+
     }
 }

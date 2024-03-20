@@ -151,13 +151,13 @@ public class SystemRender {
      * @param camera the camera used for rendering
      */
     void DrawSprite(Entity entity, SpriteBatch batch, OrthographicCamera camera) {
+
         //Draws in each entity's Sprite at its coordinates
         ComponentPosition position = (ComponentPosition) entity.getComponent(ComponentPosition.class);
         ComponentVelocity velocity = (ComponentVelocity)  entity.getComponent(ComponentVelocity.class);
         ComponentSprite sprite = (ComponentSprite) entity.getComponent(ComponentSprite.class);
 
         batch.setProjectionMatrix(camera.combined); //tells the SpriteBatch to use the coordinate system specified by the camera
-
         batch.draw(sprite.getSprite(), (float) (position.getX()), (float) (position.getY()), (float) (position.getWidth()), (float) (position.getHeight()));
 
 ////        // This changes the direction of the player sprite

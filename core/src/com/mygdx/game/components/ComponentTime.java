@@ -40,7 +40,7 @@ public class ComponentTime extends Component{
         this.lastUpdated = lastUpdated;
     }
 
-    public String getTimeString(){
+    public String getString(){
         return String.format("Day %2d - %02d:%02d", day, hour, minute);
     }
 }

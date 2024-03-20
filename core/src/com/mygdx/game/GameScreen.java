@@ -34,6 +34,8 @@ public class GameScreen implements Screen {
     SystemTime timeSystem;
     SystemText textSystem;
 
+    SystemUpdateTrackerText updateTrackerTextSystem;
+
 
     public GameScreen(final MyGdxGame game) {
         this.game = game;
@@ -45,18 +47,25 @@ public class GameScreen implements Screen {
 
         entities.put("Library",new Library(1.35, 1.4,0.4, 0.4));
         entities.put("DuckPond",new DuckPond(0.75,0.4, 0.35,0.25));
-        entities.put("Piazza",new Piazza(1.3,0.6, 0.2,0.4));
         entities.put("Accommodation",new Accommodation(0.5,1.2, 0.2,0.2,this));
+        entities.put("Piazza",new Piazza(1.3,0.6, 0.2,0.4));
+
 
         entities.put("Map",new Map(0,0, 2, 2)); //currently the map's sprite size is 3000 x 1896
 
         entities.put("TimeTracker",new TimeTracker());
 
-        entities.put("EnergyTracker",new Tracker(100));
-        entities.put("StudyTracker", new Tracker(0));
-        entities.put("EatTracker", new Tracker(0));
-        entities.put("FunTracker", new Tracker(0));
+        entities.put("EnergyTracker",new ValueTracker(100,"Energy"));
+        entities.put("StudyTracker", new ValueTracker(0,"Study"));
+        entities.put("EatTracker", new ValueTracker(0,"Eat"));
+        entities.put("FunTracker", new ValueTracker(0,"Fun"));
         entities.put("StudyLeftTracker", new StudyLeft(2,false));
+
+        entities.put("EnergyText",new TrackerText("EnergyTracker",game.hudBatch,game.font,10,15,1));
+        entities.put("StudyText",new TrackerText("StudyTracker",game.hudBatch,game.font,100,15,1));
+        entities.put("EatText",new TrackerText("EatTracker",game.hudBatch,game.font,200,15,1));
+        entities.put("FunText",new TrackerText("FunTracker",game.hudBatch,game.font,300,15,1));
+        entities.put("TimeText",new TrackerText("TimeTracker",game.hudBatch,game.font,400,15,1));
 
         updateInputSystem = new SystemUpdateInput();
         updateVelocityByInputSystem = new SystemUpdateVelocityByInput();
@@ -64,6 +73,7 @@ public class GameScreen implements Screen {
         collisionSystem = new SystemCollision();
         renderSystem = new SystemRender();
         timeSystem = new SystemTime();
+        updateTrackerTextSystem = new SystemUpdateTrackerText();
         textSystem = new SystemText();
 
     }
@@ -90,36 +100,38 @@ public class GameScreen implements Screen {
             game.setScreen(new PauseMenu(game));
         }
 
-        game.batch.begin();
+//        game.batch.begin();
+//        game.hudBatch.begin();
 
         // Update all the systems every frame
         UpdateFrame();
 
-        game.batch.end();
+//        game.hudBatch.end();
+//        game.batch.end();
 
-        // Update clock in corner to display after updating, so that it appears on top.
-        game.hudBatch.begin();
-
-        // Set font color to black
-        game.font.setColor(Color.BLACK);
-
-        // Set font scale
-        game.font.getData().setScale(1);
-
-        // Get time
-        ComponentTime time = (ComponentTime)entities.get("TimeTracker").getComponent(ComponentTime.class);
-        String output = "Time: "+time.getTimeString();
-        ComponentValue energy = (ComponentValue) (entities.get("EnergyTracker").getComponent(ComponentValue.class));
-        output += " | Energy: "+Integer.toString(energy.getValue());
-        ComponentValue study = (ComponentValue) (entities.get("StudyTracker").getComponent(ComponentValue.class));
-        output += " |Study:"+Integer.toString(study.getValue());
-        ComponentValue eat = (ComponentValue) (entities.get("EatTracker").getComponent(ComponentValue.class));
-        output += " |Eat:"+Integer.toString(eat.getValue());
-        ComponentValue fun = (ComponentValue) (entities.get("FunTracker").getComponent(ComponentValue.class));
-        output += " |Fun:"+Integer.toString(fun.getValue());
-        // Draw the clock
-        game.font.draw(game.hudBatch, output, 20, 30);
-        game.hudBatch.end();
+//        // Update clock in corner to display after updating, so that it appears on top.
+//        game.hudBatch.begin();
+//
+//        // Set font color to black
+//        game.font.setColor(Color.BLACK);
+//
+//        // Set font scale
+//        game.font.getData().setScale(1);
+//
+//        // Get time
+//        ComponentTime time = (ComponentTime)entities.get("TimeTracker").getComponent(ComponentTime.class);
+//        String output = "Time: "+time.getTimeString();
+//        ComponentValue energy = (ComponentValue) (entities.get("EnergyTracker").getComponent(ComponentValue.class));
+//        output += " | Energy: "+Integer.toString(energy.getValue());
+//        ComponentValue study = (ComponentValue) (entities.get("StudyTracker").getComponent(ComponentValue.class));
+//        output += " |Study:"+Integer.toString(study.getValue());
+//        ComponentValue eat = (ComponentValue) (entities.get("EatTracker").getComponent(ComponentValue.class));
+//        output += " |Eat:"+Integer.toString(eat.getValue());
+//        ComponentValue fun = (ComponentValue) (entities.get("FunTracker").getComponent(ComponentValue.class));
+//        output += " |Fun:"+Integer.toString(fun.getValue());
+//        // Draw the clock
+//        game.font.draw(game.hudBatch, output, 20, 30);
+//        game.hudBatch.end();
 
     }
 
@@ -164,8 +176,13 @@ public class GameScreen implements Screen {
         updateVelocityByInputSystem.update(entities);
         updatePositionByVelocitySystem.update(entities);
         collisionSystem.update(entities);
+        game.batch.begin();
         renderSystem.update(entities,game.shapeRenderer,game.batch);
+        game.batch.end();
+        updateTrackerTextSystem.update(entities);
+        game.hudBatch.begin();
         textSystem.update(entities);
+        game.hudBatch.end();
         timeSystem.update(entities,this);
     }
 
