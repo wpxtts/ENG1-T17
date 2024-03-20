@@ -69,7 +69,14 @@ public class GameScreen implements Screen {
     }
     public void endGame(){
         System.out.println("End Game");
-        game.toScoreScreen();
+        Entity studyTracker = entities.get("StudyTracker");
+        Entity eatTracker = entities.get("EatTracker");
+        Entity funTracker = entities.get("FunTracker");
+        ComponentValue study = (ComponentValue) studyTracker.getComponent(ComponentValue.class);
+        ComponentValue eat = (ComponentValue) eatTracker.getComponent(ComponentValue.class);
+        ComponentValue fun = (ComponentValue) funTracker.getComponent(ComponentValue.class);
+
+        game.toScoreScreen(study.getValue(),fun.getValue(),eat.getValue());
     }
 
     @Override

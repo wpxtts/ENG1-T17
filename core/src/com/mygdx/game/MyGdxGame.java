@@ -77,8 +77,9 @@ public class MyGdxGame extends Game {
 		this.setScreen(new TutorialScreen(this));
 	}
 
-	public void toScoreScreen(){
-		this.setScreen(new ScoreScreen(this));
+	public void toScoreScreen(int study, int fun, int eat){
+
+		this.setScreen(new ScoreScreen(this,study, fun, eat));
 	}
 
 }

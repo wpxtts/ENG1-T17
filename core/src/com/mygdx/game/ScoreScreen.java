@@ -15,10 +15,16 @@ public class ScoreScreen implements Screen{
     private Stage stage;
     private Texture backgroundImage;
 
+    int study;
+    int fun;
+    int eat;
+
     MyGdxGame parent;
 
-    public ScoreScreen(MyGdxGame gameLoop){
-
+    public ScoreScreen(MyGdxGame gameLoop, int study, int fun, int eat){
+        this.study = study;
+        this.fun = fun;
+        this.eat = eat;
         this.parent = gameLoop;
         /// create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
@@ -48,13 +54,13 @@ public class ScoreScreen implements Screen{
         table.row();
 
         // Names
-        String[] names = {"Study Score", "Wellbeing Score", "Overall Grade", "Thank you for Playing!"};
-        int study_score, wellbeing_score;
+        String[] names = {"Study Score", "Fun Score", "Eat Score","Overall Grade", "Thank you for Playing!"};
+        int study_score, wellbeing_score, fun_score;
         double grade;
         study_score = 500;
         wellbeing_score = 350;
         grade = Math.min((Math.log(study_score*wellbeing_score)+40), 100);
-        double[] scores = {study_score, wellbeing_score, grade};
+        double[] scores = {study, fun, eat,grade};
         for (int i = 0; i<names.length; i++) {
             String name = names[i];
             if (i<names.length-1){
