@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
         entities.put("Player",new Player());
 
         entities.put("Library",new Library(1.35, 1.4,0.4, 0.4));
-        entities.put("DuckPond",new DuckPond(0.75,0.4, 0.35,0.25));
+        entities.put("DuckPond",new DuckPond(1.3,0.07, 0.35,0.25));
         entities.put("Accommodation",new Accommodation(0.5,1.2, 0.2,0.2,this));
         entities.put("Piazza",new Piazza(1.3,0.6, 0.2,0.4));
 
