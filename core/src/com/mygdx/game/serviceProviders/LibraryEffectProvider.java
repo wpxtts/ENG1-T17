@@ -37,7 +37,6 @@ public class LibraryEffectProvider extends CollisionEffectProvider {
             time.setHour(time.getHour()+4);
             study.setValue(study.getValue()+1);
             studyLeft.setValue(studyLeft.getValue()-1);
-            System.out.println("Interacted with duck pond!");
         }
     }
 }

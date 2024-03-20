@@ -38,6 +38,9 @@ public class ScoreScreen implements Screen{
         stage.addActor(background); // Add the background image to the stage
     }
 
+    /**
+     * Create text and buttons to display the score screen
+     */
     @Override
     public void show() {
         // Create a table that fills the screen. Everything else will go inside this table.
@@ -92,6 +95,10 @@ public class ScoreScreen implements Screen{
 
     }
 
+    /**
+     * Render the score screen
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         // clear the screen ready for next set of images to be drawn
