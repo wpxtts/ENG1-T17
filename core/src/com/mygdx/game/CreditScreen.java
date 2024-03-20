@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * Implements the credits screen
+ */
 public class CreditScreen implements Screen{
 
     private Stage stage;
@@ -17,6 +20,10 @@ public class CreditScreen implements Screen{
 
     MyGdxGame parent;
 
+    /**
+     * Create new CreditScreen
+     * @param gameLoop the parent game loop which owns the screen
+     */
     public CreditScreen(MyGdxGame gameLoop){
 
         this.parent = gameLoop;
@@ -31,6 +38,9 @@ public class CreditScreen implements Screen{
         stage.addActor(background); // Add the background image to the stage
     }
 
+    /**
+     * Generate credit screen structure (labels and buttons)
+     */
     @Override
     public void show() {
         // Create a table that fills the screen. Everything else will go inside this table.
@@ -72,6 +82,10 @@ public class CreditScreen implements Screen{
 
     }
 
+    /**
+     * Render credit screen
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         // clear the screen ready for next set of images to be drawn
@@ -83,6 +97,11 @@ public class CreditScreen implements Screen{
         stage.draw();
     }
 
+    /**
+     * Called when screen changed size
+     * @param width new screen width
+     * @param height new screen height
+     */
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);

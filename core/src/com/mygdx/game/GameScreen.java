@@ -19,6 +19,9 @@ import com.mygdx.game.systems.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Implements the game screen
+ */
 public class GameScreen implements Screen {
     final MyGdxGame game;
     SpriteBatch batch;
@@ -77,6 +80,10 @@ public class GameScreen implements Screen {
         textSystem = new SystemText();
 
     }
+
+    /**
+     * End the game and move to score screen
+     */
     public void endGame(){
         System.out.println("End Game");
         Entity studyTracker = entities.get("StudyTracker");
@@ -89,6 +96,10 @@ public class GameScreen implements Screen {
         game.toScoreScreen(study.getValue(),fun.getValue(),eat.getValue());
     }
 
+    /**
+     * Render the game screen
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         // Turn the screen black.
@@ -100,12 +111,8 @@ public class GameScreen implements Screen {
 
     }
 
-
-
     @Override
     public void resize(int width, int height) {
-        System.out.println(width);
-        System.out.println(height);
     }
     @Override
     public void show() {
