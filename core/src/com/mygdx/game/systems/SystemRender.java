@@ -49,17 +49,11 @@ public class SystemRender {
         float mapWidth = 1;
         float mapHeight = 1;
         // Finds the map
-        for(Entity entity: entities.values()){
-            if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
-                String flag = ((ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class)).getFlag();
-                if(flag.equals("Map")){
-                    Map map = (Map) entity;
-                    ComponentPosition mapPosition = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    mapWidth = (float) mapPosition.getRawWidth();
-                    mapHeight = (float) mapPosition.getRawHeight();
-                }
-            }
-        }
+        Map map = (Map) entities.get("Map");
+        ComponentPosition mapPosition = (ComponentPosition) map.getComponent(ComponentPosition.class);
+        mapWidth = (float) mapPosition.getRawWidth();
+        mapHeight = (float) mapPosition.getRawHeight();
+
 //        System.out.println(entities);
         // Finds all objects to be rendered.
         for (String name : entities.keySet()) {
@@ -92,6 +86,28 @@ public class SystemRender {
                     camera.position.lerp(new Vector3(targetX, targetY, 0), 0.5f);
                     camera.position.set(targetX, targetY, 0);
                     camera.update();
+
+                    // Changes player texture to point in correct direction
+                    ComponentPosition position = (ComponentPosition) currentEntity.getComponent(ComponentPosition.class);
+                    ComponentVelocity velocity = (ComponentVelocity)  currentEntity.getComponent(ComponentVelocity.class);
+                    ComponentSprite sprite = (ComponentSprite) currentEntity.getComponent(ComponentSprite.class);
+
+                    if (velocity.getXSpeed() > 0) {
+                        //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                        sprite.setSprite(playerRight);
+
+                    }
+                    if (velocity.getXSpeed() < 0) {
+                        //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                        sprite.setSprite(playerLeft);
+
+                    }
+                    if (velocity.getXSpeed() == 0) {
+                        //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                        sprite.setSprite(playerRegular);
+
+                    }
+
                 }
                 if(!name.equals("Map")){
                     visibleObjects.add(currentEntity);
@@ -144,29 +160,29 @@ public class SystemRender {
 
         batch.draw(sprite.getSprite(), (float) (position.getX()), (float) (position.getY()), (float) (position.getWidth()), (float) (position.getHeight()));
 
-        // This changes the direction of the player sprite
-        if (entity.hasComponent(ComponentSpecialEntityFlag.class)){
-
-            ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag)  entity.getComponent(ComponentSpecialEntityFlag.class);
-            if(flag.getFlag().equals("Player")){
-                //Changes player's sprite when moving or still (based on velocity)
-                if (velocity.getXSpeed() > 0) {
-                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                    sprite.setSprite(playerRight);
-
-                }
-                if (velocity.getXSpeed() < 0) {
-                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                    sprite.setSprite(playerLeft);
-
-                }
-                if (velocity.getXSpeed() == 0) {
-                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
-                    sprite.setSprite(playerRegular);
-
-                }
-            }
-        }
+////        // This changes the direction of the player sprite
+//        if (entity.hasComponent(ComponentSpecialEntityFlag.class)){
+//
+//            ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag)  entity.getComponent(ComponentSpecialEntityFlag.class);
+//            if(flag.getFlag().equals("Player")){
+//                //Changes player's sprite when moving or still (based on velocity)
+//                if (velocity.getXSpeed() > 0) {
+//                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+//                    sprite.setSprite(playerRight);
+//
+//                }
+//                if (velocity.getXSpeed() < 0) {
+//                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+//                    sprite.setSprite(playerLeft);
+//
+//                }
+//                if (velocity.getXSpeed() == 0) {
+//                    //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+//                    sprite.setSprite(playerRegular);
+//
+//                }
+//            }
+//        }
 
     }
 

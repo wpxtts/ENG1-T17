@@ -2,7 +2,6 @@ package com.mygdx.game.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.components.ComponentPosition;
-import com.mygdx.game.components.ComponentSpecialEntityFlag;
 import com.mygdx.game.components.ComponentVelocity;
 import com.mygdx.game.entities.Entity;
 
@@ -30,16 +29,11 @@ public class SystemUpdatePositionByVelocity {
         float mapHeight = 1;
 
         // Get map height and width
-        for(Entity entity : entities.values()){
-            if(entity.hasComponent(ComponentSpecialEntityFlag.class)){
-                ComponentSpecialEntityFlag flag = (ComponentSpecialEntityFlag) entity.getComponent(ComponentSpecialEntityFlag.class);
-                if(flag.getFlag().equals("Map")){
-                    ComponentPosition mapPosition = (ComponentPosition) entity.getComponent(ComponentPosition.class);
-                    mapWidth = (float) mapPosition.getRawWidth();
-                    mapHeight = (float) mapPosition.getRawHeight();
-                }
-            }
-        }
+
+        Entity map = entities.get("Map");
+        ComponentPosition mapPosition = (ComponentPosition) map.getComponent(ComponentPosition.class);
+        mapWidth = (float) mapPosition.getRawWidth();
+        mapHeight = (float) mapPosition.getRawHeight();
 
         // Update positions based on velocity
         for(Entity entity : entities.values()){
