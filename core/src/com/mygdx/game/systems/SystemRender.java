@@ -23,10 +23,18 @@ public class SystemRender extends UpdateSystem{
     Texture playerLeft;
     Texture playerRegular;
     Texture playerRight;
+    Texture playerUp1;
+    Texture playerUp2;
+    Texture playerDown1;
+    Texture playerDown2;
     public SystemRender() {
         playerRight = new Texture(Gdx.files.internal("player_sprite_right.png"));
         playerLeft = new Texture(Gdx.files.internal("player_sprite_left.png"));
         playerRegular = new Texture(Gdx.files.internal("player_sprite_still.png"));
+        playerUp1 = new Texture(Gdx.files.internal("player_sprite_up_1.png"));
+        playerUp2 = new Texture(Gdx.files.internal("player_sprite_up_2.png"));
+        playerDown1 = new Texture(Gdx.files.internal("player_sprite_down_1.png"));
+        playerDown2 = new Texture(Gdx.files.internal("player_sprite_down_2.png"));
 
     }
 
@@ -105,6 +113,40 @@ public class SystemRender extends UpdateSystem{
                     if (velocity.getXSpeed() == 0) {
                         //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
                         sprite.setSprite(playerRegular);
+
+                    }
+                    float swapTimer = 0;
+                    double swapInterval = 2; // Swap textures every 2 seconds
+                    if (velocity.getYSpeed() > 0) {
+                        //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                        sprite.setSprite(playerUp1);
+                        swapTimer += Gdx.graphics.getDeltaTime()*50;
+                        System.out.println(swapTimer);
+                        if (swapTimer >= swapInterval) {
+                            swapTimer = 0;
+                            if (sprite.getSprite() == playerUp2) {
+                                sprite.setSprite(playerUp1);
+                            } else {
+                                sprite.setSprite(playerUp2);
+                            }
+                            DrawSprite(entities.get("Player"), batch, camera);
+                        }
+
+                    }
+                    if (velocity.getYSpeed() < 0) {
+                        //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
+                        sprite.setSprite(playerDown2);
+                        swapTimer += Gdx.graphics.getDeltaTime()*50;
+                        System.out.println(swapTimer);
+                        if (swapTimer >= swapInterval) {
+                            swapTimer = 0;
+                            if (sprite.getSprite() == playerDown2) {
+                                sprite.setSprite(playerDown1);
+                            } else {
+                                sprite.setSprite(playerDown2);
+                            }
+                            DrawSprite(entities.get("Player"), batch, camera);
+                        }
 
                     }
 
@@ -187,3 +229,4 @@ public class SystemRender extends UpdateSystem{
     }
 
 }
+
