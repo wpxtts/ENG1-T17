@@ -118,7 +118,7 @@ public class SystemRender extends UpdateSystem{
                         sprite.setSprite(playerRegular);
 
                     }
-                    
+
                     float swapTimer = 0;
                     double swapInterval = 2; // Swap textures every 2 seconds
                     if (velocity.getYSpeed() > 0) {
