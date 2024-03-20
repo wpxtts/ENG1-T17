@@ -18,7 +18,6 @@ public class MyGdxGame extends Game {
 	public SpriteBatch hudBatch;
 	public BitmapFont font;
 	public ShapeRenderer shapeRenderer;
-	private Stage stage;
 
 	/**
 	 * Initialises sprite batch, font and sets intial screen to MenuScreen.

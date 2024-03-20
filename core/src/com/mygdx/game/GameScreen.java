@@ -21,10 +21,6 @@ import java.util.HashMap;
 
 public class GameScreen implements Screen {
     final MyGdxGame game;
-    SpriteBatch batch;
-    BitmapFont font;
-    Texture img;
-    Stage stage;
     HashMap<String, Entity> entities;
     SystemUpdateInput updateInputSystem;
     SystemUpdateVelocityByInput updateVelocityByInputSystem;
