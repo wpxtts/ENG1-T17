@@ -56,12 +56,25 @@ public class TutorialScreen implements Screen {
         table.add(instruction1).colspan(2).left().padBottom(20);
         table.row();
 
-        Label instruction2 = new Label("2. Press spacebar to interact with activities.", skin);
+        Label instruction2 = new Label("2. Eat at the piazza to stay fuelled and gain energy.", skin);
         table.add(instruction2).colspan(2).left().padBottom(20);
         table.row();
 
-        Label instruction3 = new Label("3. Balance eating, relaxing and studying to do well on your exams!", skin);
+        Label instruction3 = new Label("3. Sleep in your accommodation to gain the most energy overnight", skin);
         table.add(instruction3).colspan(2).left().padBottom(20);
+        table.row();
+
+        Label instruction4 = new Label("4. Go feed the ducks to increase your fun score.", skin);
+        table.add(instruction4).colspan(2).left().padBottom(20);
+        table.row();
+
+
+        Label instruction5 = new Label("5. Press spacebar to interact with activities.", skin);
+        table.add(instruction5).colspan(2).left().padBottom(20);
+        table.row();
+
+        Label instruction6 = new Label("6. Balance eating, relaxing and studying to do well on your exams!", skin);
+        table.add(instruction6).colspan(2).left().padBottom(20);
         table.row();
 
         // Back button

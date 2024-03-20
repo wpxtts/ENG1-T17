@@ -46,15 +46,18 @@ public class CreditScreen implements Screen{
         // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
         table.setFillParent(true);
-//        table.setDebug(true);
+        // Set the table's alignment to center
+        table.center();
+        // Add the table to the stage
         stage.addActor(table);
 
         // temporary until we have asset manager in
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-
-        Label titleLabel = new Label( "Credits", skin ,"black");
-        table.add(titleLabel);
+        // Create the title label
+        Label titleLabel = new Label("Credits", skin, "black");
+        // Add the title label to the table and center it
+        table.add(titleLabel).center().padBottom(30).colspan(2);
         table.row();
 
         // Names
@@ -65,21 +68,19 @@ public class CreditScreen implements Screen{
             table.row();
         }
 
-        //create buttons
+        // Create the back button
         TextButton back = new TextButton("Back", skin, "small");
+        // Add the back button to the table and center it
+        table.add(back).center().fillX().uniformX().padTop(30).colspan(2);
+        table.row();
 
-        //add buttons to table
-        table.add(back).fillX().center().uniformX();
-        table.row().center().pad(10, 0, 10, 0);
-
-        // create button listeners
+        // Create button listeners
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 parent.toMainScreen();
             }
         });
-
     }
 
     /**
