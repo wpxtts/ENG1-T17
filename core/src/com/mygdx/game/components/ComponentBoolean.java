@@ -1,5 +1,8 @@
 package com.mygdx.game.components;
 
+/**
+ * A component which stores a true/false value
+ */
 public class ComponentBoolean extends Component {
 
     boolean value;
