@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.serviceProviders.ScoreCalculator;
 
 public class ScoreScreen implements Screen{
 
@@ -59,7 +60,7 @@ public class ScoreScreen implements Screen{
         double grade;
         study_score = 500;
         wellbeing_score = 350;
-        grade = Math.min((Math.log(study_score*wellbeing_score)+40), 100);
+        grade = ScoreCalculator.calculateScore(study,fun,eat);
         double[] scores = {study, fun, eat,grade};
         for (int i = 0; i<names.length; i++) {
             String name = names[i];
