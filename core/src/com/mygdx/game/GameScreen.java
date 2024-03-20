@@ -142,7 +142,7 @@ public class GameScreen implements Screen {
         updatePositionByVelocitySystem.update(entities);
         collisionSystem.update(entities);
         game.batch.begin();
-        renderSystem.update(entities,game.shapeRenderer,game.batch);
+        renderSystem.update(entities, game.batch);
         game.batch.end();
         updateTrackerTextSystem.update(entities);
         game.hudBatch.begin();
