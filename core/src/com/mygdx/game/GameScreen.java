@@ -93,10 +93,10 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         // Turn the screen black.
         ScreenUtils.clear(0, 0, 0, 1);
-        
+
 
         // Update all the systems every frame
-        UpdateFrame();
+        updateFrame();
 
     }
 
@@ -136,7 +136,7 @@ public class GameScreen implements Screen {
     /**
      * Update each system.
      */
-    void UpdateFrame() {
+    void updateFrame() {
         updateInputSystem.update(entities);
         updateVelocityByInputSystem.update(entities);
         updatePositionByVelocitySystem.update(entities);
