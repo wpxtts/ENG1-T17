@@ -13,7 +13,7 @@ import java.util.HashMap;
 /**
  * SystemTime class manages the in-game time simulation.
  */
-public class SystemTime {
+public class SystemTime extends UpdateSystem{
     // Value representing the real time equivalent of one in-game hour
     private static final float realSecondsPerInGameMinute = 0.25f;
 

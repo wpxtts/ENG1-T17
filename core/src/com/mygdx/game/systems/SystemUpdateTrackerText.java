@@ -7,7 +7,7 @@ import com.mygdx.game.entities.Tracker;
 
 import java.util.HashMap;
 
-public class SystemUpdateTrackerText {
+public class SystemUpdateTrackerText extends UpdateSystem{
 
     public SystemUpdateTrackerText(){}
 

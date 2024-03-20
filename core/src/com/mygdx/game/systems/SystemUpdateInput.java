@@ -12,7 +12,7 @@ import java.util.HashMap;
  * SystemUpdateInput class updates Input components to reflect the current input state.
  * It checks for keyboard input and updates the list of keys being pressed.
  */
-public class SystemUpdateInput {
+public class SystemUpdateInput extends UpdateSystem{
 
     /**
      * Constructs a SystemUpdateInput object.

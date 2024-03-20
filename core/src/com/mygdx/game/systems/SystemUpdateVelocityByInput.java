@@ -12,7 +12,7 @@ import java.util.HashMap;
  * It checks for entities with both input and velocity components and modifies the velocity
  * according to the keys pressed by the user.
  */
-public class SystemUpdateVelocityByInput {
+public class SystemUpdateVelocityByInput extends UpdateSystem{
 
     /**
      * Constructs a SystemUpdateVelocityByInput object.

@@ -7,7 +7,7 @@ import com.mygdx.game.serviceProviders.TextEffectProvider;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SystemText {
+public class SystemText extends UpdateSystem{
 
     public SystemText() {}
 

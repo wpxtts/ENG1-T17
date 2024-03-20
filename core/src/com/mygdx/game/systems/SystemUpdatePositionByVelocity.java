@@ -13,7 +13,7 @@ import java.util.HashMap;
  * if they have both position and velocity components.
  * It also ensures entities stay within the bounds of the map.
  */
-public class SystemUpdatePositionByVelocity {
+public class SystemUpdatePositionByVelocity extends UpdateSystem{
 
     /**
      * Constructs a SystemUpdatePositionByVelocity object.

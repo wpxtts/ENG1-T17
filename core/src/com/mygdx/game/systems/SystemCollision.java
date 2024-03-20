@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * SystemCollision is responsible for managing collision detection and resolution in the game.
  */
-public class SystemCollision {
+public class SystemCollision extends UpdateSystem{
 
     /**
      * Constructs a SystemCollision object.

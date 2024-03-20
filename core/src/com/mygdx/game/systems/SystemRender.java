@@ -19,7 +19,7 @@ import java.util.Objects;
 /**
  * System which renders all sprites.
  */
-public class SystemRender {
+public class SystemRender extends UpdateSystem{
     Texture playerLeft;
     Texture playerRegular;
     Texture playerRight;
