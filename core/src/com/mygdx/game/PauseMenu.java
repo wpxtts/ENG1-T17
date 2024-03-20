@@ -24,6 +24,9 @@ public class PauseMenu implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Create labels and buttons to display the pause screen
+     */
     @Override
     public void show() {
         // Create a table that fills the screen. Everything else will go inside this table.
@@ -56,6 +59,10 @@ public class PauseMenu implements Screen {
         });
     }
 
+    /**
+     * Render the screen
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         // Clear the screen ready for next set of images to be drawn
@@ -67,6 +74,11 @@ public class PauseMenu implements Screen {
         stage.draw();
     }
 
+    /**
+     * Resize screen
+     * @param width new screen width
+     * @param height new screen height
+     */
     @Override
     public void resize(int width, int height) {
         // Change the stage's viewport when the screen size is changed

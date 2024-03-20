@@ -76,6 +76,12 @@ public class MyGdxGame extends Game {
 		this.setScreen(new TutorialScreen(this));
 	}
 
+	/**
+	 * Change to score screen
+	 * @param study number of times the player studied in the week
+	 * @param fun number of times the player had fun in the week
+	 * @param eat number of times the player ate in the week
+	 */
 	public void toScoreScreen(int study, int fun, int eat){
 
 		this.setScreen(new ScoreScreen(this,study, fun, eat));
