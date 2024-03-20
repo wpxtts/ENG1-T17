@@ -27,6 +27,8 @@ public class SystemRender extends UpdateSystem{
     Texture playerUp2;
     Texture playerDown1;
     Texture playerDown2;
+
+    // Constructs the render system and defines the textures of the player's movements.
     public SystemRender() {
         playerRight = new Texture(Gdx.files.internal("player_sprite_right.png"));
         playerLeft = new Texture(Gdx.files.internal("player_sprite_left.png"));
@@ -100,6 +102,7 @@ public class SystemRender extends UpdateSystem{
                     ComponentVelocity velocity = (ComponentVelocity)  currentEntity.getComponent(ComponentVelocity.class);
                     ComponentSprite sprite = (ComponentSprite) currentEntity.getComponent(ComponentSprite.class);
 
+                    // Changes the texture of the player depending on their movements in a given direction.
                     if (velocity.getXSpeed() > 0) {
                         //playerEntity.ComponentSprite.setSprite(Texture(Gdx.files.internal("player_sprite_still.png")));
                         sprite.setSprite(playerRight);
@@ -115,6 +118,7 @@ public class SystemRender extends UpdateSystem{
                         sprite.setSprite(playerRegular);
 
                     }
+                    
                     float swapTimer = 0;
                     double swapInterval = 2; // Swap textures every 2 seconds
                     if (velocity.getYSpeed() > 0) {
